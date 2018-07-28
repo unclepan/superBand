@@ -6,18 +6,22 @@ const data = [
       {
         id: 'a',
         t: '斑马',
+        url: '',
       },
       {
         id: 'b',
         t: '狐狸',
+        url: '',
       },
       {
         id: 'c',
         t: '熊猫',
+        url: '',
       },
       {
         id: 'd',
         t: '狮子',
+        url: '',
       },
     ],
     c: '',
@@ -29,18 +33,22 @@ const data = [
       {
         id: 'a',
         t: '照相机',
+        url: '',
       },
       {
         id: 'b',
         t: '行李箱',
+        url: '',
       },
       {
         id: 'c',
         t: '吉他',
+        url: '',
       },
       {
         id: 'd',
         t: '食物',
+        url: '',
       },
     ],
     c: '',
@@ -52,18 +60,22 @@ const data = [
       {
         id: 'a',
         t: '海边',
+        url: '',
       },
       {
         id: 'b',
         t: '山顶',
+        url: '',
       },
       {
         id: 'c',
         t: '草地',
+        url: '',
       },
       {
         id: 'd',
         t: '屋顶',
+        url: '',
       },
     ],
     c: '',
@@ -75,18 +87,22 @@ const data = [
       {
         id: 'a',
         t: '狗',
+        url: '',
       },
       {
         id: 'b',
         t: '猫',
+        url: '',
       },
       {
         id: 'c',
         t: '牛',
+        url: '',
       },
       {
         id: 'd',
         t: '蛇',
+        url: '',
       },
     ],
     c: '',
@@ -98,18 +114,22 @@ const data = [
       {
         id: 'a',
         t: '时尚周刊',
+        url: '',
       },
       {
         id: 'b',
         t: '音乐周刊',
+        url: '',
       },
       {
         id: 'c',
         t: '八卦周刊',
+        url: '',
       },
       {
         id: 'd',
         t: '新闻报纸',
+        url: '',
       },
     ],
     c: '',
@@ -121,18 +141,22 @@ const data = [
       {
         id: 'a',
         t: '旧衣服',
+        url: '',
       },
       {
         id: 'b',
         t: '零碎的小东西',
+        url: '',
       },
       {
         id: 'c',
         t: '体积过大的乐器',
+        url: '',
       },
       {
         id: 'd',
         t: '旧书杂志',
+        url: '',
       },
     ],
     c: '',
@@ -144,18 +168,22 @@ const data = [
       {
         id: 'a',
         t: '',
+        url: '/static/images/01.jpg',
       },
       {
         id: 'b',
         t: '',
+        url: '/static/images/02.jpg',
       },
       {
         id: 'c',
         t: '',
+        url: '/static/images/03.jpg',
       },
       {
         id: 'd',
         t: '',
+        url: '/static/images/04.jpg',
       },
     ],
     c: '',
@@ -167,18 +195,22 @@ const data = [
       {
         id: 'a',
         t: '你们刚刚认识时的场景',
+        url: '',
       },
       {
         id: 'b',
         t: '最近热播的综艺节目',
+        url: '',
       },
       {
         id: 'c',
         t: '最近要开票的演出',
+        url: '',
       },
       {
         id: 'd',
         t: '你们共同认识的人的八卦',
+        url: '',
       },
     ],
     c: '',

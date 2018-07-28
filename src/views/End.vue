@@ -6,8 +6,8 @@
         <img :class="$style.mainLogo" src="../assets/images/03.png">
       </div>
       <div :class="$style.problemCard">
-        <p :class="$style.problem">你是乐队主唱</p>
-        <p :class="$style.text">具有领导者的潜质，是朋友圈的灵魂 人物，团队中的存在感担当！你思想 单纯，天生一副热心肠，时刻为他人 着想，又善于协调人际关系</p>
+        <p :class="$style.problem">{{Vdata.h}}</p>
+        <p :class="$style.text">{{Vdata.t}}</p>
         <div :class="$style.qr">
           <img src="../assets/images/QR_code.jpg" alt="">
           <p>识别二维码，测试你在乐队中的领导力</p>
@@ -20,12 +20,23 @@
 <script>
 import html2canvas from 'html2canvas';
 import Canvas2Image from '../assets/javascript/canvas2image';
+import data from '../mock/comment';
 
 export default {
   name: 'End',
   data() {
     return {
+      data,
+      Vdata: null,
     };
+  },
+  created() {
+    const v = Math.floor(Math.random() * 6);
+    this.Vdata = this.data[v];
+    this.$nextTick(() => {
+      // DOM 更新了
+      this.convert2canvas(document.body);
+    });
   },
   methods: {
     convert2canvas(cntElem) {
@@ -57,12 +68,20 @@ export default {
         // 【重要】默认转化的格式为png,也可设置为其他格式
         const img = Canvas2Image.convertToJPEG(canvas, canvas.width, canvas.height);
         img.className = this.$style.superPic;
+        img.id = 'superPic';
+        const pic = document.getElementById('superPic');
+        if (pic) {
+          document.body.removeChild(pic);
+        }
         document.body.appendChild(img);
       });
     },
   },
-  mounted() {
-    this.convert2canvas(document.body);
+  destroyed() {
+    const pic = document.getElementById('superPic');
+    if (pic) {
+      document.body.removeChild(pic);
+    }
   },
 };
 </script>

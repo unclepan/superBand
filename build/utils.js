@@ -22,7 +22,7 @@ exports.cssLoaders = function (options) {
       // 开启 CSS Modules
       modules: true,
       // 自定义生成的类名
-      localIdentName: '[local]_[hash:base64:8]'
+      localIdentName: '[local]'
     }
   }
 

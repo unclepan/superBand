@@ -49,4 +49,11 @@ export default {
   li{
     list-style: none;
   }
+  .clearfix {
+    &::after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+  }
 </style>

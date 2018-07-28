@@ -1,24 +1,35 @@
 <template>
   <div :class="$style.wrap">
-    <div :class="$style.tip" v-if="tip">请你选择一项</div>
+    <transition name="bounce">
+      <div :class="$style.tip" v-if="tip">请你选择一项</div>
+    </transition>
     <div :class="$style.main">
       <div :class="$style.header">
         <img :class="$style.logo" src="../assets/images/01.png">
         <img :class="$style.mainLogo" src="../assets/images/03.png">
       </div>
-      <div :class="$style.problemCard" v-if="pageData">
-        <p :class="$style.problem">{{pageData.q}}</p>
-        <div :class="$style.option">
-          <div
-            :class="{[$style.c]: item.id === pageData.c }"
-            v-for="(item, index) in pageData.o"
-            :key="index"
-            @click="changeOption(item.id)">
-              <span :class="$style.ico"></span>
-              <span :class="$style.text">{{item.t}}</span>
+      <transition name="fade">
+        <div class="clearfix" :class="$style.problemCard" v-if="pageData">
+          <p :class="$style.problem">{{pageData.q}}</p>
+          <div :class="$style.option">
+            <div
+              :class="{[$style.c]: item.id === pageData.c, [$style.pic]: item.url}"
+              v-for="(item, index) in pageData.o"
+              :key="index"
+              @click="changeOption(item.id)">
+                <div v-if="item.url">
+                  <img :class="$style.url" :src="item.url">
+                </div>
+                <span :class="$style.ico"></span>
+                <span
+                  v-if="item.t"
+                  :class="$style.text">
+                  {{item.t}}
+                </span>
+            </div>
           </div>
         </div>
-      </div>
+      </transition>
       <img
         @click="end"
         :class="$style.play"
@@ -48,10 +59,13 @@ export default {
   },
   methods: {
     init() {
-      const data = this.data.find(item => {
-        return item.key === this.Vkey;
-      });
-      this.pageData = data;
+      this.pageData = null;
+      setTimeout(() => {
+        const data = this.data.find(item => {
+          return item.key === this.Vkey;
+        });
+        this.pageData = data;
+      }, 0);
     },
     changeOption(v) {
       const data = this.data.find(item => {
@@ -77,6 +91,11 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  watch: {
+    $router() {
+      this.init();
+    },
   },
 };
 </script>
@@ -126,7 +145,7 @@ export default {
       .problem{
         color: #ffffff;
         font-size: 2rem;
-        padding: 1rem;
+        padding: 1rem 0;
       }
       .option{
         div{
@@ -140,13 +159,26 @@ export default {
             border-radius: 0.6rem;
             background: #ffffff;
           }
+          .url{
+            width: 100px;
+            height: 100px;
+            background: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+          }
           .text{
             color: #ffffff;
             font-size: 2rem;
             padding-left: 0.8rem;
           }
         }
+        .pic{
+          width: 50%;
+          text-align: center;
+          float: left;
+        }
         .c{
+          transform: scale(1.01);
           .ico{
             background: #ffd139;
             border: 3px solid #333333;
