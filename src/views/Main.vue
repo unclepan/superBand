@@ -30,16 +30,12 @@
           </div>
         </div>
       </transition>
-      <img
-        @click="end"
-        :class="$style.play"
-        src="../assets/images/end.png"
-        v-if="data.length === Vkey" >
-      <img
-        @click="play"
-        :class="$style.play"
-        src="../assets/images/next.png"
-        v-else>
+      <div
+        :class="$style.nextWrap"
+        class="play"
+        @click="play(data.length === Vkey)">
+        <div :class="$style.next">{{data.length === Vkey ? '完成' : '下一题'}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -62,6 +58,13 @@ export default {
     ...mapMutations({
       add: 'increment',
     }),
+    play(v) {
+      if (v) {
+        this.end();
+      } else {
+        this.next();
+      }
+    },
     init() {
       this.pageData = null;
       setTimeout(() => {
@@ -77,7 +80,7 @@ export default {
       });
       data.c = v;
     },
-    play() {
+    next() {
       if (this.pageData.c === '') {
         this.tip = true;
         const t = setTimeout(() => {
@@ -90,12 +93,19 @@ export default {
       }
     },
     end() {
-      const v = this.data.map(item => {
-        return item.c;
-      });
-      console.log(v);
-      this.add(v);
-      this.$router.push({ name: 'End' });
+      if (this.pageData.c === '') {
+        this.tip = true;
+        const t = setTimeout(() => {
+          this.tip = false;
+          clearTimeout(t);
+        }, 1000);
+      } else {
+        const v = this.data.map(item => {
+          return item.c;
+        });
+        this.add(v);
+        this.$router.push({ name: 'End' });
+      }
     },
   },
   mounted() {
@@ -116,10 +126,10 @@ export default {
   overflow: hidden;
   background-image: url('../assets/images/bg.jpg');
   background-repeat: no-repeat;
-  background-size:110%;
+  background-size:116%;
   background-position: 0 bottom;
   animation-name: 'bounceInLeft';
-  animation-duration: 9s;
+  animation-duration: 8s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -130,6 +140,7 @@ export default {
     height: 30px;
     line-height: 30px;
     left: 50%;
+    top: 10px;
     margin-left: -60px;
     text-align: center;
     background: rgba(12, 255, 240, 0.7);
@@ -203,20 +214,33 @@ export default {
         }
       }
     }
-    .play{
+    .nextWrap{
       cursor: pointer;
+      border-radius: 2rem;
+      border: 4px solid #333333;
       width: 13rem;
+      min-height:6rem;
       left:50%;
       margin-left: -6.5rem;
       display: block;
       position: absolute;
+      z-index: 10000;
       bottom: 2rem;
-      animation-name: 'fadeOut';
-      animation-duration: 1s;
-      animation-timing-function: ease;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-play-state: running;
+      background: rgba(12, 255, 240, 1);
+    }
+    .next{
+      text-shadow: 0px 0px 1px #ffffff;
+      border-radius: 2rem;
+      border: 4px solid #333333;
+      text-align: center;
+      line-height: 5rem;
+      font-size: 2.6rem;
+      color: #333333;
+      width: 12rem;
+      min-height:5rem;
+      margin: -1rem auto 0;
+      display: block;
+      background: rgba(12, 255, 240, 1);
     }
   }
 

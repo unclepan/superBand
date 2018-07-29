@@ -2,7 +2,7 @@
   <div id="app">
     <router-view/>
     <img v-if="showMic" @click="mic" :class="$style.mic" src="../assets/images/02.png">
-    <audio autoplay="autoplay" id="audios">
+    <audio autoplay="autoplay" loop="loop" id="audios">
       <source src="../assets/music/wlgb.ogg" type="audio/ogg" />
       <source src="../assets/music/wlgb.mp3" type="audio/mpeg" />
     </audio>
@@ -15,7 +15,7 @@
 export default {
   name: 'App',
   mounted() {
-    // axios.get('http://localhost:1234/s').then((response) => {
+    // axios.get('http://3600413e.ngrok.io/').then((response) => {
     //   console.log(response);
     // }).catch((response) => {
     //   console.log(response);

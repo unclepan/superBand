@@ -1,8 +1,8 @@
 .fade-enter-active, .fade-leave-active {
-  transition: all .8s ease;
+  transition: all .5s ease;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  transform: translateY(20px);
+  transform: translateY(30px);
   opacity: 0;
 }
 
@@ -80,17 +80,6 @@
   }
 }
 
-@keyframes slideInDown {
-  from {
-    transform: translate3d(0, -30%, 0);
-    visibility: visible;
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 @keyframes rotateIn {
   from {
     transform-origin: center;
@@ -111,4 +100,32 @@
   to {
     background-position: right bottom;
   }
+}
+
+@keyframes devia {
+  from {
+    transform:translate(0,0);
+  }
+
+  to {
+    transform:translate(0,-20px);
+  }
+}
+
+.play{
+  animation-name: 'fadeOut';
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-play-state: running;
+}
+
+.deviation{
+  animation-name: 'devia';
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-play-state: running;
 }
