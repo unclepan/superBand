@@ -3,7 +3,6 @@
     <div :class="$style.main">
       <div :class="$style.header">
         <img :class="$style.logo" src="../assets/images/01.png">
-        <img :class="$style.mic" src="../assets/images/02.png">
       </div>
       <img :class="$style.mainLogo" src="../assets/images/03.png">
       <img :class="$style.mainPic" src="../assets/images/04.png">
@@ -19,6 +18,7 @@ export default {
   data() {
     return {
       msg: 'Index',
+      m: false,
     };
   },
   methods: {
@@ -36,8 +36,13 @@ export default {
   overflow: hidden;
   background-image: url('../assets/images/bg.jpg');
   background-repeat: no-repeat;
-  background-size:100%;
+  background-size:110%;
   background-position: 0 bottom;
+  animation-name: 'bounceInLeft';
+  animation-duration: 9s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
   .main{
     padding: 10px;
     img{
@@ -54,11 +59,24 @@ export default {
       width: 15rem;
       display: block;
       margin:  2rem auto;
+      animation-name: 'slideInDown';
+      animation-duration: 1s;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-play-state: running;
     }
     .mainPic{
       width: 28rem;
       display: block;
       margin:  0 auto;
+      animation-name: 'jello';
+      animation-duration: 1s;
+      animation-timing-function: ease;
+      animation-delay: 1s;
+      animation-iteration-count: 1;
+      animation-direction: normal;
+      animation-play-state: running;
     }
     .play{
       cursor: pointer;
@@ -68,6 +86,12 @@ export default {
       display: block;
       position: absolute;
       bottom: 2rem;
+      animation-name: 'fadeOut';
+      animation-duration: 1s;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-play-state: running;
     }
   }
 

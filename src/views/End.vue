@@ -19,8 +19,10 @@
 
 <script>
 import html2canvas from 'html2canvas';
+import { mapState } from 'vuex';
 import Canvas2Image from '../assets/javascript/canvas2image';
 import data from '../mock/comment';
+
 
 export default {
   name: 'End',
@@ -31,12 +33,18 @@ export default {
     };
   },
   created() {
-    const v = Math.floor(Math.random() * 6);
-    this.Vdata = this.data[v];
+    const v = this.choice.slice(0, 4).join('');
+    const c = this.data.find((item, index) => {
+      return item.m.indexOf(v) >= 0;
+    });
+    this.Vdata = c || this.data[3];
     this.$nextTick(() => {
       // DOM 更新了
       this.convert2canvas(document.body);
     });
+  },
+  computed: {
+    ...mapState(['choice']),
   },
   methods: {
     convert2canvas(cntElem) {

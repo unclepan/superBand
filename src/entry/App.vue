@@ -1,12 +1,45 @@
 <template>
   <div id="app">
     <router-view/>
+    <img v-if="showMic" @click="mic" :class="$style.mic" src="../assets/images/02.png">
+    <audio autoplay="autoplay" id="audios">
+      <source src="../assets/music/wlgb.ogg" type="audio/ogg" />
+      <source src="../assets/music/wlgb.mp3" type="audio/mpeg" />
+    </audio>
   </div>
 </template>
 
 <script>
+// import axios from 'axios';
+
 export default {
   name: 'App',
+  mounted() {
+    // axios.get('http://localhost:1234/s').then((response) => {
+    //   console.log(response);
+    // }).catch((response) => {
+    //   console.log(response);
+    // });
+  },
+  computed: {
+    showMic() {
+      if (this.$route.name === 'Index') {
+        return true;
+      }
+      return false;
+    },
+  },
+  methods: {
+    mic() {
+      const myVideo = document.getElementById('audios');
+      if (this.m) {
+        myVideo.play();
+      } else {
+        myVideo.pause();
+      }
+      this.m = !this.m;
+    },
+  },
 };
 </script>
 
@@ -55,5 +88,19 @@ export default {
       content: "";
       clear: both;
     }
+  }
+</style>
+<style lang="less" module>
+  .mic{
+    width: 3rem;
+    position: absolute;
+    z-index: 1000;
+    top:10px;
+    right: 10px;
+    animation-name: 'rotateIn';
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
   }
 </style>

@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import data from '../mock/problem';
 
 export default {
@@ -58,6 +59,9 @@ export default {
     };
   },
   methods: {
+    ...mapMutations({
+      add: 'increment',
+    }),
     init() {
       this.pageData = null;
       setTimeout(() => {
@@ -65,7 +69,7 @@ export default {
           return item.key === this.Vkey;
         });
         this.pageData = data;
-      }, 0);
+      }, 10);
     },
     changeOption(v) {
       const data = this.data.find(item => {
@@ -86,6 +90,11 @@ export default {
       }
     },
     end() {
+      const v = this.data.map(item => {
+        return item.c;
+      });
+      console.log(v);
+      this.add(v);
       this.$router.push({ name: 'End' });
     },
   },
@@ -107,8 +116,13 @@ export default {
   overflow: hidden;
   background-image: url('../assets/images/bg.jpg');
   background-repeat: no-repeat;
-  background-size:100%;
+  background-size:110%;
   background-position: 0 bottom;
+  animation-name: 'bounceInLeft';
+  animation-duration: 9s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
   .tip{
     position:absolute;
     border-radius: 3px;
@@ -197,6 +211,12 @@ export default {
       display: block;
       position: absolute;
       bottom: 2rem;
+      animation-name: 'fadeOut';
+      animation-duration: 1s;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-play-state: running;
     }
   }
 
