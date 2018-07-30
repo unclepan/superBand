@@ -8,7 +8,7 @@
         <img :class="$style.logo" src="../assets/images/01.png">
         <img :class="$style.mainLogo" src="../assets/images/03.png">
       </div>
-      <transition name="fade">
+      <transition name="fade" :key="Vkey">
         <div class="clearfix" :class="$style.problemCard" v-if="pageData">
           <p :class="$style.problem">{{pageData.q}}</p>
           <div :class="$style.option">

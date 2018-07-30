@@ -9,7 +9,7 @@
         <p :class="$style.problem">{{Vdata.h}}</p>
         <p :class="$style.text">{{Vdata.t}}</p>
         <div :class="$style.qr">
-          <img src="../assets/images/QR_code.jpg" alt="">
+          <img src="../assets/images/QR_code.png" alt="">
           <p>识别二维码，测试你在乐队中的领导力</p>
         </div>
       </div>

@@ -168,22 +168,22 @@ const data = [
       {
         id: 'a',
         t: '',
-        url: '/static/images/01.jpg',
+        url: '/cjyd/static/images/01.jpg',
       },
       {
         id: 'b',
         t: '',
-        url: '/static/images/02.jpg',
+        url: '/cjyd/static/images/02.jpg',
       },
       {
         id: 'c',
         t: '',
-        url: '/static/images/03.jpg',
+        url: '/cjyd/static/images/03.jpg',
       },
       {
         id: 'd',
         t: '',
-        url: '/static/images/04.jpg',
+        url: '/cjyd/static/images/04.jpg',
       },
     ],
     c: '',
