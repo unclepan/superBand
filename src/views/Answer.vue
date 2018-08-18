@@ -34,32 +34,36 @@
         currentData: {},
         showB: false,
         itemIndex: -1,
+        noClick: true,
       };
     },
     methods: {
       init() {
-        const tmRan = this.$route.query.ran;
+        let tmRan = this.$route.query.ran || 1;
+        tmRan = tmRan.toString();
         this.arrData = data.find(item => {
           return item.key === tmRan;
         });
-        console.log(this.arrData);
       },
       vData() {
         this.currentData = this.arrData.tm[this.sty];
       },
       next(data, index) {
-        if (this.sty < this.arrData.tm.length - 1) {
-          this.itemIndex = index;
-          this.showB = true;
-
-          setTimeout(() => {
-            this.sty += 1;
-            this.itemIndex = -1;
-            this.showB = false;
-            this.vData();
-          }, 1000);
-        } else {
-          console.log('没了');
+        if (this.noClick) {
+          if (this.sty < this.arrData.tm.length - 1) {
+            this.noClick = false;
+            this.itemIndex = index;
+            this.showB = true;
+            setTimeout(() => {
+              this.noClick = true;
+              this.sty += 1;
+              this.itemIndex = -1;
+              this.showB = false;
+              this.vData();
+            }, 1000);
+          } else {
+            this.$router.push({ name: 'LuckDraw' });
+          }
         }
       },
     },
