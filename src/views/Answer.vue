@@ -1,35 +1,20 @@
 <template>
   <div :class="$style.wrap">
     <div :class="$style.main">
-      <div :class="$style.header">问题二</div>
+      <div :class="$style.header">{{currentData.title}}</div>
       <div :class="$style.problem">
-        <p>诗句“富贵不肯吃，贫者不解煮”描写的是哪道菜？</p>
+        <p>{{currentData.q}}</p>
       </div>
       <div :class="$style.answer">
         <img :class="$style.w_luobo" src="../assets/images/w_luobo.png">
         <img :class="$style.w_mogu" src="../assets/images/w_mogu.png">
-        <div :class="$style.item">
+        <div @click="next(item, index)" :class="$style.item" v-for="(item, index) in currentData.o" :key="index">
           <div :class="$style.itemWrap">
-            <div :class="$style.itemInner">A.放入清水中，新鲜的鸡蛋会沉下去，反之则会浮上来</div>
-            <img :class="$style.panduan" src="../assets/images/w_dui.png">
-          </div>
-        </div>
-        <div :class="$style.item">
-          <div :class="$style.itemWrap">
-            <div :class="$style.itemInner">A.放入清水中，新鲜的鸡蛋会沉下去，反之则会浮上来</div>
-            <img :class="$style.panduan" src="../assets/images/w_dui.png">
-          </div>
-        </div>
-        <div :class="$style.item">
-          <div :class="$style.itemWrap">
-            <div :class="$style.itemInner">A.放入清水中，新鲜的鸡蛋会沉下去，反之则会浮上来</div>
-            <img :class="$style.panduan" src="../assets/images/w_dui.png">
-          </div>
-        </div>
-        <div :class="$style.item">
-          <div :class="$style.itemWrap">
-            <div :class="$style.itemInner">A.放入清水中，新鲜的鸡蛋会沉下去，反之则会浮上来</div>
-            <img :class="$style.panduan" src="../assets/images/w_cuo.png">
+            <div :class="$style.itemInner">{{item.id.toUpperCase()}}: {{item.t}}</div>
+            <div v-if="showB">
+              <img v-if="item.b&&itemIndex === index" :class="$style.panduan" src="../assets/images/w_dui.png">
+              <img v-if="!item.b&&itemIndex === index" :class="$style.panduan" src="../assets/images/w_cuo.png">
+            </div>
           </div>
         </div>
       </div>
@@ -38,19 +23,53 @@
 </template>
 
 <script>
-export default {
-  name: 'Answer',
-  data() {
-    return {
-    };
-  },
-  methods: {
-  },
-  mounted() {
-  },
-  watch: {
-  },
-};
+  import data from '../mock/wProblem';
+
+  export default {
+    name: 'Answer',
+    data() {
+      return {
+        sty: 0,
+        arrData: {},
+        currentData: {},
+        showB: false,
+        itemIndex: -1,
+      };
+    },
+    methods: {
+      init() {
+        const tmRan = this.$route.query.ran;
+        this.arrData = data.find(item => {
+          return item.key === tmRan;
+        });
+        console.log(this.arrData);
+      },
+      vData() {
+        this.currentData = this.arrData.tm[this.sty];
+      },
+      next(data, index) {
+        if (this.sty < this.arrData.tm.length - 1) {
+          this.itemIndex = index;
+          this.showB = true;
+
+          setTimeout(() => {
+            this.sty += 1;
+            this.itemIndex = -1;
+            this.showB = false;
+            this.vData();
+          }, 1000);
+        } else {
+          console.log('没了');
+        }
+      },
+    },
+    mounted() {
+      this.init();
+      this.vData();
+    },
+    watch: {
+    },
+  };
 </script>
 <style lang="less" module>
   .wrap{
@@ -126,8 +145,9 @@ export default {
           position: absolute;
           top: 0;
           right: -1rem;
-          top: -0.2rem;
-          width: 2.6rem;
+          top: 50%;
+          margin-top: -1rem;
+          width: 2rem;
         }
       }
     }

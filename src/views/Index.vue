@@ -31,37 +31,44 @@
 
 <script>
 
-export default {
-  name: 'Index',
-  data() {
-    return {
-      list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
-      active: 1,
-    };
-  },
-  mounted() {
-    this.init();
-  },
-  methods: {
-    init() {
-      setInterval(() => {
-        if (this.active === 26) {
-          this.active = 1;
-        } else {
-          this.active = this.active + 1;
-        }
-      }, 100);
+  export default {
+    name: 'Index',
+    data() {
+      return {
+        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
+        active: 1,
+      };
     },
-    play() {
-      // this.mic();
-      this.$router.push({ name: 'Answer' });
+    mounted() {
+      this.init();
     },
-    // mic() {
-    //   const myVideo = document.getElementById('audios');
-    //   myVideo.play();
-    // },
-  },
-};
+    methods: {
+      init() {
+        setInterval(() => {
+          if (this.active === 26) {
+            this.active = 1;
+          } else {
+            this.active = this.active + 1;
+          }
+        }, 100);
+      },
+      randomNumBoth(Min, Max) {
+        const Range = Max - Min;
+        const Rand = Math.random();
+        const num = Min + Math.round(Rand * Range); // 四舍五入
+        return num;
+      },
+      play() {
+        // this.mic();
+        const ran = this.randomNumBoth(1, 4);
+        this.$router.push({ name: 'Answer', query: { ran } });
+      },
+      // mic() {
+      //   const myVideo = document.getElementById('audios');
+      //   myVideo.play();
+      // },
+    },
+  };
 </script>
 <style lang="less" module>
 .wrap{
