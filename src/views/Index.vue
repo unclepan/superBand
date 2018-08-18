@@ -23,7 +23,7 @@
         </div>
       </div>
       <div :class="$style.play">
-        <div :class="$style.inner"></div>
+        <div :class="$style.inner" @click="play()"></div>
       </div>
     </div>
   </div>
@@ -52,10 +52,10 @@ export default {
         }
       }, 100);
     },
-    // play() {
-    //   this.mic();
-    //   this.$router.push({ name: 'Main' });
-    // },
+    play() {
+      // this.mic();
+      this.$router.push({ name: 'Answer' });
+    },
     // mic() {
     //   const myVideo = document.getElementById('audios');
     //   myVideo.play();
@@ -71,13 +71,8 @@ export default {
   overflow: hidden;
   background-image: url('../assets/images/w_indexBg.jpg');
   background-repeat: no-repeat;
-  background-size:116%;
-  background-position: 0 bottom;
-  animation-name: 'bounceInLeft';
-  animation-duration: 8s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  background-size:100%;
+
   .main{
     margin: 0 auto;
     position: relative;

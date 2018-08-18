@@ -59,12 +59,12 @@ export default {
   // @media screen and (min-width:800px){html{font-size:25px}}
   @font-face {
     font-family: 'fzzjxss';
-    src: url('../assets/fonts/FZZJ-XSS-1.eot');
+    src: url('../assets/fonts/sfont.eot');
     src:
-        url('../assets/fonts/FZZJ-XSS-1.eot?#font-spider') format('embedded-opentype'),
-        url('../assets/fonts/FZZJ-XSS-1.woff') format('woff'),
-        url('../assets/fonts/FZZJ-XSS-1.ttf') format('truetype'),
-        url('../assets/fonts/FZZJ-XSS-1.svg') format('svg');
+        url('../assets/fonts/sfont.eot?#font-spider') format('embedded-opentype'),
+        url('../assets/fonts/sfont.woff') format('woff'),
+        url('../assets/fonts/sfont.ttf') format('truetype'),
+        url('../assets/fonts/sfont.svg') format('svg');
     font-weight: normal;
     font-style: normal;
   }
