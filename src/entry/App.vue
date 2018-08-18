@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <router-view/>
-    <img v-if="showMic" @click="mic" :class="$style.mic" src="../assets/images/02.png">
-    <audio autoplay="autoplay" loop="loop" id="audios">
-      <source src="../assets/music/wlgb.ogg" type="audio/ogg" />
-      <source src="../assets/music/wlgb.mp3" type="audio/mpeg" />
-    </audio>
+    <!-- <img v-if="showMic" @click="mic" :class="$style.mic" src="../assets/images/02.png"> -->
+    <!-- <audio autoplay="autoplay" loop="loop" id="audios">
+      <source src="../assets/music/aaaaaaaaa.ogg" type="audio/ogg" />
+      <source src="../assets/music/aaaaaaaaa.mp3" type="audio/mpeg" />
+    </audio> -->
   </div>
 </template>
 
@@ -14,6 +14,12 @@
 
 export default {
   name: 'App',
+  data() {
+    return {
+      msg: 'Index',
+      m: false,
+    };
+  },
   mounted() {
     // axios.get('http://3600413e.ngrok.io/').then((response) => {
     //   console.log(response);
@@ -31,26 +37,26 @@ export default {
   },
   methods: {
     mic() {
-      const myVideo = document.getElementById('audios');
-      if (this.m) {
-        myVideo.play();
-      } else {
-        myVideo.pause();
-      }
-      this.m = !this.m;
+      // const myVideo = document.getElementById('audios');
+      // if (this.m) {
+      //   myVideo.play();
+      // } else {
+      //   myVideo.pause();
+      // }
+      // this.m = !this.m;
     },
   },
 };
 </script>
 
 <style lang="less">
-  @media screen and (min-width:321px) and (max-width:375px){html{font-size:11px}}
-  @media screen and (min-width:376px) and (max-width:414px){html{font-size:12px}}
-  @media screen and (min-width:415px) and (max-width:639px){html{font-size:15px}}
-  @media screen and (min-width:640px) and (max-width:719px){html{font-size:20px}}
-  @media screen and (min-width:720px) and (max-width:749px){html{font-size:22.5px}}
-  @media screen and (min-width:750px) and (max-width:799px){html{font-size:23.5px}}
-  @media screen and (min-width:800px){html{font-size:25px}}
+  // @media screen and (min-width:321px) and (max-width:375px){html{font-size:11px}}
+  // @media screen and (min-width:376px) and (max-width:414px){html{font-size:12px}}
+  // @media screen and (min-width:415px) and (max-width:639px){html{font-size:15px}}
+  // @media screen and (min-width:640px) and (max-width:719px){html{font-size:20px}}
+  // @media screen and (min-width:720px) and (max-width:749px){html{font-size:22.5px}}
+  // @media screen and (min-width:750px) and (max-width:799px){html{font-size:23.5px}}
+  // @media screen and (min-width:800px){html{font-size:25px}}
   @font-face {
     font-family: 'fzzjxss';
     src: url('../assets/fonts/FZZJ-XSS-1.eot');
@@ -77,7 +83,7 @@ export default {
     font-family: 'fzzjxss';
   }
   html{
-    font-size:10px;
+    font-size:19px;
   }
   li{
     list-style: none;

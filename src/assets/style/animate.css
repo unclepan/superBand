@@ -122,3 +122,32 @@
   animation-direction: alternate;
   animation-play-state: running;
 }
+
+
+
+
+
+
+
+@keyframes gundong1 {
+  from {
+    top:0
+  }
+
+  to {
+    top: -15.8rem;
+  }
+}
+
+@keyframes gundong2 {
+  from {
+    top: -15.8rem;
+  }
+
+  to {
+    top:0
+  }
+}
+
+
+

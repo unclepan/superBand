@@ -6,12 +6,18 @@
         <img :class="$style.mainLogo" src="../assets/images/03.png">
       </div>
       <div :class="$style.problemCard">
+        <div :class="$style.header">
+          <img id="headerPic" :src="headimgurl">
+        </div>
         <p :class="$style.problem">{{Vdata.h}}</p>
         <p :class="$style.text">{{Vdata.t}}</p>
         <div :class="$style.qr">
+          <p>我是第{{num}}个测试过《超级乐队》的人长按识别二维码，跟我一起测测你是属于乐队哪个角色吧</p>
           <img src="../assets/images/QR_code.png" alt="">
-          <p>识别二维码，测试你在乐队中的领导力</p>
         </div>
+      </div>
+      <div :class="$style.sPic">
+        <img src="../assets/images/s.png">
       </div>
     </div>
   </div>
@@ -19,6 +25,7 @@
 
 <script>
 import html2canvas from 'html2canvas';
+import axios from 'axios';
 import { mapState } from 'vuex';
 import Canvas2Image from '../assets/javascript/canvas2image';
 import data from '../mock/comment';
@@ -30,6 +37,8 @@ export default {
     return {
       data,
       Vdata: null,
+      num: 0,
+      headimgurl: '',
     };
   },
   created() {
@@ -38,9 +47,18 @@ export default {
       return item.m.indexOf(v) >= 0;
     });
     this.Vdata = c || this.data[3];
+    this.headimgurl = window.npoc.pic;
+    window.wxTitle = this.Vdata.h;
+    window.wxDoc = this.Vdata.t;
+    window.wwxx();
     this.$nextTick(() => {
       // DOM 更新了
-      this.convert2canvas(document.body);
+      axios.get('http://www.erji1pin.cn/index.php/wxapi/jsq').then((response) => {
+        this.num = response.data;
+        this.convert2canvas(document.body);
+      }).catch((response) => {
+        console.log('统计接口报错');
+      });
     });
   },
   computed: {
@@ -118,7 +136,7 @@ export default {
     .mainLogo{
       width: 15rem;
       display: block;
-      margin: 1.6rem auto;
+      margin: 1rem auto;
     }
     .problemCard{
       border:3px solid rgba(255, 255, 255, 0.6);
@@ -126,7 +144,15 @@ export default {
       border-radius: 10px;
       padding: 1rem;
       margin: 1rem;
-      margin-top: 4rem;
+      margin-top: 2rem;
+      .header{
+        width: 4.5rem;
+        height: 4.5rem;
+        margin: 0 auto 0.4rem;
+        img{
+          width: 100%;
+        }
+      }
       .problem{
         color: #ffffff;
         font-size: 3rem;
@@ -138,17 +164,29 @@ export default {
         font-size: 1.6rem;
       }
       .qr{
-        text-align: right;
         padding-top: 1.2rem;
+        display: flex;
+        justify-content: center;
         img{
-          width: 4rem;
+          width: 5rem;
+          height: 5rem;
         }
         p{
-          padding-top: 1rem;
-          font-size: 1rem;
+          padding-right: 1rem;
+          font-size: 1.4rem;
           color: #ffffff;
           font-family: '微软雅黑';
+          line-height: 1.5rem;
+          font-weight: bold;
         }
+      }
+    }
+    .sPic{
+      margin: 1.3rem auto 0;
+      display: black;
+      width: 70%;
+      img{
+        width:100%;
       }
     }
   }
