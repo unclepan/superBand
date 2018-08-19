@@ -1,10 +1,11 @@
 <template>
   <div :class="$style.wrap">
     <div :class="$style.main">
-      <img :class="$style.header" src="../assets/images/w_hongbaoBg.png">
+      <img class="bounceIn" :class="$style.header" src="../assets/images/w_hongbaoBg.png">
       <img :class="$style.mainBox" src="../assets/images/w_hongbaoMain.png">
-      <p :class="$style.info">获得1.16元现金好礼</p>
+      <p class="shake" :class="$style.info">获得1.16元现金好礼</p>
       <div
+        class="fadeOut"
         @click="fanhui()"
         :class="$style.nextWrap">
         <div :class="$style.next">返回</div>

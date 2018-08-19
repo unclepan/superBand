@@ -1,22 +1,24 @@
 <template>
   <div :class="$style.wrap">
     <div :class="$style.main">
-      <div :class="$style.header">{{currentData.title}}</div>
-      <div :class="$style.problem">
+      <div :class="[$style.header, {fadeInLeft: noClick}]">{{currentData.title}}</div>
+      <div :class="$style.problem" class="fadeOut">
         <p>{{currentData.q}}</p>
       </div>
-      <div :class="$style.answer">
+      <div :class="[$style.answer, {flipInY: noClick}]">
         <img :class="$style.w_luobo" src="../assets/images/w_luobo.png">
         <img :class="$style.w_mogu" src="../assets/images/w_mogu.png">
-        <div @click="next(item, index)" :class="$style.item" v-for="(item, index) in currentData.o" :key="index">
-          <div :class="$style.itemWrap">
-            <div :class="$style.itemInner">{{item.id.toUpperCase()}}: {{item.t}}</div>
-            <div v-if="showB">
-              <img v-if="item.b&&itemIndex === index" :class="$style.panduan" src="../assets/images/w_dui.png">
-              <img v-if="!item.b&&itemIndex === index" :class="$style.panduan" src="../assets/images/w_cuo.png">
+          <div @click="next(item, index)" :class="$style.item" v-for="(item, index) in currentData.o" :key="index">
+            <div :class="$style.itemWrap">
+              <div :class="$style.itemInner">{{item.id.toUpperCase()}}: {{item.t}}</div>
+              <transition name="fade">
+                <div v-if="showB">
+                  <img v-if="item.b&&itemIndex === index" :class="$style.panduan" src="../assets/images/w_dui.png">
+                  <img v-if="!item.b&&itemIndex === index" :class="$style.panduan" src="../assets/images/w_cuo.png">
+                </div>
+              </transition>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -101,7 +103,7 @@
       line-height: 3rem;
       text-align: center;
       color: #ffffff;
-      text-shadow:#222 2px 0 0,#222 0 1px 0,#222 -1px 0 0,#222 0 -1px 0;
+      text-shadow:#222 1px 0 1px,#222 0 1px 1px,#222 -1px 0 1px,#222 0 -1px 1px;
     }
     .problem{
       width: 14rem;

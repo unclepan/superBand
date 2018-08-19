@@ -1,18 +1,22 @@
 <template>
   <div :class="$style.wrap">
     <div :class="$style.main">
-      <img :class="$style.header" src="../assets/images/w_title01.png">
-      <img :class="$style.mainBox" src="../assets/images/w_page02.png">
-      <h3 :class="$style.example" id="example">共答对{{choiceNum}}道题</h3>
+      <img class="bounceIn" :class="$style.header" src="../assets/images/w_title01.png">
+      <div :class="$style.mainBoxExample" class="zoomInDown">
+        <img :class="$style.mainBox" src="../assets/images/w_page02.png">
+        <h3 :class="$style.example" id="example">共答对{{choiceNum}}道题</h3>
+      </div>
       <p :class="$style.text">这么厉害！你一定经常下厨吧！</p>
-      <div  :class="$style.butWrapBox">
+      <div class="flipInX" :class="$style.butWrapBox">
         <div :class="$style.butWrap">
           <div
+            class="fadeOut"
             :class="[$style.nextWrap, $style.nextWrapO]"
             @click="luckDraw()">
             <div :class="$style.next">红包抽奖</div>
           </div>
           <div
+            class="fadeOut"
             :class="[$style.nextWrap, $style.nextWrapO]"
             @click="turntable()">
             <div :class="$style.next">礼品抽奖</div>
@@ -20,10 +24,12 @@
         </div>
         <div :class="$style.butWrap">
           <div
+            class="fadeOut"
             :class="$style.nextWrap">
             <div :class="$style.next">长按分享</div>
           </div>
           <div
+            class="fadeOut"
             :class="$style.nextWrap"
             @click="zailai()">
             <div :class="$style.next">再来一次</div>
@@ -87,20 +93,24 @@
       margin: 0.8rem auto 0.7rem;
       display: block;
     }
-    .mainBox{
-      width: 12rem;
-      margin: 0.8rem auto 0.7rem;
-      display: block;
+    .mainBoxExample{
+        position: relative;
+       .mainBox{
+        width: 12rem;
+        margin: 0.8rem auto 0.7rem;
+        display: block;
+      }
+      .example{
+        top: 0.4rem;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: #ff771d;
+        font-size: 1.4rem;
+        text-shadow:#fff 1px 0 1px,#fff 0 1px 1px,#fff -1px 0 1px,#fff 0 -1px 1px;
+      }
     }
-    .example{
-      top: 4.6rem;
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      color: #ff771d;
-      font-size: 1.4rem;
-      text-shadow:#fff 1px 0 1px,#fff 0 1px 1px,#fff -1px 0 1px,#fff 0 -1px 1px;
-    }
+
     .text{
       text-align: center;
       color: #fff7bd;

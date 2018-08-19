@@ -99,7 +99,6 @@ export default {
     transition: all .5s ease;
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    transform: translateY(30px);
     opacity: 0;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.wrap">
     <div :class="$style.main">
-      <img :class="$style.header" src="../assets/images/w_turntableTitle.png">
+      <img class="bounceIn" :class="$style.header" src="../assets/images/w_turntableTitle.png">
       <div :class="$style.wheelMain" v-if="!toast_control">
           <div :class="$style.wheelPointerBox">
             <div :class="$style.wheelPointer" @click="rotate_handle()" :style="{transform:rotate_angle_pointer,transition:rotate_transition_pointer}">
@@ -10,18 +10,20 @@
           </div>
           <div :class="$style.wheelBg" :style="{transform:rotate_angle,transition:rotate_transition}"></div>
       </div>
-      <div :class="$style.toast" v-else>
+      <div class="zoomInDown" :class="$style.toast" v-else>
         <img :class="$style.wGxTitle" src="../assets/images/w_gxTitle.png">
         <p>获得二等奖 蓝牙音箱</p>
         <img :class="$style.wText" src="../assets/images/w_text.png">
       </div>
       <div :class="$style.butWrap">
         <div
+          class="fadeOut"
           @click="fanhui()"
           :class="$style.nextWrap">
           <div :class="$style.next">返回</div>
         </div>
         <div
+          class="fadeOut"
           :class="$style.nextWrap">
           <div :class="$style.next">奖品说明</div>
         </div>
