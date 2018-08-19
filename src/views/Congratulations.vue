@@ -84,12 +84,12 @@
   .main{
     .header{
       width: 12rem;
-      margin: 0.8rem auto;
+      margin: 0.8rem auto 0.7rem;
       display: block;
     }
     .mainBox{
       width: 12rem;
-      margin: 0.8rem auto;
+      margin: 0.8rem auto 0.7rem;
       display: block;
     }
     .example{

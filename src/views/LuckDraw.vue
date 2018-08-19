@@ -1,10 +1,14 @@
 <template>
   <div :class="$style.wrap">
-    <p :class="$style.info">获得1.16元现金好礼</p>
-    <div
-      @click="fanhui()"
-      :class="$style.nextWrap">
-      <div :class="$style.next">返回</div>
+    <div :class="$style.main">
+      <img :class="$style.header" src="../assets/images/w_hongbaoBg.png">
+      <img :class="$style.mainBox" src="../assets/images/w_hongbaoMain.png">
+      <p :class="$style.info">获得1.16元现金好礼</p>
+      <div
+        @click="fanhui()"
+        :class="$style.nextWrap">
+        <div :class="$style.next">返回</div>
+      </div>
     </div>
   </div>
 </template>
@@ -30,27 +34,41 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-    background-image: url('../assets/images/w_luckBg.jpg');
-    background-repeat: no-repeat;
-    background-size:100%;
-    .info{
-      width: 10rem;
-      text-align: center;
-      margin: 13.8rem auto 0;
-      color: #ffef82;
+    background-image: url('../assets/images/w_page04_bg.jpg');
+    background-size:10%;
+    .main{
+      .header{
+        width: 12rem;
+        margin: 0.8rem auto 0;
+        display: block;
+      }
+      .mainBox{
+        width: 100%;
+        margin: -0.8rem auto 0.7rem;
+        display: block;
+      }
+      .info{
+        top: 13rem;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: #ffef82;
+        text-shadow:#666 0 0 2px;
+      }
     }
+
     .nextWrap{
       cursor: pointer;
       border-radius: 0.8rem;
       border: 0.12rem solid #856c28;
-      width: 6.5rem;
-      min-height:2.3rem;
+      width: 5.5rem;
+      min-height:2rem;
       left:50%;
       margin-left: -3rem;
       display: block;
       position: absolute;
       z-index: 10000;
-      bottom: 2rem;
+      bottom: 1rem;
       background: rgba(250, 187, 34, 1);
       box-shadow: -0.23rem 0.2rem 0 rgba(255, 138, 3, 0.6);
       .next{
@@ -58,9 +76,9 @@
         border-radius: 0.8rem;
         border: 0.12rem solid #856c28;
         text-align: center;
-        width: 6.3rem;
-        min-height: 2.1rem;
-        line-height: 2.1rem;
+        width: 5.3rem;
+        min-height: 1.8rem;
+        line-height: 1.8rem;
         margin: -0.5rem auto;
         color: #ff7519;
         background: #ffe264;
