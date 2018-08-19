@@ -62,7 +62,7 @@
               this.vData();
             }, 1000);
           } else {
-            this.$router.push({ name: 'LuckDraw' });
+            this.$router.push({ name: 'Congratulations' });
           }
         }
       },

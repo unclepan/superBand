@@ -2,6 +2,7 @@
   <div :class="$style.wrap">
     <p :class="$style.info">获得1.16元现金好礼</p>
     <div
+      @click="fanhui()"
       :class="$style.nextWrap">
       <div :class="$style.next">返回</div>
     </div>
@@ -15,6 +16,11 @@
     data() {
       return {
       };
+    },
+    methods: {
+      fanhui() {
+        this.$router.push({ name: 'Congratulations' });
+      },
     },
   };
 </script>
