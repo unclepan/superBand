@@ -34,7 +34,7 @@
 }
 
 .flipInY {
-  animation-name: 'flipInY';
+  animation-name: flipInY;
   animation-duration: 1s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
@@ -74,7 +74,7 @@
 }
 
 .flipInX {
-  animation-name: 'flipInX';
+  animation-name: flipInX;
   animation-duration: 1s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
@@ -99,7 +99,7 @@
 }
 
 .zoomInDown {
-  animation-name: 'zoomInDown';
+  animation-name: zoomInDown;
   animation-duration: 1s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
@@ -199,8 +199,8 @@
 .bounceIn {
   -webkit-animation-duration: 0.75s;
   animation-duration: 0.75s;
-  -webkit-animation-name: 'bounceIn';
-  animation-name: 'bounceIn';
+  -webkit-animation-name: bounceIn;
+  animation-name: bounceIn;
 }
 
 @keyframes devia {
@@ -213,7 +213,7 @@
   }
 }
 .deviation{
-  animation-name: 'devia';
+  animation-name: devia;
   animation-duration: 1s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
@@ -252,7 +252,7 @@
   }
 }
 .fadeOut{
-  animation-name: 'fadeOut';
+  animation-name: fadeOut;
   animation-duration: 1s;
   animation-timing-function: ease;
   animation-iteration-count: infinite;
@@ -275,7 +275,7 @@
 }
 
 .fadeInLeft {
-  animation-name: 'fadeInLeft';
+  animation-name: fadeInLeft;
   animation-duration: 200ms;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
@@ -307,7 +307,7 @@
 }
 
 .shake {
-  animation-name: 'shake';
+  animation-name: shake;
   animation-duration: 800ms;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;

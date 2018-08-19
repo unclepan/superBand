@@ -23,7 +23,7 @@
         </div>
       </div>
       <div :class="$style.play">
-        <div :class="$style.inner" @click="play()"></div>
+        <div :class="$style.inner" @click="play()">开始</div>
       </div>
     </div>
   </div>
@@ -279,6 +279,7 @@
         width: 6rem;
         height: 2.2rem;
         cursor: pointer;
+        opacity: 0;
     }
   }
 }
