@@ -266,7 +266,7 @@ export default {
         padding: 1rem 0;
         color: #fff000;
         font-size: 1.2rem;
-        text-shadow:#ffa521 2px 0 0,#ffa521 0 1px 0,#ffa521 -1px 0 0,#ffa521 0 -1px 0;
+        text-shadow:#ffa521 1px 0 1px,#ffa521 0 1px 1px,#ffa521 -1px 0 1px,#ffa521 0 -1px 1px;
       }
       .wText{
         width: 10rem;
