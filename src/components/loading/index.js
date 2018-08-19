@@ -1,5 +1,12 @@
 import './index.less';
-
+import a from '../../assets/images/w_hongbaoMain.png';
+import b from '../../assets/images/w_index_main.png';
+import c from '../../assets/images/w_indexBg.jpg';
+import d from '../../assets/images/w_page1_bg.jpg';
+import e from '../../assets/images/w_page02.png';
+import f from '../../assets/images/w_turntableBg.jpg';
+import g from '../../assets/images/w_turntablePan.png';
+import h from '../../assets/images/w_answerBg.jpg';
 
 function preloader() {
   if (document.images) {
@@ -11,14 +18,14 @@ function preloader() {
     const img6 = new Image();
     const img7 = new Image();
     const img8 = new Image();
-    img1.src = '../../assets/images/w_hongbaoMain.png';
-    img2.src = '../../assets/images/w_index_main.png';
-    img3.src = '../../assets/images/w_indexBg.jpg';
-    img4.src = '../../assets/images/w_page1_bg.jpg';
-    img5.src = '../../assets/images/w_page02.png';
-    img6.src = '../../assets/images/w_turntableBg.jpg';
-    img7.src = '../../assets/images/w_turntablePan.png';
-    img8.src = '../../assets/images/w_answerBg.jpg';
+    img1.src = a;
+    img2.src = b;
+    img3.src = c;
+    img4.src = d;
+    img5.src = e;
+    img6.src = f;
+    img7.src = g;
+    img8.src = h;
   }
 }
 
