@@ -4,15 +4,15 @@
       <img :class="$style.w_index_main" src="../assets/images/w_index_main.png">
 
       <div :class="$style.tiao1">
-        <img :class="$style.w_index_main" src="../assets/images/w_index_tiao.jpg">
+        <div :class="$style.tiaoInner"></div>
       </div>
 
       <div :class="$style.tiao2">
-        <img :class="$style.w_index_main" src="../assets/images/w_index_tiao.jpg">
+        <div :class="$style.tiaoInner"></div>
       </div>
 
       <div :class="$style.tiao3">
-        <img :class="$style.w_index_main" src="../assets/images/w_index_tiao.jpg">
+        <div :class="$style.tiaoInner"></div>
       </div>
 
       <div :class="$style.dianzong">
@@ -98,7 +98,11 @@
     height: 7.6rem;
     background: red;
     overflow: hidden;
-    img{
+    .tiaoInner{
+      width: 100%;
+      background-size: 100%;
+      height: 2800px;
+      background-image: url('../assets/images/w_index_tiao.jpg');
       position: absolute;
       animation-name: 'gundong1';
       animation-duration: 0.8s;
@@ -115,7 +119,11 @@
     height: 7.6rem;
     background: red;
     overflow: hidden;
-    img{
+    .tiaoInner{
+      width: 100%;
+      background-size: 100%;
+      height: 2800px;
+      background-image: url('../assets/images/w_index_tiao.jpg');
       position: absolute;
       animation-name: 'gundong2';
       animation-duration: 0.8s;
@@ -132,7 +140,11 @@
     height: 7.6rem;
     background: red;
     overflow: hidden;
-    img{
+    .tiaoInner{
+      width: 100%;
+      background-size: 100%;
+      height: 2800px;
+      background-image: url('../assets/images/w_index_tiao.jpg');
       position: absolute;
       animation-name: 'gundong1';
       animation-duration: 0.8s;
