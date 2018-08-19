@@ -1,28 +1,33 @@
 <template>
   <div :class="$style.wrap">
-    <h3 :class="$style.example" id="example">共答对10道题</h3>
-    <div  :class="$style.butWrapBox">
-      <div :class="$style.butWrap">
-        <div
-          :class="[$style.nextWrap, $style.nextWrapO]"
-          @click="luckDraw()">
-          <div :class="$style.next">红包抽奖</div>
+    <div :class="$style.main">
+      <img :class="$style.header" src="../assets/images/w_title01.png">
+      <img :class="$style.mainBox" src="../assets/images/w_page02.png">
+      <h3 :class="$style.example" id="example">共答对{{choiceNum}}道题</h3>
+      <p :class="$style.text">这么厉害！你一定经常下厨吧！</p>
+      <div  :class="$style.butWrapBox">
+        <div :class="$style.butWrap">
+          <div
+            :class="[$style.nextWrap, $style.nextWrapO]"
+            @click="luckDraw()">
+            <div :class="$style.next">红包抽奖</div>
+          </div>
+          <div
+            :class="[$style.nextWrap, $style.nextWrapO]"
+            @click="turntable()">
+            <div :class="$style.next">礼品抽奖</div>
+          </div>
         </div>
-        <div
-          :class="[$style.nextWrap, $style.nextWrapO]"
-          @click="turntable()">
-          <div :class="$style.next">礼品抽奖</div>
-        </div>
-      </div>
-      <div :class="$style.butWrap">
-        <div
-          :class="$style.nextWrap">
-          <div :class="$style.next">长按分享</div>
-        </div>
-        <div
-          :class="$style.nextWrap"
-          @click="zailai()">
-          <div :class="$style.next">再来一次</div>
+        <div :class="$style.butWrap">
+          <div
+            :class="$style.nextWrap">
+            <div :class="$style.next">长按分享</div>
+          </div>
+          <div
+            :class="$style.nextWrap"
+            @click="zailai()">
+            <div :class="$style.next">再来一次</div>
+          </div>
         </div>
       </div>
     </div>
@@ -30,6 +35,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import $ from 'jquery';
   import '../assets/javascript/jquery.arctext';
 
@@ -41,6 +47,18 @@
     mounted() {
       const $example = $('#example').hide();
       $example.show().arctext({ radius: 116 });
+    },
+    computed: {
+      ...mapState(['choice']),
+      choiceNum() {
+        if (this.choice.length === 0) {
+          return 0;
+        }
+        const v = this.choice.filter(item => {
+          return item.b;
+        });
+        return v.length;
+      },
     },
     methods: {
       luckDraw() {
@@ -61,34 +79,55 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-image: url('../assets/images/w_congratulationsBg.jpg');
-  background-repeat: no-repeat;
-  background-size:100%;
-  .example{
-    text-align: center;
-    margin-top: 5.4rem;
-    color: #ff771d;
-    font-size: 1.4rem;
-    text-shadow:#fff 2px 0 0,#fff 0 2px 0,#fff -2px 0 0,#fff 0 -1px 0;
+  background-image: url('../assets/images/w_page03_bg.jpg');
+  background-size:10%;
+  .main{
+    .header{
+      width: 12rem;
+      margin: 0.8rem auto;
+      display: block;
+    }
+    .mainBox{
+      width: 12rem;
+      margin: 0.8rem auto;
+      display: block;
+    }
+    .example{
+      top: 4.6rem;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: #ff771d;
+      font-size: 1.4rem;
+      text-shadow:#fff 1px 0 1px,#fff 0 1px 1px,#fff -1px 0 1px,#fff 0 -1px 1px;
+    }
+    .text{
+      text-align: center;
+      color: #fff7bd;
+      text-shadow:#ff7519 1px 0 1px,#ff7519 0 1px 1px,#ff7519 -1px 0 1px,#ff7519 0 -1px 1px;
+    }
   }
+
   .butWrapBox{
     position: absolute;
     z-index: 1000;
+    left: 50%;
+    margin-left: -6.5rem;
     bottom: 0;
-    width: 100%;
-    transform: scale(0.8,0.8);
+    width: 13rem;
+    // transform: scale(0.8,0.8);
     .butWrap{
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
     }
   }
   .nextWrap{
     cursor: pointer;
     border-radius: 0.8rem;
     border: 0.12rem solid #856c28;
-    width: 6.5rem;
-    min-height:2.3rem;
+    width: 5.5rem;
+    min-height:2rem;
     display: block;
     background: rgba(250, 187, 34, 1);
     box-shadow: -0.23rem 0.2rem 0 rgba(255, 138, 3, 0.6);
@@ -97,9 +136,9 @@
       border-radius: 0.8rem;
       border: 0.12rem solid #856c28;
       text-align: center;
-      width: 6.3rem;
-      min-height: 2.1rem;
-      line-height: 2.1rem;
+      width: 5.3rem;
+      min-height: 1.8rem;
+      line-height: 1.8rem;
       margin: -0.5rem auto;
       color: #ff7519;
       background: #ffe264;

@@ -5,11 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    choice: ['c', 'a', 'd', 'd', 'b', 'b', 'a', 'c'],
+    choice: [],
   },
   mutations: {
     increment(state, v) {
-      state.choice = v;
+      state.choice.push(v);
     },
   },
 });

@@ -76,7 +76,7 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-image: url('../assets/images/w_indexBg.jpg');
+  background-image: url('../assets/images/w_page1_bg.jpg');
   background-repeat: no-repeat;
   background-size:100%;
 

@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex';
   import data from '../mock/wProblem';
 
   export default {
@@ -38,6 +39,9 @@
       };
     },
     methods: {
+      ...mapMutations({
+        add: 'increment',
+      }),
       init() {
         let tmRan = this.$route.query.ran || 1;
         tmRan = tmRan.toString();
@@ -48,12 +52,13 @@
       vData() {
         this.currentData = this.arrData.tm[this.sty];
       },
-      next(data, index) {
+      next(item, index) {
         if (this.noClick) {
           if (this.sty < this.arrData.tm.length - 1) {
             this.noClick = false;
             this.itemIndex = index;
             this.showB = true;
+            this.add(item);
             setTimeout(() => {
               this.noClick = true;
               this.sty += 1;
@@ -114,8 +119,9 @@
       border: 0.1rem solid #7d6b35;
       width: 14rem;
       margin: 0.6rem auto;
-      border-radius: 1.6rem;
+      border-radius: 0.6rem;
       position: relative;
+      padding: 0.6rem 0;
       .w_luobo{
         position: absolute;
         bottom: -0.4rem;
