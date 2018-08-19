@@ -60,10 +60,10 @@
       },
       next(item, index) {
         if (this.noClick) {
+          this.itemIndex = index;
+          this.showB = true;
           if (this.sty < this.arrData.tm.length - 1) {
             this.noClick = false;
-            this.itemIndex = index;
-            this.showB = true;
             this.add(item);
             setTimeout(() => {
               this.noClick = true;
@@ -74,8 +74,10 @@
             }, 1000);
           } else {
             setTimeout(() => {
+              this.itemIndex = -1;
+              this.showB = false;
               this.$router.push({ name: 'Congratulations' });
-            }, 1000);
+            }, 1200);
           }
         }
       },
