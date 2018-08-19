@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
+  import { mapMutations, mapState } from 'vuex';
   import data from '../mock/wProblem';
 
   export default {
@@ -40,9 +40,13 @@
         noClick: true,
       };
     },
+    computed: {
+      ...mapState(['choice']),
+    },
     methods: {
       ...mapMutations({
         add: 'increment',
+        reset: 'reset',
       }),
       init() {
         let tmRan = this.$route.query.ran || 1;
@@ -69,12 +73,15 @@
               this.vData();
             }, 1000);
           } else {
-            this.$router.push({ name: 'Congratulations' });
+            setTimeout(() => {
+              this.$router.push({ name: 'Congratulations' });
+            }, 1000);
           }
         }
       },
     },
     mounted() {
+      this.reset();
       this.init();
       this.vData();
     },

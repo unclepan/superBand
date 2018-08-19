@@ -11,5 +11,8 @@ export default new Vuex.Store({
     increment(state, v) {
       state.choice.push(v);
     },
+    reset(state, v) {
+      state.choice = [];
+    },
   },
 });
