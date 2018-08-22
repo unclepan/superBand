@@ -59,14 +59,14 @@
         return num;
       },
       play() {
-        // this.mic();
-        const ran = this.randomNumBoth(1, 4);
+        this.mic();
+        const ran = this.randomNumBoth(1, 5);
         this.$router.push({ name: 'Answer', query: { ran } });
       },
-      // mic() {
-      //   const myVideo = document.getElementById('audios');
-      //   myVideo.play();
-      // },
+      mic() {
+        const myVideo = document.getElementById('audios');
+        myVideo.play();
+      },
     },
   };
 </script>
@@ -105,7 +105,7 @@
       background-image: url('../assets/images/w_index_tiao.jpg');
       position: absolute;
       animation-name: 'gundong1';
-      animation-duration: 1.6s;
+      animation-duration: 2s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
       animation-direction: normal;
@@ -126,7 +126,7 @@
       background-image: url('../assets/images/w_index_tiao.jpg');
       position: absolute;
       animation-name: 'gundong2';
-      animation-duration: 1.6s;
+      animation-duration: 2s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
       animation-direction: normal;
@@ -147,7 +147,7 @@
       background-image: url('../assets/images/w_index_tiao.jpg');
       position: absolute;
       animation-name: 'gundong1';
-      animation-duration: 1.6s;
+      animation-duration: 2s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
       animation-direction: normal;

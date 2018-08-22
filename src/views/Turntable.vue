@@ -4,15 +4,13 @@
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_turntableTitle.png">
       <div :class="$style.wheelMain" v-if="!toast_control">
           <div :class="$style.wheelPointerBox">
-            <div :class="$style.wheelPointer" @click="rotate_handle()" :style="{transform:rotate_angle_pointer,transition:rotate_transition_pointer}">
-             抽奖
-            </div>
+            <div :class="$style.wheelPointer" @click="rotate_handle()" :style="{transform:rotate_angle_pointer,transition:rotate_transition_pointer}"></div>
           </div>
           <div :class="$style.wheelBg" :style="{transform:rotate_angle,transition:rotate_transition}"></div>
       </div>
       <div class="zoomInDown" :class="$style.toast" v-else>
         <img :class="$style.wGxTitle" src="../assets/images/w_gxTitle.png">
-        <p>获得二等奖 蓝牙音箱</p>
+        <p>获得{{prize_list[this.i].name}}</p>
         <img :class="$style.wText" src="../assets/images/w_text.png">
       </div>
       <div :class="$style.butWrap">
@@ -42,33 +40,33 @@ export default {
       lottery_ticket: 0, // 抽奖次数
       prize_list: [
         {
-          count: 10, // 奖品数量
-          name: '易趣豆', // 奖品名称
+          count: 0, // 奖品数量
+          name: '一等奖', // 奖品名称
           isPrize: 1, // 该奖项是否为奖品
         },
         {
+          count: 1,
+          name: '感谢参与1',
+          isPrize: 1,
+        },
+        {
+          count: 2,
+          name: '二等奖',
+          isPrize: 1,
+        },
+        {
+          count: 3,
+          name: '感谢参与2',
+          isPrize: 1,
+        },
+        {
+          count: 4,
+          name: '三等奖',
+          isPrize: 1,
+        },
+        {
           count: 5,
-          name: '豆',
-          isPrize: 1,
-        },
-        {
-          count: 10,
-          name: '易趣豆',
-          isPrize: 1,
-        },
-        {
-          count: 5,
-          name: '积分',
-          isPrize: 1,
-        },
-        {
-          count: 10,
-          name: '积分',
-          isPrize: 1,
-        },
-        {
-          count: 10,
-          name: '易趣豆',
+          name: '感谢参与3',
           isPrize: 1,
         },
       ], // 奖品列表
@@ -112,6 +110,7 @@ export default {
       const during_time = 5; // 默认为1s
       const random = Math.floor(Math.random() * 5);
       this.i = random;
+      console.log(random);
       const result_index = index || random; // 最终要旋转到哪一块，对应prize_list的下标
       const result_angle = [330, 270, 210, 150, 90, 30]; // 最终会旋转到下标的位置所需要的度数
       const rand_circle = 6; // 附加多转几圈，2-3
@@ -179,25 +178,15 @@ export default {
         top: 50%;
         left: 50%;
         z-index: 100;
-        transform: translate(-50%, -50%);
-        width: 4rem;
-        height: 4rem;
-        border-radius: 2rem;
-        background-color:#fefce3;
-        border: 0.1rem solid #856c28;
+        transform: translate(-50%, -60%);
+        width: 5.2rem;
+        height: 5.2rem;
         .wheelPointer {
-          width: 3.4rem;
-          height: 3.4rem;
-          margin: 0.2rem;
-          background-color:#f57021;
-          border-radius: 1.7rem;
-          text-align: center;
-          border: 0.1rem solid #856c28;
-          color: #ffffff;
-          line-height: 3.4rem;
-          // background: url("../assets/img/draw_btn.png") no-repeat center top;
+          width: 5.2rem;
+          height: 5.2rem;
+          background: url("../assets/img/draw_btn.png") no-repeat center top;
           background-size: 100%;
-          transform-origin: center 50%;
+          transform-origin: center 60%;
         }
       }
       .wheelBg{

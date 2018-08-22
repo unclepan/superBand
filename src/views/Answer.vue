@@ -6,8 +6,8 @@
         <p>{{currentData.q}}</p>
       </div>
       <div :class="[$style.answer, {flipInY: noClick}]">
-        <img :class="$style.w_luobo" src="../assets/images/w_luobo.png">
-        <img :class="$style.w_mogu" src="../assets/images/w_mogu.png">
+        <img class="fadeOut" :class="$style.w_luobo" src="../assets/images/w_luobo.png">
+        <img class="fadeOut" :class="$style.w_mogu" src="../assets/images/w_mogu.png">
           <div @click="next(item, index)" :class="$style.item" v-for="(item, index) in currentData.o" :key="index">
             <div :class="$style.itemWrap">
               <div :class="$style.itemInner">{{item.id.toUpperCase()}}: {{item.t}}</div>
@@ -20,6 +20,9 @@
             </div>
           </div>
       </div>
+      <img v-if="item.b === 'b'" :class="$style.ren" src="../assets/images/w_ren01.png">
+      <img v-else-if="item.b === true" :class="$style.ren" src="../assets/images/w_ren03.png">
+      <img v-else :class="$style.ren" src="../assets/images/w_ren02.png">
     </div>
   </div>
 </template>
@@ -38,6 +41,7 @@
         showB: false,
         itemIndex: -1,
         noClick: true,
+        item: { b: 'b' },
       };
     },
     computed: {
@@ -60,12 +64,14 @@
       },
       next(item, index) {
         if (this.noClick) {
+          this.item = item;
           this.itemIndex = index;
           this.showB = true;
+          this.noClick = false;
+          this.add(item);
           if (this.sty < this.arrData.tm.length - 1) {
-            this.noClick = false;
-            this.add(item);
             setTimeout(() => {
+              this.item = { b: 'b' };
               this.noClick = true;
               this.sty += 1;
               this.itemIndex = -1;
@@ -74,6 +80,7 @@
             }, 1000);
           } else {
             setTimeout(() => {
+              this.item = { b: 'b' };
               this.itemIndex = -1;
               this.showB = false;
               this.$router.push({ name: 'Congratulations' });
@@ -171,6 +178,12 @@
           width: 2rem;
         }
       }
+    }
+    .ren{
+      width: 5.6rem;
+      position: absolute;
+      bottom:0;
+      right:2rem;
     }
   }
 </style>
