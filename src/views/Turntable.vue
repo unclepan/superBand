@@ -2,17 +2,26 @@
   <div :class="$style.wrap">
     <div :class="$style.main">
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_turntableTitle.png">
+
       <div :class="$style.wheelMain" v-if="!toast_control">
           <div :class="$style.wheelPointerBox">
-            <div :class="$style.wheelPointer" @click="rotate_handle()" :style="{transform:rotate_angle_pointer,transition:rotate_transition_pointer}"></div>
+            <div :class="$style.wheelPointer" @click="rotate_handle()"></div>
           </div>
           <div :class="$style.wheelBg" :style="{transform:rotate_angle,transition:rotate_transition}"></div>
       </div>
+
       <div class="zoomInDown" :class="$style.toast" v-else>
-        <img :class="$style.wGxTitle" src="../assets/images/w_gxTitle.png">
-        <p>获得{{prize_list[this.i].name}}</p>
+        <div v-if="jiangxiang === 0 || jiangxiang === 2  || jiangxiang === 4">
+          <img :class="$style.wGxTitle" src="../assets/images/w_gxTitle.png">
+          <p>获得{{jiangxiangText}}</p>
+        </div>
+        <div v-else>
+          <img :class="$style.wGxTitle" src="../assets/images/w_yhTitle.jpg">
+          <p>感谢您的参与，请明天继续加油哦！</p>
+        </div>
         <img :class="$style.wText" src="../assets/images/w_text.png">
       </div>
+
       <div :class="$style.butWrap">
         <div
           class="fadeOut"
@@ -22,6 +31,7 @@
         </div>
         <div
           class="fadeOut"
+          @click="game_over()"
           :class="$style.nextWrap">
           <div :class="$style.next">奖品说明</div>
         </div>
@@ -32,86 +42,74 @@
 
 <script>
 /* eslint-disable */
+import axios from 'axios';
 
 export default {
   data() {
     return {
-      easejoy_bean: 0, // 金豆
-      lottery_ticket: 0, // 抽奖次数
-      prize_list: [
-        {
-          count: 0, // 奖品数量
-          name: '一等奖', // 奖品名称
-          isPrize: 1, // 该奖项是否为奖品
-        },
-        {
-          count: 1,
-          name: '感谢参与1',
-          isPrize: 1,
-        },
-        {
-          count: 2,
-          name: '二等奖',
-          isPrize: 1,
-        },
-        {
-          count: 3,
-          name: '感谢参与2',
-          isPrize: 1,
-        },
-        {
-          count: 4,
-          name: '三等奖',
-          isPrize: 1,
-        },
-        {
-          count: 5,
-          name: '感谢参与3',
-          isPrize: 1,
-        },
-      ], // 奖品列表
+      jiangxiangText: '感谢参与',
+      yichoujiang: false,
+      jiangxiang: 1,
       toast_control: false, // 抽奖结果弹出框控制器
-      hasPrize: false, // 是否中奖
       start_rotating_degree: 0, // 初始旋转角度
       rotate_angle: 0, // 将要旋转的角度
-      start_rotating_degree_pointer: 0, // 指针初始旋转角度
-      rotate_angle_pointer: 0, // 指针将要旋转的度数
       rotate_transition: 'transform 6s ease-in-out', // 初始化选中的过度属性控制
-      rotate_transition_pointer: 'transform 12s ease-in-out', // 初始化指针过度属性控制
       click_flag: true, // 是否可以旋转抽奖
-      i: 0, // 测试使用
     };
   },
   created() {
-    this.init_prize_list();
-  },
-  computed: {
-    toast_title() {
-      return this.hasPrize
-        ? `恭喜您，获得${this.prize_list[this.i].count} ${this.prize_list[this.i].name}`
-        : '未中奖';
-    },
-    toast_pictrue() {
-      return this.hasPrize
-        ? require('../assets/img/congratulation.png')
-        : require('../assets/img/sorry.png');
-    },
+    this.init();
   },
   methods: {
+    init(){
+      axios.get('http://app.erji1pin.cn/index/index/cxsfcj/').then((response) => {
+        if (response.data === '未抽奖') {
+          this.yichoujiang = true;
+          this.init_prize_list();
+        } else {
+          this.yichoujiang = false;
+          window.alert('请明天再来抽奖哦！');
+        }
+      }).catch((response) => {
+        window.alert('请明天再来抽奖哦！');
+      });
+    },
     // 此方法为处理奖品数据
-    init_prize_list(list) {},
+    init_prize_list() {
+      axios.get('http://app.erji1pin.cn/index/index/get_cjjg/').then((response) => {
+        this.jiangxiangText = response.data;
+        switch(response.data)
+        {
+        case '一等奖':
+          this.jiangxiang = 0;
+          break;
+        case '二等奖':
+          this.jiangxiang = 2;
+          break;
+        case '三等奖':
+          this.jiangxiang = 4;
+          break;
+        default:
+          this.jiangxiang = 3;
+        }
+      }).catch((response) => {
+        window.alert('请明天再来抽奖哦！');
+      });
+    },
     rotate_handle() {
-      this.rotating();
-      // this.i = this.i + 2;
+      if(this.yichoujiang) {
+        this.rotating(this.jiangxiang);
+      } else {
+        window.alert('请明天再来抽奖哦！');
+      }
     },
     rotating(index) {
       if (!this.click_flag) return;
       const type = 0; // 默认为 0  转盘转动 1 箭头和转盘都转动(暂且遗留)
       const during_time = 5; // 默认为1s
-      const random = Math.floor(Math.random() * 5);
-      this.i = random;
-      console.log(random);
-      const result_index = index || random; // 最终要旋转到哪一块，对应prize_list的下标
+
+      const result_index = index || index === 0 ? index : 1;
+
       const result_angle = [330, 270, 210, 150, 90, 30]; // 最终会旋转到下标的位置所需要的度数
       const rand_circle = 6; // 附加多转几圈，2-3
       this.click_flag = false; // 旋转结束前，不允许再次触发
@@ -123,14 +121,11 @@ export default {
           result_angle[result_index] -
           this.start_rotating_degree % 360;
         this.start_rotating_degree = rotate_angle;
+
         this.rotate_angle = `rotate(${rotate_angle}deg)`;
-        // // //转动指针
-        // this.rotate_angle_pointer = "rotate("+this.start_rotating_degree_pointer + 360*rand_circle+"deg)";
-        // this.start_rotating_degree_pointer =360*rand_circle;
         const that = this;
-        // 旋转结束后，允许再次触发
         setTimeout(function () {
-          that.click_flag = true;
+          // that.click_flag = true; // 旋转结束后，允许再次触发
           that.game_over(this.i);
         }, during_time * 1000 + 1500); // 延时，保证转盘转完
       } else {
@@ -138,8 +133,11 @@ export default {
       }
     },
     game_over() {
-      this.toast_control = true;
-      this.hasPrize = this.prize_list[this.i].isPrize;
+      if (this.click_flag) {
+        window.alert('请先抽奖！');
+      } else {
+        this.toast_control = true;
+      }
     },
     // 关闭弹窗
     close_toast() {

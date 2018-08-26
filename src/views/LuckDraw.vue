@@ -3,7 +3,7 @@
     <div :class="$style.main">
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_hongbaoBg.png">
       <img :class="$style.mainBox" src="../assets/images/w_hongbaoMain.png">
-      <p class="shake" :class="$style.info">获得1.16元现金好礼</p>
+      <p class="shake" :class="$style.info">获得{{num}}元现金好礼</p>
       <div
         class="fadeOut"
         @click="fanhui()"
@@ -15,14 +15,38 @@
 </template>
 
 <script>
+  import axios from 'axios';
 
   export default {
     name: 'Answer',
     data() {
       return {
+        num: 0,
       };
     },
+    mounted() {
+      this.init();
+    },
     methods: {
+      init() {
+        axios.get('http://app.erji1pin.cn/index/index/cxsfzj/').then((response) => {
+          if (response.data === '未中奖') {
+            this.money();
+          } else {
+            window.alert('请明天再来哦！');
+          }
+        }).catch((response) => {
+          window.alert('请明天再来哦！');
+        });
+      },
+      money() {
+        axios.get('http://app.erji1pin.cn/index/index/get_hbje').then((response) => {
+          this.num = (response.data / 100);
+          console.log(response.data);
+        }).catch((response) => {
+          window.alert('出错了！');
+        });
+      },
       fanhui() {
         this.$router.push({ name: 'Congratulations' });
       },

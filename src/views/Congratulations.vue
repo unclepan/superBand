@@ -41,9 +41,11 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import { mapState } from 'vuex';
   import $ from 'jquery';
   import '../assets/javascript/jquery.arctext';
+
 
   export default {
     data() {
@@ -68,10 +70,26 @@
     },
     methods: {
       luckDraw() {
-        this.$router.push({ name: 'LuckDraw' });
+        axios.get('http://app.erji1pin.cn/index/index/cxsfzj/').then((response) => {
+          if (response.data === '未中奖') {
+            this.$router.push({ name: 'LuckDraw' });
+          } else {
+            window.alert('请明天再来领红包哦！');
+          }
+        }).catch((response) => {
+          window.alert('请明天再来领红包哦！');
+        });
       },
       turntable() {
-        this.$router.push({ name: 'Turntable' });
+        axios.get('http://app.erji1pin.cn/index/index/cxsfcj/').then((response) => {
+          if (response.data === '未抽奖') {
+            this.$router.push({ name: 'Turntable' });
+          } else {
+            window.alert('请明天再来抽奖哦！');
+          }
+        }).catch((response) => {
+          window.alert('请明天再来抽奖哦！');
+        });
       },
       zailai() {
         this.$router.push({ name: 'Answer' });
