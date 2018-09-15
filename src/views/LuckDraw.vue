@@ -36,7 +36,7 @@
             window.alert('请明天再来哦！');
           }
         }).catch((response) => {
-          window.alert('请明天再来哦！');
+          window.alert('出错了！');
         });
       },
       money() {

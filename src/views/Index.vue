@@ -292,6 +292,7 @@
         height: 2.2rem;
         cursor: pointer;
         opacity: 0;
+        background: red;
     }
   }
 }
