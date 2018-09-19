@@ -3,23 +3,68 @@
     <div :class="$style.main">
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_turntableTitle.png">
 
-      <div :class="$style.wheelMain" v-if="!toast_control">
-          <div :class="$style.wheelPointerBox">
-            <div :class="$style.wheelPointer" @click="rotate_handle()"></div>
+      <div class="zoomInDown" :class="[$style.toast, $style.toast_tijiaoxinxi]" v-if="toast_tijiaoxinxi">
+          <div :class="$style.toast_tijiaoxinxi_box">
+            <p :class="$style.p1">恭喜您中奖</p>
+            <p :class="$style.p2"> 请填写您的真实信息，以便收取奖品</p>
+            <p :class="$style.label">您的姓名<span>*</span></p>
+            <input type="text" v-model="form.name">
+            <p :class="$style.label">手机号码<span>*</span></p>
+            <input type="text" v-model="form.phone">
           </div>
-          <div :class="$style.wheelBg" :style="{transform:rotate_angle,transition:rotate_transition}"></div>
+          <div :class="[$style.toastButWrap, $style.toastButWrapTishi]">
+            <div
+              class="fadeOut"
+              :class="$style.nextWrap"
+              @click="tianwanla()">
+              <div :class="$style.next">填完啦</div>
+            </div>
+          </div>
       </div>
 
-      <div class="zoomInDown" :class="$style.toast" v-else>
+      <div class="zoomInDown" :class="$style.toast" v-else-if="toast_control">
         <div v-if="jiangxiang === 0 || jiangxiang === 2  || jiangxiang === 4">
           <img :class="$style.wGxTitle" src="../assets/images/w_gxTitle.png">
           <p>获得{{jiangxiangText}}</p>
+          <img :class="$style.wText" src="../assets/images/w_text.png">
+          <div :class="[$style.toastButWrap, $style.toastButWrapTishi]">
+            <div
+              class="fadeOut"
+              :class="$style.nextWrap"
+              @click="tianxiexinxin()">
+              <div :class="$style.next">填写信息</div>
+            </div>
+          </div>
         </div>
         <div v-else>
           <img :class="$style.wGxTitle" src="../assets/images/w_yhTitle.jpg">
           <p>感谢您的参与，请明天继续加油哦！</p>
+          <img :class="$style.wText" src="../assets/images/w_text.png">
         </div>
-        <img :class="$style.wText" src="../assets/images/w_text.png">
+      </div>
+
+      <div class="zoomInDown" :class="[$style.toast, $style.toast_shuoming]" v-else-if="toast_shuoming">
+          <p>
+            一等奖为价值5000元的马尔代夫游，1名；<br/>
+            二等奖为价值399元的猫王音箱，10名；<br/>
+            活动有效时间为2018年9月22日-10月7日；<br/>
+            中奖玩家需填写真实联系方式，活动结束后工作人员将与中奖者联系，奖品于2018年10月内统一寄出；
+          </p>
+          <div :class="[$style.toastButWrap, $style.toastButWrapTishi]">
+            <div
+              class="fadeOut"
+              :class="$style.nextWrap"
+              @click="toast_shuoming = false">
+              <div :class="$style.next">返回</div>
+            </div>
+          </div>
+      </div>
+
+      <div :class="$style.wheelMain" v-else>
+          <div :class="$style.wheelPointerBox">
+            <div :class="$style.wheelPointer" @click="rotate_handle()"></div>
+          </div>
+          <div :class="$style.wheelBg" :style="{transform:rotate_angle,transition:rotate_transition}"></div>
       </div>
 
       <div :class="$style.butWrap">
@@ -31,7 +76,7 @@
         </div>
         <div
           class="fadeOut"
-          @click="game_over()"
+          @click="shuoming()"
           :class="$style.nextWrap">
           <div :class="$style.next">奖品说明</div>
         </div>
@@ -47,6 +92,12 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      form:{
+        name: '',
+        phone: ''
+      },
+      toast_tijiaoxinxi: false,
+      toast_shuoming: false,
       jiangxiangText: '感谢参与',
       yichoujiang: false,
       jiangxiang: 1,
@@ -144,7 +195,21 @@ export default {
       this.toast_control = false;
     },
     fanhui() {
-      this.$router.push({ name: 'Congratulations' });
+      this.$router.replace({ name: 'Congratulations' });
+    },
+    shuoming(){
+      this.toast_shuoming = true;
+    },
+    tianwanla(){
+      if(!this.form.name || !this.form.phone){
+        window.alert('请完整填写信息');
+      }else {
+        console.log('提交信息');
+      }
+    },
+    tianxiexinxin(){
+      this.toast_tijiaoxinxi = true;
+      this.toast_control = false;
     },
   },
 };
@@ -241,8 +306,8 @@ export default {
       background-color: #ffeea7;
       border: 0.1rem solid #7d6b35;
       width: 14rem;
-      margin: 2rem auto;
-      padding: 1rem;
+      margin: 1.2rem auto;
+      padding: 0.9rem;
       border-radius: 1.6rem;
       text-align: center;
       box-shadow: -0.23rem 0.2rem 0 rgba(255, 138, 3, 0.6);
@@ -259,7 +324,96 @@ export default {
         width: 10rem;
       }
     }
+    .toast_shuoming{
+      p{
+        padding: 0;
+        font-size: 0.8rem;
+        text-align: left;
+      }
+    }
   }
-
+  .nextWrap{
+    cursor: pointer;
+    border-radius: 0.8rem;
+    border: 0.12rem solid #856c28;
+    width: 5.3rem;
+    min-height:2rem;
+    display: block;
+    background: rgba(250, 187, 34, 1);
+    box-shadow: -0.23rem 0.2rem 0 rgba(255, 138, 3, 0.6);
+    .next{
+      text-shadow: 0px 0px 1px #ffffff;
+      border-radius: 0.8rem;
+      border: 0.12rem solid #856c28;
+      text-align: center;
+      width: 5.1rem;
+      min-height: 1.8rem;
+      line-height: 1.8rem;
+      margin: -0.4rem auto;
+      color: #ff7519;
+      background: #ffe264;
+      font-weight: bolder;
+    }
+  }
+  .toastButWrap{
+    display: flex;
+    justify-content: space-between;
+    margin: 0.6rem 0;
+    .nextWrap{
+      cursor: pointer;
+      width: 4.6rem;
+      min-height: 1.8rem;
+      .next{
+        width: 4.4rem;
+        min-height: 1.6rem;
+        line-height: 1.6rem;
+      }
+    }
+  }
+  .toastButWrapTishi{
+    justify-content: center;
+  }
+  .toast_tijiaoxinxi{
+    .toast_tijiaoxinxi_box{
+      .p1{
+        padding: 0;
+        color: #ff7519;
+        font-size: 1rem;
+        text-shadow:#856c28 1px 0 1px,#856c28 0 1px 1px,#856c28 -1px 0 1px,#856c28 0 -1px 1px;
+      }
+      .p2{
+        padding:0.4rem 0;
+        font-family: generic-family;
+        font-size: 0.6rem;
+        text-shadow: none;
+        color: #856c28;
+      }
+      .label{
+        padding:0.3rem 0;
+        text-align: left;
+        color: #d8cec5;
+        font-size: 1rem;
+        text-shadow:#856c28 1px 0 1px,#856c28 0 1px 1px,#856c28 -1px 0 1px,#856c28 0 -1px 1px;
+        span{
+          color: #ff7519;
+          text-shadow: none;
+        }
+      }
+      input{
+        font-family: generic-family;
+        margin-bottom: 0.3rem;
+        width: 100%;
+        border-radius: 0;
+        font-size: 0.8rem;
+        background: none;
+        border:0.1rem solid #856c28;
+        line-height: 1.4rem;
+        height: 1.4rem;
+        padding: 5px;
+        color: #333333;
+        outline: none;
+      }
+    }
+  }
 }
 </style>

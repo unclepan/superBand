@@ -83,7 +83,7 @@
               this.item = { b: 'b' };
               this.itemIndex = -1;
               this.showB = false;
-              this.$router.push({ name: 'Congratulations' });
+              this.$router.replace({ name: 'Congratulations' });
             }, 1500);
           }
         }
@@ -136,10 +136,10 @@
       background-color: #fff9e3;
       border: 0.1rem solid #7d6b35;
       width: 14rem;
-      margin: 0.6rem auto;
+      margin: 0.4rem auto;
       border-radius: 0.6rem;
       position: relative;
-      padding: 0.6rem 0;
+      padding: 0.3rem 0;
       .w_luobo{
         position: absolute;
         bottom: -0.4rem;
@@ -155,7 +155,7 @@
       .item{
         .itemWrap{
           width: 11rem;
-          margin: 0.5rem auto;
+          margin: 0.4rem auto;
           border-radius: 2rem;
           box-shadow: -0.23rem 0.2rem 0 rgba(255, 224, 27, 0.6);
           position: relative;

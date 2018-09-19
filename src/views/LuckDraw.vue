@@ -48,7 +48,7 @@
         });
       },
       fanhui() {
-        this.$router.push({ name: 'Congratulations' });
+        this.$router.replace({ name: 'Congratulations' });
       },
     },
   };

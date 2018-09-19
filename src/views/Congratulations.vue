@@ -21,6 +21,21 @@
       </div>
     </div>
 
+    <div class="zoomInDown" :class="$style.toast" v-else-if="showToastTishi">
+      <div>
+        <img :class="$style.wGxTitle" src="../assets/images/w_gengduo_title.png">
+        <p>到店参加“焕新乐万家，一站购到底”可获更多优惠及100万装修基金</p>
+      </div>
+      <div :class="[$style.toastButWrap, $style.toastButWrapTishi]">
+        <div
+          class="fadeOut"
+          :class="$style.nextWrap"
+          @click="showToastTishi = false">
+          <div :class="$style.next">返回</div>
+        </div>
+      </div>
+    </div>
+
     <div :class="$style.main" v-else>
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_title01.png">
       <div :class="$style.mainBoxExample" class="zoomInDown">
@@ -46,6 +61,7 @@
         <div :class="$style.butWrap">
           <div
             class="fadeOut"
+            @click="showToastTishi = true"
             :class="$style.nextWrap">
             <div :class="$style.next">更多惊喜</div>
           </div>
@@ -73,6 +89,7 @@
       return {
         fenxian: '',
         showToast: false,
+        showToastTishi: false,
       };
     },
     mounted() {
@@ -97,7 +114,6 @@
         const v = this.choice.filter(item => {
           return item.b;
         });
-        // const v = { length: 10 };
         if (v.length > 1 && v.length <= 4) {
           this.fenxian = '吃货属性暴露！光吃光吃光吃（看成“吃光”的你已经没救了！）';
         } else if (v.length > 5 && v.length <= 7) {
@@ -107,6 +123,7 @@
         } else {
           this.fenxian = '吃货属性暴露！光吃光吃光吃（看成“吃光”的你已经没救了！）';
         }
+        window.wwxx(this.fenxian);
       },
       guanbiToast() {
         this.showToast = false;
@@ -118,7 +135,7 @@
         if (v.length >= 5) {
           axios.get('http://app.erji1pin.cn/index/index/cxsfzj/').then((response) => {
             if (response.data === '未中奖') {
-              this.$router.push({ name: 'LuckDraw' });
+              this.$router.replace({ name: 'LuckDraw' });
             } else {
               window.alert('请明天再来领红包哦！');
             }
@@ -132,7 +149,7 @@
       turntable() {
         axios.get('http://app.erji1pin.cn/index/index/cxsfcj/').then((response) => {
           if (response.data === '未抽奖') {
-            this.$router.push({ name: 'Turntable' });
+            this.$router.replace({ name: 'Turntable' });
           } else {
             window.alert('请明天再来抽奖哦！');
           }
@@ -141,7 +158,7 @@
         });
       },
       zailai() {
-        this.$router.push({ name: 'Answer' });
+        this.$router.replace({ name: 'Answer' });
       },
     },
   };
@@ -157,14 +174,14 @@
   .main{
     .header{
       width: 12rem;
-      margin: 0.8rem auto 0.7rem;
+      margin: 0.8rem auto 0.6rem;
       display: block;
     }
     .mainBoxExample{
         position: relative;
        .mainBox{
         width: 12rem;
-        margin: 0.8rem auto 0.7rem;
+        margin: 0.6rem auto 0.6rem;
         display: block;
       }
       .example{
@@ -198,14 +215,14 @@
     .butWrap{
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
   }
   .nextWrap{
     cursor: pointer;
     border-radius: 0.8rem;
     border: 0.12rem solid #856c28;
-    width: 5.5rem;
+    width: 5.3rem;
     min-height:2rem;
     display: block;
     background: rgba(250, 187, 34, 1);
@@ -215,10 +232,10 @@
       border-radius: 0.8rem;
       border: 0.12rem solid #856c28;
       text-align: center;
-      width: 5.3rem;
+      width: 5.1rem;
       min-height: 1.8rem;
       line-height: 1.8rem;
-      margin: -0.5rem auto;
+      margin: -0.4rem auto;
       color: #ff7519;
       background: #ffe264;
       font-weight: bolder;
@@ -273,6 +290,9 @@
           line-height: 1.8rem;
         }
       }
+    }
+    .toastButWrapTishi{
+      justify-content: center;
     }
   }
 }

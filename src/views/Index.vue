@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.wrap">
     <div :class="$style.main">
+      <img :class="$style.logo" src="../assets/images/wanjiale.png">
       <img :class="$style.w_index_main" src="../assets/images/w_index_main.png">
 
       <div :class="$style.tiao1">
@@ -61,7 +62,7 @@
       play() {
         this.mic();
         const ran = this.randomNumBoth(1, 5);
-        this.$router.push({ name: 'Answer', query: { ran } });
+        this.$router.replace({ name: 'Answer', query: { ran } });
       },
       mic() {
         const myVideo = document.getElementById('audios');
@@ -85,6 +86,12 @@
     position: relative;
     width: 16rem;
     // transform: scale(0.96,0.96);
+    .logo{
+      position:fixed;
+      right:0.6rem;
+      top:0.4rem;
+      width: 3.6rem;
+    }
   }
   .w_index_main{
     width: 100%;

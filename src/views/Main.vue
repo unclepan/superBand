@@ -104,7 +104,7 @@ export default {
           return item.c;
         });
         this.add(v);
-        this.$router.push({ name: 'End' });
+        this.$router.replace({ name: 'End' });
       }
     },
   },
