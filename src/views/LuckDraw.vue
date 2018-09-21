@@ -3,7 +3,10 @@
     <div :class="$style.main">
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_hongbaoBg.png">
       <img :class="$style.mainBox" src="../assets/images/w_hongbaoMain.png">
-      <p class="shake" :class="$style.info">获得{{num}}元现金好礼</p>
+      <div :class="$style.info">
+        <p :class="$style.title">{{num ? '恭喜你' : '很遗憾'}}</p>
+        <p class="shake" :class="$style.text">{{num ? `获得${num}元现金好礼` : '请明天继续'}}</p>
+      </div>
       <div
         class="fadeOut"
         @click="fanhui()"
@@ -73,12 +76,16 @@
         display: block;
       }
       .info{
-        top: 13rem;
+        top: 10.3rem;
         position: absolute;
         width: 100%;
         text-align: center;
         color: #ffef82;
         text-shadow:#666 0 0 2px;
+        .title{
+          font-size: 2rem;
+          margin-bottom: 0.2rem;
+        }
       }
     }
 

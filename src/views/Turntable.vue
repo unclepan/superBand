@@ -3,7 +3,7 @@
     <div :class="$style.main">
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_turntableTitle.png">
 
-      <div class="zoomInDown" :class="[$style.toast, $style.toast_tijiaoxinxi]" v-if="!toast_tijiaoxinxi">
+      <div class="zoomInDown" :class="[$style.toast, $style.toast_tijiaoxinxi]" v-if="toast_tijiaoxinxi">
           <div :class="$style.toast_tijiaoxinxi_box">
             <p :class="$style.p1">恭喜您中奖</p>
             <p :class="$style.p2"> 请填写您的真实信息，以便收取奖品</p>
@@ -122,11 +122,8 @@ export default {
       click_flag: true, // 是否可以旋转抽奖
     };
   },
-  created() {
-    this.init();
-  },
   methods: {
-    init(){
+    rotate_handle(){
       axios.get('http://app.erji1pin.cn/index/index/cxsfcj/').then((response) => {
         if (response.data === '未抽奖') {
           this.yichoujiang = true;
@@ -136,6 +133,7 @@ export default {
           window.alert('请明天再来抽奖哦！');
         }
       }).catch((response) => {
+        this.yichoujiang = false;
         window.alert('请明天再来抽奖哦！');
       });
     },
@@ -157,11 +155,12 @@ export default {
         default:
           this.jiangxiang = 3;
         }
+        this.init();
       }).catch((response) => {
         window.alert('请明天再来抽奖哦！');
       });
     },
-    rotate_handle() {
+    init() {
       if(this.yichoujiang) {
         this.rotating(this.jiangxiang);
       } else {
@@ -170,6 +169,7 @@ export default {
     },
     rotating(index) {
       if (!this.click_flag) return;
+
       const type = 0; // 默认为 0  转盘转动 1 箭头和转盘都转动(暂且遗留)
       const during_time = 5; // 默认为1s
 
@@ -185,30 +185,32 @@ export default {
           rand_circle * 360 +
           result_angle[result_index] -
           this.start_rotating_degree % 360;
+
         this.start_rotating_degree = rotate_angle;
+        console.log(rotate_angle);
 
         this.rotate_angle = `rotate(${rotate_angle}deg)`;
         const that = this;
         setTimeout(function () {
-          // that.click_flag = true; // 旋转结束后，允许再次触发
-          that.game_over(this.i);
+          that.click_flag = true; // 旋转结束后，允许再次触发
+          that.game_over();
         }, during_time * 1000 + 1500); // 延时，保证转盘转完
       } else {
-        //
+        // console.log('');
       }
     },
     game_over() {
-      if (this.click_flag) {
-        window.alert('请先抽奖！');
-      } else {
-        this.toast_control = true;
-      }
+      this.toast_control = true;
+      // if (this.click_flag) {
+      //   window.alert('请先抽奖！');
+      // } else {
+      //   this.toast_control = true;
+      // }
     },
     // 关闭弹窗
     close_toast() {
       this.toast_control = false;
     },
-
     fanhui() {
       this.$router.replace({ name: 'Congratulations' });
     },
@@ -231,7 +233,7 @@ export default {
           window.alert('提交成功');
           setTimeout(() => {
             this.$router.replace({ name: 'Congratulations' });
-          }, 3000);
+          }, 2000);
         }).catch((error) => {
           console.log('提交失败');
         });
