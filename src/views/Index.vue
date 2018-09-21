@@ -88,7 +88,7 @@
     // transform: scale(0.96,0.96);
     .logo{
       position:fixed;
-      right:0.6rem;
+      left:0.6rem;
       top:0.4rem;
       width: 3.6rem;
     }

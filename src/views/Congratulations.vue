@@ -21,10 +21,14 @@
       </div>
     </div>
 
-    <div class="zoomInDown" :class="$style.toast" v-else-if="showToastTishi">
+    <div class="zoomInDown" :class="[$style.toast, $style.showToastTishiBox]" v-else-if="showToastTishi">
       <div>
         <img :class="$style.wGxTitle" src="../assets/images/w_gengduo_title.png">
-        <p>到店参加“焕新乐万家，一站购到底”可获更多优惠及100万装修基金</p>
+        <p :class="$style.textP">
+          <span :class="$style.wangjiale">万家乐</span>
+          <span>首席产品体验官李好</span>
+          邀您到线下终端门店参加“焕新乐万家，一站购到底”活动可获更多优惠，及分享100万装修基金
+        </p>
       </div>
       <div :class="[$style.toastButWrap, $style.toastButWrapTishi]">
         <div
@@ -34,6 +38,7 @@
           <div :class="$style.next">返回</div>
         </div>
       </div>
+      <img :class="$style.lihaoImg" src="../assets/images/lihao.png">
     </div>
 
     <div :class="$style.main" v-else>
@@ -293,6 +298,24 @@
     }
     .toastButWrapTishi{
       justify-content: center;
+    }
+  }
+
+  .showToastTishiBox{
+    position: relative;
+    .textP{
+      font-size: 0.9rem;
+      line-height: 1.3rem;
+      .wangjiale{
+        color: #ff7519;
+        text-shadow:#856c28 1px 0 1px,#856c28 0 1px 1px,#856c28 -1px 0 1px,#856c28 0 -1px 1px;
+      }
+    }
+    .lihaoImg{
+      position: absolute;
+      width: 100%;
+      left: 0;
+      margin-top: -0.5rem;
     }
   }
 }

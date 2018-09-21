@@ -39,7 +39,11 @@
         <div v-else>
           <img :class="$style.wGxTitle" src="../assets/images/w_yhTitle.jpg">
           <p>感谢您的参与，请明天继续加油哦！</p>
-          <img :class="$style.wText" src="../assets/images/w_text.png">
+          <p :class="$style.yihanp2">
+            <span :class="$style.wangjiale">万家乐</span>
+            首席产品体验官李好邀您到线下终端门店参加“焕新乐万家，一站购到底”活动可获更多优惠，及分享100万装修基金
+          </p>
+          <!-- <img :class="$style.wText" src="../assets/images/w_text.png"> -->
         </div>
       </div>
 
@@ -205,6 +209,7 @@ export default {
         window.alert('请完整填写信息');
       }else {
         console.log('提交信息');
+
       }
     },
     tianxiexinxin(){
@@ -224,6 +229,7 @@ export default {
   overflow: hidden;
   background-image: url('../assets/images/w_turntableBg.jpg');
   background-repeat: no-repeat;
+  background-position: 0 bottom;
   background-size:100%;
   .main{
     .header{
@@ -311,6 +317,13 @@ export default {
       border-radius: 1.6rem;
       text-align: center;
       box-shadow: -0.23rem 0.2rem 0 rgba(255, 138, 3, 0.6);
+      .yihanp2{
+        font-size: 0.8rem;
+        .wangjiale{
+          color: #ff7519;
+          text-shadow:#856c28 1px 0 1px,#856c28 0 1px 1px,#856c28 -1px 0 1px,#856c28 0 -1px 1px;
+        }
+      }
       .wGxTitle{
         width: 6rem;
       }
