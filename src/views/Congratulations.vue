@@ -26,7 +26,7 @@
         <img :class="$style.wGxTitle" src="../assets/images/w_gengduo_title.png">
         <p :class="$style.textP">
           <span :class="$style.wangjiale">万家乐</span>
-          <span>首席产品体验官李好</span>
+          <span :class="$style.lihao">首席产品体验官李好</span>
           邀您到线下终端门店参加“焕新乐万家，一站购到底”活动可获更多优惠，及分享100万装修基金
         </p>
       </div>
@@ -306,6 +306,9 @@
     .textP{
       font-size: 0.9rem;
       line-height: 1.3rem;
+      .lihao{
+        color: #f6d95b;
+      }
       .wangjiale{
         color: #ff7519;
         text-shadow:#856c28 1px 0 1px,#856c28 0 1px 1px,#856c28 -1px 0 1px,#856c28 0 -1px 1px;

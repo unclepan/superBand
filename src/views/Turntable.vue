@@ -41,9 +41,18 @@
           <p>感谢您的参与，请明天继续加油哦！</p>
           <p :class="$style.yihanp2">
             <span :class="$style.wangjiale">万家乐</span>
-            首席产品体验官李好邀您到线下终端门店参加“焕新乐万家，一站购到底”活动可获更多优惠，及分享100万装修基金
+            <span :class="$style.lihao">首席产品体验官李好</span>
+            邀您到线下终端门店参加“焕新乐万家，一站购到底”活动可获更多优惠，及分享100万装修基金
           </p>
           <!-- <img :class="$style.wText" src="../assets/images/w_text.png"> -->
+        </div>
+        <div :class="[$style.toastButWrap, $style.toastButWrapTishi]">
+          <div
+            class="fadeOut"
+            :class="$style.nextWrap"
+            @click="toast_control = false">
+            <div :class="$style.next">返回</div>
+          </div>
         </div>
       </div>
 
@@ -64,25 +73,26 @@
           </div>
       </div>
 
-      <div :class="$style.wheelMain" v-else>
-          <div :class="$style.wheelPointerBox">
-            <div :class="$style.wheelPointer" @click="rotate_handle()"></div>
-          </div>
-          <div :class="$style.wheelBg" :style="{transform:rotate_angle,transition:rotate_transition}"></div>
-      </div>
-
-      <div :class="$style.butWrap">
-        <div
-          class="fadeOut"
-          @click="fanhui()"
-          :class="$style.nextWrap">
-          <div :class="$style.next">返回</div>
+      <div v-else>
+        <div :class="$style.wheelMain">
+            <div :class="$style.wheelPointerBox">
+              <div :class="$style.wheelPointer" @click="rotate_handle()"></div>
+            </div>
+            <div :class="$style.wheelBg" :style="{transform:rotate_angle,transition:rotate_transition}"></div>
         </div>
-        <div
-          class="fadeOut"
-          @click="shuoming()"
-          :class="$style.nextWrap">
-          <div :class="$style.next">奖品说明</div>
+        <div :class="$style.butWrap">
+          <div
+            class="fadeOut"
+            @click="fanhui()"
+            :class="$style.nextWrap">
+            <div :class="$style.next">返回</div>
+          </div>
+          <div
+            class="fadeOut"
+            @click="shuoming()"
+            :class="$style.nextWrap">
+            <div :class="$style.next">奖品说明</div>
+          </div>
         </div>
       </div>
      </div>
@@ -198,6 +208,7 @@ export default {
     close_toast() {
       this.toast_control = false;
     },
+
     fanhui() {
       this.$router.replace({ name: 'Congratulations' });
     },
@@ -208,7 +219,19 @@ export default {
       if(!this.form.name || !this.form.phone){
         window.alert('请完整填写信息');
       }else {
-        console.log('提交信息');
+        axios.post('http://app.erji1pin.cn/index/index/tjzj/', {
+          name: this.form.name,
+          phone: this.form.phone,
+          time: new Date().getTime(),
+          prize: this.jiangxiangText
+        })
+        .then(function (response) {
+          console.log('提交成功');
+          this.$router.replace({ name: 'Congratulations' });
+        })
+        .catch(function (error) {
+          console.log('提交失败');
+        });
 
       }
     },
@@ -319,6 +342,11 @@ export default {
       box-shadow: -0.23rem 0.2rem 0 rgba(255, 138, 3, 0.6);
       .yihanp2{
         font-size: 0.8rem;
+        color: #ffeea7;
+        text-shadow:#856c28 1px 0 1px,#856c28 0 1px 1px,#856c28 -1px 0 1px,#856c28 0 -1px 1px;
+        .lihao{
+          color: #f6d95b;
+        }
         .wangjiale{
           color: #ff7519;
           text-shadow:#856c28 1px 0 1px,#856c28 0 1px 1px,#856c28 -1px 0 1px,#856c28 0 -1px 1px;
