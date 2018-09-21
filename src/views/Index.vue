@@ -90,7 +90,7 @@
       position:fixed;
       left:0.6rem;
       top:0.4rem;
-      width: 3.6rem;
+      width: 2.6rem;
     }
   }
   .w_index_main{

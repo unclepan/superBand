@@ -3,7 +3,7 @@
     <div :class="$style.main">
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_turntableTitle.png">
 
-      <div class="zoomInDown" :class="[$style.toast, $style.toast_tijiaoxinxi]" v-if="toast_tijiaoxinxi">
+      <div class="zoomInDown" :class="[$style.toast, $style.toast_tijiaoxinxi]" v-if="!toast_tijiaoxinxi">
           <div :class="$style.toast_tijiaoxinxi_box">
             <p :class="$style.p1">恭喜您中奖</p>
             <p :class="$style.p2"> 请填写您的真实信息，以便收取奖品</p>
@@ -219,17 +219,20 @@ export default {
       if(!this.form.name || !this.form.phone){
         window.alert('请完整填写信息');
       }else {
+        const now = new Date();
+        const time = `${now.toLocaleString()}`
         axios.post('http://app.erji1pin.cn/index/index/tjzj/', {
           name: this.form.name,
           phone: this.form.phone,
-          time: new Date().getTime(),
+          time: time,
           prize: this.jiangxiangText
-        })
-        .then(function (response) {
+        }).then((response) =>  {
           console.log('提交成功');
-          this.$router.replace({ name: 'Congratulations' });
-        })
-        .catch(function (error) {
+          window.alert('提交成功');
+          setTimeout(() => {
+            this.$router.replace({ name: 'Congratulations' });
+          }, 3000);
+        }).catch((error) => {
           console.log('提交失败');
         });
 

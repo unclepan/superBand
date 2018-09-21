@@ -5,7 +5,7 @@
       <div :class="$style.problem" class="fadeOut">
         <p>{{currentData.q}}</p>
       </div>
-      <div :class="[$style.answer, {flipInY: noClick}]">
+      <div class="www" :class="[$style.answer, {flipInY: noClick}]">
         <img class="fadeOut" :class="$style.w_luobo" src="../assets/images/w_luobo.png">
         <img class="fadeOut" :class="$style.w_mogu" src="../assets/images/w_mogu.png">
           <div @click="next(item, index)" :class="$style.item" v-for="(item, index) in currentData.o" :key="index">
@@ -20,9 +20,9 @@
             </div>
           </div>
       </div>
-      <img v-if="item.b === 'b'" :class="$style.ren" src="../assets/images/w_ren01.png">
-      <img v-else-if="item.b === true" :class="$style.ren" src="../assets/images/w_ren03.png">
-      <img v-else :class="$style.ren" src="../assets/images/w_ren02.png">
+      <img :style="{ top: dingzhu}" v-if="item.b === 'b'" :class="$style.ren" src="../assets/images/w_ren01.png">
+      <img :style="{ top: dingzhu}" v-else-if="item.b === true" :class="$style.ren" src="../assets/images/w_ren03.png">
+      <img :style="{ top: dingzhu}" v-else :class="$style.ren" src="../assets/images/w_ren02.png">
     </div>
   </div>
 </template>
@@ -35,6 +35,7 @@
     name: 'Answer',
     data() {
       return {
+        dingzhu: 'inherit',
         sty: 0,
         arrData: {},
         currentData: {},
@@ -61,6 +62,9 @@
       },
       vData() {
         this.currentData = this.arrData.tm[this.sty];
+        this.$nextTick(() => {
+          this.getHeight();
+        });
       },
       next(item, index) {
         if (this.noClick) {
@@ -88,11 +92,27 @@
           }
         }
       },
+      getHeight() {
+        const dom1 = document.querySelector(`.${this.$style.answer}`).offsetHeight;
+        const dom2 = document.querySelector(`.${this.$style.answer}`).offsetTop;
+        const bodyHeight = document.body.clientHeight;
+        const gao = dom1 + dom2 + 156;
+        if (gao > bodyHeight) {
+          console.log('顶住了');
+          this.dingzhu = `${dom1 + dom2}px`;
+        } else {
+          console.log('没顶住');
+          this.dingzhu = 'inherit';
+        }
+      },
     },
     mounted() {
       this.reset();
       this.init();
       this.vData();
+      this.$nextTick(() => {
+        this.getHeight();
+      });
     },
     watch: {
     },
@@ -186,10 +206,11 @@
       }
     }
     .ren{
-      width: 5.6rem;
+      width: 100px;
       position: absolute;
       bottom:0;
       right:2rem;
+      display: block;
     }
   }
 </style>

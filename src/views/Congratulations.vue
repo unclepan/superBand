@@ -308,6 +308,7 @@
       line-height: 1.3rem;
       .lihao{
         color: #f6d95b;
+        text-shadow:#856c28 1px 0 1px,#856c28 0 1px 1px,#856c28 -1px 0 1px,#856c28 0 -1px 1px;
       }
       .wangjiale{
         color: #ff7519;
