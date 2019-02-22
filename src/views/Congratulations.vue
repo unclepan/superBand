@@ -92,6 +92,8 @@
   export default {
     data() {
       return {
+        hh1: true,
+        hh2: true,
         fenxian: '',
         showToast: false,
         showToastTishi: false,
@@ -134,33 +136,43 @@
         this.showToast = false;
       },
       luckDraw() {
-        const v = this.choice.filter(item => {
-          return item.b;
-        });
-        if (v.length >= 5) {
-          axios.get('http://app.erji1pin.cn/index/index/cxsfzj/').then((response) => {
-            if (response.data === '未中奖') {
-              this.$router.replace({ name: 'LuckDraw' });
-            } else {
-              window.alert('请明天再来领红包哦！');
-            }
-          }).catch((response) => {
-            window.alert('请明天再来领红包哦！');
+        if (this.hh1) {
+          this.hh1 = false;
+          const v = this.choice.filter(item => {
+            return item.b;
           });
-        } else {
-          this.showToast = true;
+          if (v.length >= 5) {
+            axios.get('http://app.erji1pin.cn/index/index/cxsfzj/').then((response) => {
+              this.hh1 = true;
+              if (response.data === '未中奖') {
+                this.$router.replace({ name: 'LuckDraw' });
+              } else {
+                window.alert('请明天再来领红包哦！');
+              }
+            }).catch((response) => {
+              window.alert('请明天再来领红包哦！');
+            });
+          } else {
+            this.hh1 = true;
+            this.showToast = true;
+          }
         }
       },
       turntable() {
-        axios.get('http://app.erji1pin.cn/index/index/cxsfcj/').then((response) => {
-          if (response.data === '未抽奖') {
-            this.$router.replace({ name: 'Turntable' });
-          } else {
+        if (this.hh2) {
+          this.hh2 = false;
+          axios.get('http://app.erji1pin.cn/index/index/cxsfcj/').then((response) => {
+            this.hh2 = true;
+            if (response.data === '未抽奖') {
+              this.$router.replace({ name: 'Turntable' });
+            } else {
+              window.alert('请明天再来抽奖哦！');
+            }
+          }).catch((response) => {
+            this.hh2 = true;
             window.alert('请明天再来抽奖哦！');
-          }
-        }).catch((response) => {
-          window.alert('请明天再来抽奖哦！');
-        });
+          });
+        }
       },
       zailai() {
         this.$router.replace({ name: 'Answer' });

@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.wrap">
-    <div :class="$style.main">
+    <div :class="$style.main" v-if="lai">
       <img class="bounceIn" :class="$style.header" src="../assets/images/w_hongbaoBg.png">
       <img :class="$style.mainBox" src="../assets/images/w_hongbaoMain.png">
       <div :class="$style.info">
@@ -25,6 +25,7 @@
     data() {
       return {
         num: 0,
+        lai: false,
       };
     },
     mounted() {
@@ -45,6 +46,7 @@
       money() {
         axios.get('http://app.erji1pin.cn/index/index/get_hbje').then((response) => {
           this.num = (response.data / 100);
+          this.lai = true;
           console.log(response.data);
         }).catch((response) => {
           window.alert('出错了！');
