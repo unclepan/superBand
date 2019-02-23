@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
+  <div id="wrapper">
     <router-view/>
     <!-- <img v-if="showMic" @click="mic" :class="$style.mic" src="../assets/images/02.png"> -->
-    <audio autoplay="autoplay" loop="loop" id="audios">
+    <!-- <audio autoplay="autoplay" loop="loop" id="audios">
       <source src="../assets/music/aaaaaaaaa.ogg" type="audio/ogg" />
       <source src="../assets/music/aaaaaaaaa.mp3" type="audio/mpeg" />
-    </audio>
+    </audio> -->
   </div>
 </template>
 
@@ -16,11 +16,10 @@ export default {
   name: 'App',
   data() {
     return {
-      msg: 'Index',
-      m: false,
     };
   },
   mounted() {
+    this.init();
     // axios.get('http://3600413e.ngrok.io/').then((response) => {
     //   console.log(response);
     // }).catch((response) => {
@@ -28,14 +27,41 @@ export default {
     // });
   },
   computed: {
-    showMic() {
-      if (this.$route.name === 'Index') {
-        return true;
-      }
-      return false;
-    },
+    // showMic() {
+    //   if (this.$route.name === 'Index') {
+    //     return true;
+    //   }
+    //   return false;
+    // },
   },
   methods: {
+    init() {
+      // 利用 CSS3 旋转 对根容器逆时针旋转 90 度
+      const detectOrient = function () {
+        const width = document.documentElement.clientWidth;
+        const height = document.documentElement.clientHeight;
+        const $wrapper = document.getElementById('wrapper');
+        let style = '';
+
+        if (width >= height) { // 横屏
+          style += `width:${width}px;`; // 注意旋转后的宽高切换
+          style += `height:${height}px;`;
+          style += '-webkit-transform: rotate(0); transform: rotate(0);';
+          style += '-webkit-transform-origin: 0 0;';
+          style += 'transform-origin: 0 0;';
+        } else { // 竖屏
+          style += `width:${height}px;`;
+          style += `height:${width}px;`;
+          style += '-webkit-transform: rotate(90deg); transform: rotate(90deg);';
+          // 注意旋转中点的处理
+          style += `-webkit-transform-origin: ${width / 2}px ${width / 2}px;`;
+          style += `transform-origin: ${width / 2}px ${width / 2}px;`;
+        }
+        $wrapper.style.cssText = style;
+      };
+      window.onresize = detectOrient;
+      detectOrient();
+    },
     mic() {
       // const myVideo = document.getElementById('audios');
       // if (this.m) {

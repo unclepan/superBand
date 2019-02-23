@@ -5,31 +5,70 @@
   z-index: 10000;
   left:0;
   top:0;
-  background: #fed322;
   display: flex;
   justify-content: center;
   align-items: center;
-  .loader {
-    background: rgba(245,112,33,1);
-    height: 1rem;
-    width: 1rem;
-    margin: 3rem auto;
-    animation: loadit 4s linear infinite;
-  }
-  .text{
-    font-family: '微软雅黑';
-    color: #ffffff;
-    font-size: 0.3rem;
-    padding-top: 10px;
+  text-align: center;
+  background-image: url('@/assets/images/img-2019-2-22/wrap-bg.jpg');
+  background-size:12px;
+  .loading{
+    .logo{
+      width: 4rem;
+    }
+    .loader{
+      width: 150px;
+      height: 10px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+    .loader span{
+      display: block;
+      width: 8px;
+      height: 7px;
+      margin: 2px;
+      box-shadow: 0 2px 0 rgba(227, 164, 41, 0.8);
+      background: lightgreen;
+      animation: load 1.04s ease infinite;
+    }
+    @keyframes load{
+      0%{
+          opacity: 1;
+          background: #fef4b9;
+      }
+      100%{
+          opacity: 0.9;
+          background: #53954d;
+      }
+    }
+    .loader span:nth-child(1){
+      animation-delay:0.1s;
+    }
+    .loader span:nth-child(2){
+      animation-delay:0.2s;
+    }
+    .loader span:nth-child(3){
+      animation-delay:0.3s;
+    }
+    .loader span:nth-child(4){
+      animation-delay:0.4s;
+    }
+    .loader span:nth-child(5){
+      animation-delay:0.5s;
+    }
+    .loader span:nth-child(6){
+      animation-delay:0.6s;
+    }
+    .loader span:nth-child(7){
+      animation-delay:0.7s;
+    }
+    .loader span:nth-child(8){
+      animation-delay:0.8s;
+    }
+    .loader span:nth-child(9){
+      animation-delay:0.9s;
+    }
   }
 }
 
 
-@keyframes loadit {
-  55% {
-    background: rgba(245,112,33,0.8);
-    border-radius: 100%;
-    transform: rotate(360deg);
-    box-shadow: 4rem 0 0 rgba(245,112,33,0.4),-4em 0 0 rgba(245,112,33,0.4),1em 0 0 rgba(245,112,33,0.4),-1em 0 0 rgba(245,112,33,0.4),0 4em 0 rgba(245,112,33,0.4),0 -4em 0 rgba(245,112,33,0.4),0 1em 0 rgba(245,112,33,0.4),0 -1em 0 rgba(245,112,33,0.4);
-  }
-}

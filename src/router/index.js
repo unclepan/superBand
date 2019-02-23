@@ -1,10 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Index from '@/views/Index';
-import Answer from '@/views/Answer';
-import Congratulations from '@/views/Congratulations';
-import LuckDraw from '@/views/LuckDraw';
-import Turntable from '@/views/Turntable';
+import Page01 from '@/views/Page01';
+import Page02 from '@/views/Page02';
 
 Vue.use(Router);
 
@@ -12,28 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Index',
-      component: Index,
+      name: 'Page01',
+      component: Page01,
     },
     {
-      path: '/answer',
-      name: 'Answer',
-      component: Answer,
-    },
-    {
-      path: '/luckDraw',
-      name: 'LuckDraw',
-      component: LuckDraw,
-    },
-    {
-      path: '/congratulations',
-      name: 'Congratulations',
-      component: Congratulations,
-    },
-    {
-      path: '/turntable',
-      name: 'Turntable',
-      component: Turntable,
+      path: '/Page02',
+      name: 'Page02',
+      component: Page02,
     },
   ],
 });
