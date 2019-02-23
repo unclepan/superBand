@@ -5,16 +5,16 @@
         <p :class="$style.title">快来看我发动四两拨千斤必杀技，成功打败洗碗精！耶！</p>
         <fenxiang/>
         <div :class="$style.btn">
-          <img src="../assets/images/img-2019-2-22/fenxiang-02.png">
+          <img @click="zailai()" src="../assets/images/img-2019-2-22/fenxiang-02.png">
           <img src="../assets/images/img-2019-2-22/fenxiang-03.png">
-          <img src="../assets/images/img-2019-2-22/fenxiang-04.png">
-          <img src="../assets/images/img-2019-2-22/fenxiang-05.png">
+          <img @click="youjiang()" src="../assets/images/img-2019-2-22/fenxiang-04.png">
+          <img @click="hongbao()" src="../assets/images/img-2019-2-22/fenxiang-05.png">
         </div>
       </div>
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
       <img :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
-      <img :class="$style['main-03']" src="../assets/images/img-2019-2-22/fenxiang-07.png">
-      <img :class="$style['main-04']" src="../assets/images/img-2019-2-22/fenxiang-06.png">
+      <img  :class="$style['main-03']" src="../assets/images/img-2019-2-22/fenxiang-07.png">
+      <img  :class="$style['main-04']" src="../assets/images/img-2019-2-22/fenxiang-06.png">
   </div>
 </template>
 
@@ -33,6 +33,15 @@
    mounted() {
    },
    methods: {
+     zailai() {
+       this.$router.replace({ name: 'Page02' });
+     },
+     youjiang() {
+       this.$router.replace({ name: 'Page06' });
+     },
+     hongbao() {
+       this.$router.replace({ name: 'Page05' });
+     },
    },
  };
 </script>

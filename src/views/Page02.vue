@@ -3,7 +3,7 @@
 
     <div :class="$style['page-01']" v-show="page==='page1'">
       <img :class="$style.img01" src="../assets/images/img-2019-2-22/jinru-01.png">
-      <div :class="$style.img02">12</div>
+      <div :class="$style.img02">{{`${jiazaiNum}%`}}</div>
     </div>
 
     <div :class="$style['page-02']" v-show="page==='page2'">
@@ -82,6 +82,8 @@
   export default {
     data() {
       return {
+        t: {},
+        jiazaiNum: 0,
         page: 'page1',
         jineng: '四两拨千斤',
         pointer: 0,
@@ -103,11 +105,15 @@
     },
     methods: {
       init() {
-        // const random = Math.floor(Math.random() * wArena.length);
-        // console.log(wArena[random], random);
-        setTimeout(() => {
-          this.page = 'page2';
-        }, 1000);
+        this.t = setInterval(() => {
+          if (this.jiazaiNum >= 100) {
+            this.page = 'page2';
+            clearInterval(this.t);
+          } else {
+            const random = Math.floor(Math.random() * 6);
+            this.jiazaiNum = this.jiazaiNum + random;
+          }
+        }, 10);
       },
       dati() {
         this.pointer = 0;
@@ -119,17 +125,6 @@
         setTimeout(() => {
           this.datila = true;
         }, 2000);
-      },
-      nextTi() {
-        this.datila = false;
-        setTimeout(() => {
-          this.pointer = this.pointer + 1;
-          this.$refs.attack.styl = 0;
-          this.title = `第${this.pointer + 1}题`;
-          setTimeout(() => {
-            this.datila = true;
-          }, 1000);
-        }, 3000);
       },
       xuanze(val) {
         if (this.zhanshidaan) return;
@@ -167,6 +162,17 @@
           }
         }, 1300);
       },
+      nextTi() {
+        this.datila = false;
+        setTimeout(() => {
+          this.pointer = this.pointer + 1;
+          this.$refs.attack.styl = 0;
+          this.title = `第${this.pointer + 1}题`;
+          setTimeout(() => {
+            this.datila = true;
+          }, 1000);
+        }, 3000);
+      },
       xuanzejineng(val) {
         this.jineng = val;
       },
@@ -202,8 +208,9 @@
       background-size:100%;
       background-repeat: no-repeat;
       text-align: center;
-      line-height: 3rem;
+      line-height: 2.6rem;
       font-size: 0.8rem;
+      color: #b93123;
     }
   }
   .page-02{

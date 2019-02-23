@@ -3,7 +3,7 @@
       <div :class="$style.mianban">
         <img :class="$style['shibai-01']" src="../assets/images/img-2019-2-22/shibai-01.png">
         <img :class="$style['shibai-02']" src="../assets/images/img-2019-2-22/shibai-02.png">
-        <img :class="$style['shibai-03']" src="../assets/images/img-2019-2-22/shibai-03.png">
+        <img @click="push()" :class="$style['shibai-03']" src="../assets/images/img-2019-2-22/shibai-03.png">
       </div>
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
       <img :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
@@ -24,6 +24,9 @@ export default {
   mounted() {
   },
   methods: {
+    push() {
+      this.$router.replace({ name: 'Page02' });
+    },
   },
 };
 </script>

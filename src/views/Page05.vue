@@ -12,7 +12,7 @@
         </div>
         <div :class="$style.btn">
           <img @click="show=true" src="../assets/images/img-2019-2-22/hongbao-03.png">
-          <img src="../assets/images/img-2019-2-22/hongbao-04.png">
+          <img @click="fanHuiFenXiang()" src="../assets/images/img-2019-2-22/hongbao-04.png">
         </div>
       </div>
 
@@ -24,7 +24,7 @@
         </div>
         <div :class="$style.btn">
             <img src="../assets/images/img-2019-2-22/hongbao-03.png">
-            <img src="../assets/images/img-2019-2-22/hongbao-04.png">
+            <img @click="fanHuiFenXiang()" src="../assets/images/img-2019-2-22/hongbao-04.png">
         </div>
       </div>
 
@@ -50,6 +50,9 @@
    mounted() {
    },
    methods: {
+     fanHuiFenXiang() {
+       this.$router.replace({ name: 'Page04' });
+     },
    },
  };
 </script>
