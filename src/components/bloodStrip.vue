@@ -3,11 +3,11 @@
     <img :class="$style['main-05']" src="../assets/images/img-2019-2-22/main-05.png">
     <div :class="$style.center">
         <div :class="$style.line">
-            <div :class="$style.innerLine"></div>
+            <div :class="$style.innerLine" :style="{width: `${xi}%`}"></div>
         </div>
         <img :class="$style['main-07']" src="../assets/images/img-2019-2-22/main-07.png">
         <div :class="$style.line">
-            <div :class="$style.innerLine"></div>
+            <div :class="$style.innerLine" :style="{width: `${you}%`}"></div>
         </div>
     </div>
     <img :class="$style['main-06']" src="../assets/images/img-2019-2-22/main-06.png">
@@ -17,13 +17,40 @@
 <script>
 
   export default {
+    props: {
+      xuanzedaan: {
+        type: Array,
+      },
+      changdu: {
+        type: Number,
+      },
+    },
     data() {
       return {
+        xi: 100,
+        you: 100,
       };
     },
     mounted() {
     },
     methods: {
+      jiSuanXueTiao() {
+        const dui = this.xuanzedaan.filter(item => {
+          return item === 1;
+        }).length;
+        const cuo = this.xuanzedaan.filter(item => {
+          return item === 0;
+        }).length;
+        const duiA = this.changdu - dui;
+        const cuoB = this.changdu - cuo;
+        this.xi = cuoB * (100 / this.changdu);
+        this.you = duiA * (100 / this.changdu);
+      },
+    },
+    watch: {
+      xuanzedaan() {
+        this.jiSuanXueTiao();
+      },
     },
   };
 </script>
@@ -57,7 +84,6 @@
                 height: 0.42rem;
                 background-image: url('../assets/images/img-2019-2-22/main-08.png'); 
                 background-size: 1.2rem;
-                width: 40%;
                 border-radius: 0.16rem;
                 overflow: hidden; 
             }

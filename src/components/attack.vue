@@ -1,6 +1,13 @@
 <template>
-  <div :class="$style.wrap" @click="styl=!styl">
-      <div :class="$style.dui" v-if="styl">
+  <div :class="$style.wrap">
+      <div :class="$style.kaishi" v-if="styl===0">
+          <div :class="$style.innerKaishi">
+          <img :class="$style['kaishi-xi']" src="../assets/images/img-2019-2-22/kaishi-xi-01.png">
+          <img :class="$style['kaishi-you']" src="../assets/images/img-2019-2-22/kaishi-you-01.png">
+        </div>
+      </div>
+
+      <div :class="$style.dui" v-if="styl===1">
         <img  :class="$style['dui-shan']" :style="{left:`${2.5+num}rem`}" src="../assets/images/img-2019-2-22/dui-shan.png">
         <div :class="$style.innerDui">
           <img v-show="num===1" :class="$style['dui-xi']" src="../assets/images/img-2019-2-22/dui-xi-01.png">
@@ -11,7 +18,8 @@
           <img v-show="num===3" :class="$style['dui-you']" src="../assets/images/img-2019-2-22/dui-you-03.png">
         </div>
       </div>
-      <div :class="$style.cuo" v-else>
+
+      <div :class="$style.cuo" v-if="styl===2">
         <img  :class="$style['cuo-shan']" :style="{right:`${3+num}rem`}" src="../assets/images/img-2019-2-22/cuo-shan.png">
         <div :class="$style.innerCuo">
           <img v-show="num===1" :class="$style['cuo-xi']" src="../assets/images/img-2019-2-22/cuo-xi-01.png">
@@ -22,6 +30,7 @@
           <img v-show="num===3" :class="$style['cuo-you']" src="../assets/images/img-2019-2-22/cuo-you-03.png">
         </div>
       </div>
+
   </div>
 </template>
 
@@ -31,14 +40,14 @@
     data() {
       return {
         num: 1,
-        styl: true,
+        styl: 0,
       };
     },
     mounted() {
-      this.init();
+      this.action();
     },
     methods: {
-      init() {
+      action() {
         setInterval(() => {
           if (this.num < 3) {
             this.num = this.num + 1;
@@ -53,6 +62,25 @@
 <style lang="less" module>
     .wrap{
         width: 100%;
+        .kaishi{
+            margin: 0 auto;
+            width: 10rem;
+            position: relative;  
+            .innerKaishi{
+                display: flex;
+                justify-content: center;
+                .kaishi-xi{
+                    display: block;
+                    width: 4rem;
+                    height: 3.8rem;
+                }
+                .kaishi-you{
+                    display: block;
+                    width: 4rem;
+                    height: 3.8rem;
+                }
+            }
+        }
         .dui{
             margin: 0 auto;
             width: 10rem;
