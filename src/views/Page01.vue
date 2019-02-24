@@ -1,26 +1,26 @@
 <template>
   <div :class="$style.wrap">
     <div :class="$style['page-01']" v-if="!show">
-      <img :class="$style['loading-01']" src="/static/images/loading-01.png">
-      <img :class="$style['quan-01']" src="../assets/images/img-2019-2-22/quan-01.png">
+      <img class="pulse" :class="$style['loading-01']" src="/static/images/loading-01.png">
+      <img class="quantou" :class="$style['quan-01']" src="../assets/images/img-2019-2-22/quan-01.png">
 
-      <img v-if="!sui" :class="$style['po-01']" src="../assets/images/img-2019-2-22/po-01.png">
-      <img v-if="sui" :class="$style['po-sui-01']" src="../assets/images/img-2019-2-22/po-sui-01.png">
+      <img v-if="!sui" class="bounceIn1" :class="$style['po-01']" src="../assets/images/img-2019-2-22/po-01.png">
+      <img v-if="sui" class="rotateOutDownLeft1" :class="$style['po-sui-01']" src="../assets/images/img-2019-2-22/po-sui-01.png">
 
-      <img v-if="!sui" :class="$style['po-03']" src="../assets/images/img-2019-2-22/po-03.png">
-      <img v-if="sui" :class="$style['po-sui-03']" src="../assets/images/img-2019-2-22/po-sui-03.png">
+      <img v-if="!sui" class="bounceIn2" :class="$style['po-03']" src="../assets/images/img-2019-2-22/po-03.png">
+      <img v-if="sui" class="rotateOutDownLeft2" :class="$style['po-sui-03']" src="../assets/images/img-2019-2-22/po-sui-03.png">
 
-      <img v-if="!sui" :class="$style['po-04']" src="../assets/images/img-2019-2-22/po-04.png">
-      <img v-if="sui" :class="$style['po-sui-04']" src="../assets/images/img-2019-2-22/po-sui-04.png">
+      <img v-if="!sui" class="bounceIn3" :class="$style['po-04']" src="../assets/images/img-2019-2-22/po-04.png">
+      <img v-if="sui" class="rotateOutDownLeft3" :class="$style['po-sui-04']" src="../assets/images/img-2019-2-22/po-sui-04.png">
 
-      <img v-if="!sui" :class="$style['po-05']" src="../assets/images/img-2019-2-22/po-05.png">
-      <img v-if="sui" :class="$style['po-sui-05']" src="../assets/images/img-2019-2-22/po-sui-05.png">
+      <img v-if="!sui" class="bounceIn4" :class="$style['po-05']" src="../assets/images/img-2019-2-22/po-05.png">
+      <img v-if="sui" class="rotateOutDownLeft4" :class="$style['po-sui-05']" src="../assets/images/img-2019-2-22/po-sui-05.png">
 
-      <img v-if="!sui" :class="$style['po-06']" src="../assets/images/img-2019-2-22/po-06.png">
-      <img v-if="sui" :class="$style['po-sui-06']" src="../assets/images/img-2019-2-22/po-sui-06.png">
+      <img v-if="!sui" class="bounceIn5" :class="$style['po-06']" src="../assets/images/img-2019-2-22/po-06.png">
+      <img v-if="sui" class="rotateOutDownLeft5" :class="$style['po-sui-06']" src="../assets/images/img-2019-2-22/po-sui-06.png">
 
-      <img v-if="!sui" :class="$style['po-02']" src="../assets/images/img-2019-2-22/po-02.png">
-      <img v-if="sui" :class="$style['po-sui-02']" src="../assets/images/img-2019-2-22/po-sui-02.png">
+      <img v-if="!sui" class="bounceIn6" :class="$style['po-02']" src="../assets/images/img-2019-2-22/po-02.png">
+      <img v-if="sui" class="rotateOutDownLeft6" :class="$style['po-sui-02']" src="../assets/images/img-2019-2-22/po-sui-02.png">
 
       <img :class="{[$style['shan-01']]:true, [$style['shan-sui-01']]: sui}" src="../assets/images/img-2019-2-22/shan-01.png">
       <img :class="{[$style['shan-02']]:true, [$style['shan-sui-02']]: sui}" src="../assets/images/img-2019-2-22/shan-02.png">
@@ -29,10 +29,10 @@
       <img :class="{[$style['shan-05']]:true, [$style['shan-sui-05']]: sui}" src="../assets/images/img-2019-2-22/shan-05.png">
     </div>
 
-    <div :class="$style['page-02']" v-if="show">
+    <div class="bounceInJinru" :class="$style['page-02']" v-if="show">
       <img :class="$style.img01" src="../assets/images/img-2019-2-22/start-01.png">
-      <img @click="next()" :class="$style.img02" src="../assets/images/img-2019-2-22/start-02.png">
-      <img :class="$style.img03" src="../assets/images/img-2019-2-22/start-03.png">
+      <img class="pulse" @click="next()" :class="$style.img02" src="../assets/images/img-2019-2-22/start-02.png">
+      <img class="flipInX" :class="$style.img03" src="../assets/images/img-2019-2-22/start-03.png">
     </div>
   </div>
 </template>
@@ -55,8 +55,8 @@
           this.sui = true;
           setTimeout(() => {
             this.show = true;
-          }, 1000);
-        }, 2000);
+          }, 2500);
+        }, 4400);
       },
       next() {
         this.$router.replace({ name: 'Page02' });
@@ -86,7 +86,7 @@
       width:6rem ;
       left: 50%;
       top: 5rem;
-      margin-left: -2.4rem;
+      margin-left: -1.73rem;
     }
     .po-01{
       width:8rem ;

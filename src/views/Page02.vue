@@ -9,7 +9,8 @@
     <div :class="$style['page-02']" v-show="page==='page2'">
         <div :class="$style.top">
             <div :class="$style.left">
-                <img  src="../assets/images/img-2019-2-22/xuanze-01.png">
+                <!-- <img  src="../assets/images/img-2019-2-22/xuanze-01.png"> -->
+                <fenxiang :class="$style['fenxiang']"/>
             </div>
             <div :class="$style.right">
                 <img :class="$style.jiantou" src="../assets/images/img-2019-2-22/xuanze-03.png">
@@ -78,6 +79,7 @@
   import attack from '@/components/attack';
   import wArena from '@/mock/wArena';
   import jieguo from '@/components/jieguo';
+  import fenxiang from '@/components/fenxiang';
 
   export default {
     data() {
@@ -99,6 +101,7 @@
       bloodStrip,
       attack,
       jieguo,
+      fenxiang,
     },
     mounted() {
       this.init();
@@ -106,14 +109,14 @@
     methods: {
       init() {
         this.t = setInterval(() => {
-          if (this.jiazaiNum >= 100) {
+          if (this.jiazaiNum >= 90) {
             this.page = 'page2';
             clearInterval(this.t);
           } else {
             const random = Math.floor(Math.random() * 6);
             this.jiazaiNum = this.jiazaiNum + random;
           }
-        }, 10);
+        }, 150);
       },
       dati() {
         this.pointer = 0;
@@ -228,13 +231,17 @@
           display: flex;
           justify-content: space-between;
         .left{
-            width: 7.3rem; 
+            width: 8rem; 
             background-image:url('../assets/images/img-2019-2-22/xuanze-06.png'); 
             background-size:100%;
             background-repeat: no-repeat;
             img{
-                width: 100%;
+                width: 100%; 
                 margin-top: 3.5rem
+            }
+            .fenxiang{
+              transform: scale(0.8,0.8);
+              margin-left: -1.4rem;
             }
         } 
         .right{
