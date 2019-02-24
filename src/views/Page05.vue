@@ -3,8 +3,8 @@
       <img :class="$style.dianJiFenxiang" src="../assets/images/img-2019-2-22/fenxiang-01.png">
 
       <div :class="$style.mianban">
-        <img :class="$style.title" src="../assets/images/img-2019-2-22/hongbao-01.png">
-        <div :class="$style.hongbao">
+        <img class="zoomInDown" :class="$style.title" src="../assets/images/img-2019-2-22/hongbao-01.png">
+        <div class="fadeInDown" :class="$style.hongbao">
             <p>
                 <span :class="$style.big">5</span>
                 <span>元</span>
@@ -30,7 +30,7 @@
 
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
       <img :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
-      <img :class="$style['main-03']" src="../assets/images/img-2019-2-22/fenxiang-07.png">
+      <img class="xianying" :class="$style['main-03']" src="../assets/images/img-2019-2-22/fenxiang-07.png">
       <img :class="$style['main-04']" src="../assets/images/img-2019-2-22/fenxiang-06.png">
   </div>
 </template>
@@ -85,16 +85,18 @@
   }
   .main-03{
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 0 !important;
   }
   .main-04{
     width: 20rem;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     margin-left: -10rem;
+    z-index: 1 !important;
   }
   .mianban{
     position: fixed;
@@ -103,7 +105,7 @@
     left: 0;
     top: 0;
     text-align: center;
-    z-index: 1000;
+    z-index: 3000 !important;
     text-align: center;
     .title{
       width: 17rem;
@@ -117,6 +119,7 @@
         background-image: url('../assets/images/img-2019-2-22/hongbao-02.png');
         background-repeat: no-repeat;
         background-size:100%; 
+        opacity: 0;
         p{
             padding-top: 1.4rem;
             color: #cc2c23;
@@ -148,9 +151,9 @@
         left: 0;
         top: 0;
         text-align: center;
-        z-index: 1000;
+        z-index: 3001;
         text-align: center;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.8);
         .gongxi{
            position: absolute;
            width: 100%;

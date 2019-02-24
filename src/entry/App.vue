@@ -94,6 +94,18 @@ export default {
     font-weight: normal;
     font-style: normal;
   }
+
+  @font-face {
+    font-family: 'happyzcool';
+    src: url('../assets/fonts/happyzcool.eot');
+    src:
+        url('../assets/fonts/happyzcool.eot?#font-spider') format('embedded-opentype'),
+        url('../assets/fonts/happyzcool.woff') format('woff'),
+        url('../assets/fonts/happyzcool.ttf') format('truetype'),
+        url('../assets/fonts/happyzcool.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
   * {
     box-sizing: border-box;
     font-family: 'fzzjxss';

@@ -37,7 +37,7 @@
         :changdu="tiData.tm.length" 
         :class="$style['blood-strip']"/>
 
-      <div class="pulse" :class="$style['title']">
+      <div :class="$style['title']">
         <p>{{title}}</p>
       </div>
       
@@ -45,7 +45,7 @@
       <jieguo v-if="jieshu" :class="$style['attack']" />
 
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
-      <img class="pulse" :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
+      <img class="xianying" :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
       <img :class="$style['main-03']" src="../assets/images/img-2019-2-22/main-03.png">
       <img v-if="jieshu" class="xianying" :class="$style['jieguo-01']" src="../assets/images/img-2019-2-22/jieguo-01.png">
       <img class="guang1" :class="$style['main-guang1']" src="../assets/images/img-2019-2-22/main-04.png">
@@ -78,6 +78,7 @@
   import wArena from '@/mock/wArena';
   import jieguo from '@/components/jieguo';
   import fenxiang from '@/components/fenxiang';
+  import { mapMutations } from 'vuex';
 
   export default {
     data() {
@@ -105,6 +106,9 @@
       this.init();
     },
     methods: {
+      ...mapMutations({
+        setTiData: 'setTiData',
+      }),
       init() {
         this.t = setInterval(() => {
           if (this.jiazaiNum >= 90) {
@@ -114,7 +118,7 @@
             const random = Math.floor(Math.random() * 6);
             this.jiazaiNum = this.jiazaiNum + random;
           }
-        }, 10);
+        }, 200);
       },
       dati() {
         this.pointer = 0;
@@ -123,6 +127,7 @@
           return item.title === this.jineng;
         });
         this.tiData = data;
+        this.setTiData(data);
         setTimeout(() => {
           this.datila = true;
         }, 2000);
@@ -168,7 +173,32 @@
         setTimeout(() => {
           this.pointer = this.pointer + 1;
           this.$refs.attack.styl = 0;
-          this.title = `第${this.pointer + 1}题`;
+          // this.title = `第${this.pointer + 1}题`;
+          switch (this.pointer + 1) {
+            case 1:
+              this.title = '第一题';
+              break;
+            case 2:
+              this.title = '第二题';
+              break;
+            case 3:
+              this.title = '第三题';
+              break;
+            case 4:
+              this.title = '第四题';
+              break;
+            case 5:
+              this.title = '第五题';
+              break;
+            case 6:
+              this.title = '第六题';
+              break;
+            case 7:
+              this.title = '第七题';
+              break;
+            default:
+              this.jiangxiang = 1;
+          }
           setTimeout(() => {
             this.datila = true;
           }, 2600);
@@ -201,6 +231,7 @@
     }
     .img01{
       width: 8rem;
+      height: 10rem;
     }
     .img02{
       width: 4rem;
@@ -210,7 +241,7 @@
       background-repeat: no-repeat;
       text-align: center;
       line-height: 2.6rem;
-      font-size: 0.8rem;
+      font-size: 1rem;
       color: #b93123;
     }
   }
@@ -229,7 +260,8 @@
           display: flex;
           justify-content: space-between;
         .left{
-            width: 7rem; 
+            width: 7rem;
+            height: 10rem;
             background-image:url('../assets/images/img-2019-2-22/xuanze-06.png'); 
             background-size:100%;
             background-repeat: no-repeat;
@@ -301,6 +333,9 @@
       margin: 2rem 0;
       color: #fdf3b8;
       text-shadow:0 0.3rem 0 #e5a62a;
+      p{
+        font-family: 'happyzcool' !important;
+      }
     }
     .attack{
       width: 100%;
@@ -336,30 +371,27 @@
     }
     .main-guang1{
       width: 36rem;
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       z-index: 100;
       margin-left: -18rem;
-      transform: rotate(40deg);
     }
     .main-guang2{
       width: 36rem;
-      position: absolute;
+      position:fixed;
       top: -5rem;
       left: 50%;
-      z-index: 100;
+      z-index: 101;
       margin-left: -18rem;
-      transform: rotate(98deg);
     }
     .main-guang3{
       width: 36rem;
-      position: absolute;
+      position: fixed;
       top: 0;
       right: 0;
-      z-index: 100;
+      z-index: 102;
       margin-right: -18rem;
-      transform: rotate(-40deg);
     }
 
 
@@ -369,7 +401,7 @@
       width: 100%;
       left: 0;
       top: 0;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.8);
       text-align: center;
       z-index: 1000;
       .wen-ti{

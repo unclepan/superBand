@@ -2,7 +2,7 @@
   <div :class="$style.wrap">
       <img :class="$style.dianJiFenxiang" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-01.png">
       <div :class="$style.mianban">
-        <p :class="$style.title" class="rubberBand">快来看我发动四两拨千斤必杀技，成功打败洗碗精！耶！</p>
+        <p :class="$style.title" class="rubberBand" v-if="tiData.fenxiang">{{tiData.fenxiang||'即将回到首页'}}</p>
         <fenxiang/>
         <div :class="$style.btn">
           <img @click="zailai()" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-02.png">
@@ -20,6 +20,7 @@
 
 <script>
  import fenxiang from '@/components/fenxiang';
+ import { mapState } from 'vuex';
 
  export default {
    data() {
@@ -27,12 +28,21 @@
 
      };
    },
+   computed: {
+     ...mapState(['tiData']),
+   },
    components: {
      fenxiang,
    },
    mounted() {
+     this.init();
    },
    methods: {
+     init() {
+       if (!this.tiData.fenxiang) {
+         this.$router.replace({ name: 'Page02' });
+       }
+     },
      zailai() {
        this.$router.replace({ name: 'Page02' });
      },
@@ -95,9 +105,11 @@
     z-index: 1000;
     text-align: center;
     .title{
+      font-size: 1.2rem;
+      text-shadow:0.1rem 0.1rem 0 #f9e4b2;
       color: #fe420f;
       width: 20rem;
-      margin: 1rem auto 1.8rem;
+      margin: 1rem auto 1.1rem;
     }
     .btn{
       margin: 0.1rem auto 0;

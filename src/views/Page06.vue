@@ -183,16 +183,18 @@
     }
   .main-03{
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 0 !important;
   }
   .main-04{
     width: 20rem;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     margin-left: -10rem;
+    z-index: 1 !important;
   }
   .mianban{
     position: fixed;
@@ -201,7 +203,7 @@
     left: 0;
     top: 0;
     text-align: center;
-    z-index: 1000;
+    z-index: 3000 !important;
     text-align: center;
     .wheelMain{
       margin-top: 1rem;
@@ -247,16 +249,17 @@
     }
   }
 
-  .mianbanZheZhao{
+  .mianbanZheZhao{ 
+        outline: none;
         position: fixed;
         height: 100%;
         width: 100%;
         left: 0;
         top: 0;
         text-align: center;
-        z-index: 1000;
+        z-index: 3001;
         text-align: center;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.8);
         .shuru{
            position: absolute;
            width: 100%;
@@ -266,6 +269,7 @@
                font-size: 0.6rem;
            }
            input{
+               padding: 0.3rem;
                color: #666666;
                margin: 0.2rem 0;
                border: none;
@@ -314,7 +318,7 @@
         left: 0;
         top: 0;
         text-align: center;
-        z-index: 1000;
+        z-index: 2000;
         text-align: center;
         .title{
             display: block;
@@ -326,6 +330,7 @@
             margin: 0 auto;
             margin-top: -1rem;
             width: 10rem;
+            opacity: 0;
         }
         .btn{
             position: absolute;

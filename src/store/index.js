@@ -5,14 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    choice: [],
+    tiData: {},
   },
   mutations: {
-    increment(state, v) {
-      state.choice.push(v);
-    },
-    reset(state, v) {
-      state.choice = [];
+    setTiData(state, v) {
+      state.tiData = v;
     },
   },
 });
