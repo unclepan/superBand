@@ -1,20 +1,20 @@
 <template>
   <div :class="$style.wrap">
-      <img :class="$style.dianJiFenxiang" src="../assets/images/img-2019-2-22/fenxiang-01.png">
+      <img :class="$style.dianJiFenxiang" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-01.png">
       <div :class="$style.mianban">
-        <p :class="$style.title">快来看我发动四两拨千斤必杀技，成功打败洗碗精！耶！</p>
+        <p :class="$style.title" class="rubberBand">快来看我发动四两拨千斤必杀技，成功打败洗碗精！耶！</p>
         <fenxiang/>
         <div :class="$style.btn">
-          <img @click="zailai()" src="../assets/images/img-2019-2-22/fenxiang-02.png">
-          <img src="../assets/images/img-2019-2-22/fenxiang-03.png">
-          <img @click="youjiang()" src="../assets/images/img-2019-2-22/fenxiang-04.png">
-          <img @click="hongbao()" src="../assets/images/img-2019-2-22/fenxiang-05.png">
+          <img @click="zailai()" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-02.png">
+          <img class="pulse" src="../assets/images/img-2019-2-22/fenxiang-03.png">
+          <img @click="youjiang()" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-04.png">
+          <img @click="hongbao()" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-05.png">
         </div>
       </div>
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
       <img :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
-      <img  :class="$style['main-03']" src="../assets/images/img-2019-2-22/fenxiang-07.png">
-      <img  :class="$style['main-04']" src="../assets/images/img-2019-2-22/fenxiang-06.png">
+      <img class="xianying" :class="$style['main-03']" src="../assets/images/img-2019-2-22/fenxiang-07.png">
+      <img :class="$style['main-04']" src="../assets/images/img-2019-2-22/fenxiang-06.png">
   </div>
 </template>
 
@@ -97,10 +97,10 @@
     .title{
       color: #fe420f;
       width: 20rem;
-      margin: 1.8rem auto 1.2rem;
+      margin: 1rem auto 1.8rem;
     }
     .btn{
-      margin: 0.6rem auto 0;
+      margin: 0.1rem auto 0;
       width: 20rem;
       display: flex;
       justify-content: space-between;

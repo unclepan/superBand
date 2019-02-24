@@ -5,12 +5,13 @@
         <div :class="$style.line">
             <div :class="$style.innerLine" :style="{width: `${xi}%`}"></div>
         </div>
-        <img :class="$style['main-07']" src="../assets/images/img-2019-2-22/main-07.png">
+        <img class="rotateIn" :class="$style['main-07']" src="../assets/images/img-2019-2-22/main-07.png">
         <div :class="$style.line">
             <div :class="$style.innerLine" :style="{width: `${you}%`}"></div>
         </div>
     </div>
-    <img :class="$style['main-06']" src="../assets/images/img-2019-2-22/main-06.png">
+    <img v-if="you" :class="$style['main-06']" src="../assets/images/img-2019-2-22/main-06.png">
+    <img v-else :class="$style['main-06']" src="../assets/images/img-2019-2-22/main-09.png">
   </div>
 </template>
 

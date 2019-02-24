@@ -13,16 +13,16 @@
 
       <div :class="$style.zhongjiangjieguo" v-if="jieshu">
         <span v-if="jiangxiangText === '一等奖'">
-            <img :class="$style.title" src="../assets/images/img-2019-2-22/zhongjiangla-01.png">
-            <img :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-02.png"> 
+            <img class="zoomInDown" :class="$style.title" src="../assets/images/img-2019-2-22/zhongjiangla-01.png">
+            <img class="fadeInDown" :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-02.png"> 
         </span>
         <span v-if="jiangxiangText === '二等奖'">
-            <img :class="$style.title" src="../assets/images/img-2019-2-22/zhongjiangla-03.png">
-            <img :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-04.png"> 
+            <img class="zoomInDown" :class="$style.title" src="../assets/images/img-2019-2-22/zhongjiangla-03.png">
+            <img class="fadeInDown" :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-04.png"> 
         </span>
         <span v-if="jiangxiangText === '三等奖'">
-            <img :class="$style.title" src="../assets/images/img-2019-2-22/zhongjiangla-05.png">
-            <img :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-06.png"> 
+            <img class="zoomInDown" :class="$style.title" src="../assets/images/img-2019-2-22/zhongjiangla-05.png">
+            <img class="fadeInDown" :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-06.png"> 
         </span>
         <div :class="$style.btn">
             <img @click="show=true" src="../assets/images/img-2019-2-22/hongbao-03.png">
@@ -48,7 +48,7 @@
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
       <img :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
       <img v-if="jieshu" :class="$style['jieguo-01']" src="../assets/images/img-2019-2-22/jieguo-01.png">
-      <img :class="$style['main-03']" src="../assets/images/img-2019-2-22/fenxiang-07.png">
+      <img class="xianying" :class="$style['main-03']" src="../assets/images/img-2019-2-22/fenxiang-07.png">
       <img :class="$style['main-04']" src="../assets/images/img-2019-2-22/fenxiang-06.png">
   </div>
 </template>

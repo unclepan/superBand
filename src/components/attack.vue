@@ -2,9 +2,9 @@
   <div :class="$style.wrap">
       <div :class="$style.kaishi" v-if="styl===0">
           <div :class="$style.innerKaishi">
-          <img :class="$style['kaishi-xi']" src="../assets/images/img-2019-2-22/kaishi-xi-01.png">
-          <img :class="$style['kaishi-you']" src="../assets/images/img-2019-2-22/kaishi-you-01.png">
-        </div>
+            <img class="xiaoRenSuo1" :class="$style['kaishi-xi']" src="../assets/images/img-2019-2-22/kaishi-xi-01.png">
+            <img class="xiaoRenSuo2" :class="$style['kaishi-you']" src="../assets/images/img-2019-2-22/kaishi-you-01.png">
+          </div>
       </div>
 
       <div :class="$style.dui" v-if="styl===1">

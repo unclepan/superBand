@@ -9,13 +9,12 @@
     <div :class="$style['page-02']" v-show="page==='page2'">
         <div :class="$style.top">
             <div :class="$style.left">
-                <!-- <img  src="../assets/images/img-2019-2-22/xuanze-01.png"> -->
                 <fenxiang :class="$style['fenxiang']"/>
             </div>
             <div :class="$style.right">
-                <img :class="$style.jiantou" src="../assets/images/img-2019-2-22/xuanze-03.png">
+                <img class="pianyi1" :class="$style.jiantou" src="../assets/images/img-2019-2-22/xuanze-03.png">
                 <div :class="$style.center">
-                    <img :class="$style.title" src="../assets/images/img-2019-2-22/xuanze-02.png">
+                    <img class="pulse" :class="$style.title" src="../assets/images/img-2019-2-22/xuanze-02.png">
                     <div :class="$style.box">
                         <span @click="xuanzejineng('四两拨千斤')" :class="{[$style.change]: xuanzejinengBg('四两拨千斤')}">四两拨千斤</span>
                         <span @click="xuanzejineng('旋风无影腿')" :class="{[$style.change]: xuanzejinengBg('旋风无影腿')}">旋风无影腿</span>
@@ -24,14 +23,13 @@
                         <span @click="xuanzejineng('分瓜切果手')" :class="{[$style.change]: xuanzejinengBg('分瓜切果手')}">分瓜切果手</span>
                     </div>
                 </div>
-                <img :class="$style.jiantou" src="../assets/images/img-2019-2-22/xuanze-04.png">
+                <img class="pianyi2" :class="$style.jiantou" src="../assets/images/img-2019-2-22/xuanze-04.png">
             </div>
         </div>
-        <img @click="dati()" :class="$style.bottom" src="../assets/images/img-2019-2-22/xuanze-05.png">
+        <img @click="dati()" class="pulse" :class="$style.bottom" src="../assets/images/img-2019-2-22/xuanze-05.png">
     </div>
 
     <div :class="$style['page-03']" v-show="page==='page3'">
-
       <blood-strip 
         v-if="tiData"
         ref="bloodStrip" 
@@ -39,32 +37,32 @@
         :changdu="tiData.tm.length" 
         :class="$style['blood-strip']"/>
 
-      <div :class="$style['title']">
+      <div class="pulse" :class="$style['title']">
         <p>{{title}}</p>
       </div>
-
+      
       <attack v-if="!jieshu" ref="attack" :class="$style['attack']"/>
       <jieguo v-if="jieshu" :class="$style['attack']" />
 
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
-      <img :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
+      <img class="pulse" :class="$style['main-02']" src="../assets/images/img-2019-2-22/main-02.png">
       <img :class="$style['main-03']" src="../assets/images/img-2019-2-22/main-03.png">
-      <img v-if="jieshu" :class="$style['jieguo-01']" src="../assets/images/img-2019-2-22/jieguo-01.png">
+      <img v-if="jieshu" class="xianying" :class="$style['jieguo-01']" src="../assets/images/img-2019-2-22/jieguo-01.png">
       <img class="guang1" :class="$style['main-guang1']" src="../assets/images/img-2019-2-22/main-04.png">
       <img class="guang2" :class="$style['main-guang2']" src="../assets/images/img-2019-2-22/main-04.png">
       <img class="guang3" :class="$style['main-guang3']" src="../assets/images/img-2019-2-22/main-04.png">
 
       <div :class="$style['daTiMianBan']" v-if="datila">
-        <div :class="$style['wen-ti']">
+        <div class="bounceInDown" :class="$style['wen-ti']">
           <p>{{tiData.tm[pointer].w}}</p>
           <img @click="xuanze(true)" :class="$style['dati-01']" src="../assets/images/img-2019-2-22/dati-01.png">
           <img @click="xuanze(false)" :class="$style['dati-02']" src="../assets/images/img-2019-2-22/dati-02.png">
         </div>
-        <div :class="$style['xian']" v-show="zhanshidaan">
+        <div class="bounceInDown" :class="$style['xian']" v-show="zhanshidaan">
           <img :class="$style['dati-04']" src="../assets/images/img-2019-2-22/dati-04.png">
           <img :class="$style['dati-04']" src="../assets/images/img-2019-2-22/dati-04.png">
         </div>
-        <div :class="$style['da-an']" v-show="zhanshidaan">
+        <div class="bounceInDown"  :class="$style['da-an']" v-show="zhanshidaan">
           <p :class="$style['da-an-title']">{{tiData.tm[pointer].d ? '对':'错'}}</p>
           <p>{{tiData.tm[pointer].daan}}</p>
         </div>
@@ -116,7 +114,7 @@
             const random = Math.floor(Math.random() * 6);
             this.jiazaiNum = this.jiazaiNum + random;
           }
-        }, 150);
+        }, 10);
       },
       dati() {
         this.pointer = 0;
@@ -154,16 +152,16 @@
                 this.jieshu = true;
                 setTimeout(() => {
                   this.$router.replace({ name: 'Page04' });
-                }, 1000);
+                }, 5000);
               } else {
                 this.$router.replace({ name: 'Page03' });
               }
-            }, 100);
+            }, 3600);
           } else {
             this.zhanshidaan = false;
             this.nextTi();
           }
-        }, 1300);
+        }, 3600);
       },
       nextTi() {
         this.datila = false;
@@ -173,8 +171,8 @@
           this.title = `第${this.pointer + 1}题`;
           setTimeout(() => {
             this.datila = true;
-          }, 1000);
-        }, 3000);
+          }, 2600);
+        }, 2600);
       },
       xuanzejineng(val) {
         this.jineng = val;
@@ -231,17 +229,14 @@
           display: flex;
           justify-content: space-between;
         .left{
-            width: 8rem; 
+            width: 7rem; 
             background-image:url('../assets/images/img-2019-2-22/xuanze-06.png'); 
             background-size:100%;
             background-repeat: no-repeat;
-            img{
-                width: 100%; 
-                margin-top: 3.5rem
-            }
             .fenxiang{
               transform: scale(0.8,0.8);
-              margin-left: -1.4rem;
+              margin-left: -1rem;
+              margin-top: 2.2rem
             }
         } 
         .right{
@@ -249,7 +244,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 3rem;
+            margin-top: 2.8rem;
             .center{
               width: 9.6rem;
               padding: 0.2rem;
@@ -283,7 +278,7 @@
         }
       }
       .bottom{
-        width: 6.8rem;
+        width: 6rem;
         display: block;
         margin: 1.6rem auto 0;
       }
@@ -298,6 +293,8 @@
       margin-top: 0.4rem;
     }
     .title{
+      position: relative;
+      z-index: 999;
       text-align: center;
       font-size: 4rem;
       font-weight: bold;
@@ -310,7 +307,7 @@
       position: absolute;
       bottom: 2.2rem;
       left: 0;
-      z-index: 10;
+      z-index: 1000;
     }
     .main-01{
       width: 100%;
@@ -342,6 +339,7 @@
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 100;
       margin-left: -18rem;
       transform: rotate(40deg);
     }
@@ -350,6 +348,7 @@
       position: absolute;
       top: -5rem;
       left: 50%;
+      z-index: 100;
       margin-left: -18rem;
       transform: rotate(98deg);
     }
@@ -358,6 +357,7 @@
       position: absolute;
       top: 0;
       right: 0;
+      z-index: 100;
       margin-right: -18rem;
       transform: rotate(-40deg);
     }
@@ -369,7 +369,7 @@
       width: 100%;
       left: 0;
       top: 0;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.7);
       text-align: center;
       z-index: 1000;
       .wen-ti{
@@ -397,6 +397,8 @@
         width: 18rem;
         margin: 0 auto;
         height: 1rem;
+        position: relative;
+        z-index: 2000;
         .dati-04{
           width: 0.4rem;
           margin: 0 4rem;
