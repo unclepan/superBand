@@ -29,15 +29,25 @@
      };
    },
    computed: {
-     ...mapState(['tiData']),
+     ...mapState(['tiData', 'xuanDeDaAn']),
    },
    components: {
      fenxiang,
    },
    mounted() {
-     this.init();
+     this.action();
    },
    methods: {
+     action() {
+       const dui = this.xuanDeDaAn.filter(item => {
+         return item === 1;
+       }).length;
+       if (dui < 3) {
+         this.$router.replace({ name: 'Page01' });
+       } else {
+         this.init();
+       }
+     },
      init() {
        if (!this.tiData.fenxiang) {
          this.$router.replace({ name: 'Page02' });

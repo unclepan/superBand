@@ -2,10 +2,10 @@
   <div id="wrapper">
     <router-view/>
     <!-- <img v-if="showMic" @click="mic" :class="$style.mic" src="../assets/images/02.png"> -->
-    <!-- <audio autoplay="autoplay" loop="loop" id="audios">
-      <source src="../assets/music/aaaaaaaaa.ogg" type="audio/ogg" />
-      <source src="../assets/music/aaaaaaaaa.mp3" type="audio/mpeg" />
-    </audio> -->
+    <audio autoplay="autoplay" loop="loop" id="audios">
+      <source src="../assets/music/bbbbb.ogg" type="audio/ogg" />
+      <source src="../assets/music/bbbbb.mp3" type="audio/mpeg" />
+    </audio>
   </div>
 </template>
 

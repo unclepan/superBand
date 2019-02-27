@@ -148,45 +148,45 @@
 }
 
 .bounceIn1 {
-  animation-duration: 1.5s;
+  animation-duration: 0.9s;
   animation-name: bounceIn;
   animation-delay:0.2s;
   animation-fill-mode: backwards;
 }
 
 .bounceIn2 {
-  animation-duration: 1.5s;
+  animation-duration: 0.9s;
   animation-name: bounceIn;
-  animation-delay:1.3s;
+  animation-delay:1s;
   animation-fill-mode: backwards;
 }
 
 .bounceIn3 {
-  animation-duration: 1.5s;
+  animation-duration: 0.9s;
   animation-name: bounceIn;
-  animation-delay:2.6s;
+  animation-delay:2s;
   animation-fill-mode: backwards;
 
 }
 
 .bounceIn4 {
-  animation-duration:1.5s;
+  animation-duration:0.9s;
   animation-name: bounceIn;
-  animation-delay:3.9s;
+  animation-delay:3s;
   animation-fill-mode: backwards;
 }
 
 .bounceIn5 {
-  animation-duration: 1.5s;
+  animation-duration: 0.9s;
   animation-name: bounceIn;
-  animation-delay:5.2s;
+  animation-delay:4s;
   animation-fill-mode: backwards;
 }
 
 .bounceIn6 {
-  animation-duration: 1.5s;
+  animation-duration: 0.9s;
   animation-name: bounceIn;
-  animation-delay:6.5s;
+  animation-delay:5s;
   animation-fill-mode: backwards;
 }
 
@@ -205,9 +205,9 @@
 
 
 .quantou {
-  animation-duration: 0.2s;
+  animation-duration: 0.3s;
   animation-name: quantou;
-  animation-delay:8.8s;
+  animation-delay:6.8s;
   animation-fill-mode: backwards;
 }
 

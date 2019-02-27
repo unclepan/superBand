@@ -16,11 +16,12 @@
                 <div :class="$style.center">
                     <img class="pulse" :class="$style.title" src="../assets/images/img-2019-2-22/xuanze-02.png">
                     <div :class="$style.box">
-                        <span @click="xuanzejineng('四两拨千斤')" :class="{[$style.change]: xuanzejinengBg('四两拨千斤')}">四两拨千斤</span>
-                        <span @click="xuanzejineng('旋风无影腿')" :class="{[$style.change]: xuanzejinengBg('旋风无影腿')}">旋风无影腿</span>
-                        <span @click="xuanzejineng('劲力一刀斩')" :class="{[$style.change]: xuanzejinengBg('劲力一刀斩')}">劲力一刀斩</span>
-                        <span @click="xuanzejineng('净门冲击波')" :class="{[$style.change]: xuanzejinengBg('净门冲击波')}">净门冲击波</span>
-                        <span @click="xuanzejineng('分瓜切果手')" :class="{[$style.change]: xuanzejinengBg('分瓜切果手')}">分瓜切果手</span>
+                        <span 
+                          v-for="(item, index) in xianzejineng.list" :key="index"
+                          @click="xuanzejineng(item)" 
+                          :class="{[$style.change]: xuanzejinengBg(item)}">
+                          {{item}}
+                        </span>
                     </div>
                 </div>
                 <img class="pianyi2" :class="$style.jiantou" src="../assets/images/img-2019-2-22/xuanze-04.png">
@@ -63,7 +64,7 @@
           <img :class="$style['dati-04']" src="../assets/images/img-2019-2-22/dati-04.png">
         </div>
         <div class="bounceInDown"  :class="$style['da-an']" v-show="zhanshidaan">
-          <p :class="$style['da-an-title']">{{tiData.tm[pointer].d ? '对':'错'}}</p>
+          <p :class="$style['da-an-title']">{{duicuo ? '对':'错'}}</p>
           <p>{{tiData.tm[pointer].daan}}</p>
         </div>
       </div>
@@ -83,7 +84,13 @@
   export default {
     data() {
       return {
+        duicuo: true,
+        xianzejineng: {
+          list: ['四两拨千斤', '旋风无影腿', '劲力一刀斩', '净门冲击波', '分瓜切果手'],
+          k: true,
+        },
         t: {},
+        t2: {},
         jiazaiNum: 0,
         page: 'page1',
         jineng: '四两拨千斤',
@@ -104,10 +111,28 @@
     },
     mounted() {
       this.init();
+      this.t2 = setInterval(() => {
+        if (this.xianzejineng.k) {
+          this.xianzejinengTimeOut();
+        }
+      }, 300);
     },
     methods: {
+      xianzejinengTimeOut() {
+        let v1 = 0;
+        this.xianzejineng.list.forEach((item, index) => {
+          if (item === this.jineng) {
+            v1 = index + 1;
+          }
+        });
+        if (v1 === this.xianzejineng.list.length) {
+          v1 = 0;
+        }
+        this.jineng = this.xianzejineng.list[v1];
+      },
       ...mapMutations({
         setTiData: 'setTiData',
+        setXuanDeDaAn: 'setXuanDeDaAn',
       }),
       init() {
         this.t = setInterval(() => {
@@ -118,7 +143,7 @@
             const random = Math.floor(Math.random() * 6);
             this.jiazaiNum = this.jiazaiNum + random;
           }
-        }, 200);
+        }, 100);
       },
       dati() {
         this.pointer = 0;
@@ -136,10 +161,12 @@
         if (this.zhanshidaan) return;
         this.zhanshidaan = true;
         if (this.tiData.tm[this.pointer].d === val) {
+          this.duicuo = true;
           this.$refs.attack.styl = 1;
           this.title = this.jineng;
           this.xuanzedaan.push(1);
         } else {
+          this.duicuo = false;
           this.$refs.attack.styl = 2;
           this.title = '脏脏拳';
           this.xuanzedaan.push(0);
@@ -147,6 +174,7 @@
         setTimeout(() => {
           if (this.pointer >= this.tiData.tm.length - 1) {
             console.log('没了');
+            this.setXuanDeDaAn(this.xuanzedaan);
             this.datila = false;
             const dui = this.xuanzedaan.filter(item => {
               return item === 1;
@@ -157,7 +185,9 @@
                 this.jieshu = true;
                 setTimeout(() => {
                   this.$router.replace({ name: 'Page04' });
-                }, 5000);
+                }, 6200);
+              } else if (dui >= 3) {
+                this.$router.replace({ name: 'Page04' });
               } else {
                 this.$router.replace({ name: 'Page03' });
               }
@@ -166,7 +196,7 @@
             this.zhanshidaan = false;
             this.nextTi();
           }
-        }, 3600);
+        }, 6500);
       },
       nextTi() {
         this.datila = false;
@@ -201,10 +231,12 @@
           }
           setTimeout(() => {
             this.datila = true;
-          }, 2600);
-        }, 2600);
+          }, 3600);
+        }, 3300);
       },
       xuanzejineng(val) {
+        this.xianzejineng.k = false;
+        clearInterval(this.t2);
         this.jineng = val;
       },
       xuanzejinengBg(val) {
@@ -328,9 +360,9 @@
       position: relative;
       z-index: 999;
       text-align: center;
-      font-size: 4rem;
+      font-size: 4.3rem;
       font-weight: bold;
-      margin: 2rem 0;
+      margin: 1rem 0;
       color: #fdf3b8;
       text-shadow:0 0.3rem 0 #e5a62a;
       p{
@@ -414,14 +446,17 @@
         border-radius: 1.4rem;
         padding: 0.4rem 0.4rem 0.2rem;
         box-shadow: 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.2);
+        p{
+          font-size: 1.1rem;
+        }
         .dati-01{
           display: inline-block;
-          width: 1.2rem;
+          width: 1.4rem;
           margin: 0.2rem 2rem 0;
         }
         .dati-02{
           display: inline-block;
-          width: 1.2rem;
+          width: 1.4rem;
           margin: 0.2rem 2rem 0;
         }
       }
@@ -448,6 +483,7 @@
         padding: 0.4rem;
         box-shadow: 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.2);
         .da-an-title{
+          text-shadow:0.03rem 0.06rem 0 #fdf3b8;
           color: #e3a52a;
           margin: 0 auto 0.2rem;
           font-size: 1.5rem;

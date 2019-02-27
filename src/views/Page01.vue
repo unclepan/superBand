@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.wrap">
-    <div :class="$style['page-01']" v-show="!show">
+    <div :class="$style['page-01']" v-show="show">
       <img class="pulse" :class="$style['loading-01']" src="/static/images/loading-01.png">
       <img class="quantou" :class="$style['quan-01']" src="../assets/images/img-2019-2-22/quan-01.png">
 
@@ -29,8 +29,8 @@
       <img :class="{[$style['shan-05']]:true, [$style['shan-sui-05']]: sui}" src="../assets/images/img-2019-2-22/shan-05.png">
     </div>
 
-    <div class="bounceInJinru" :class="$style['page-02']" v-show="show">
-      <img :class="$style.img01" src="../assets/images/img-2019-2-22/start-01.png">
+    <div class="bounceInJinru" :class="$style['page-02']" v-show="!show">
+      <img class="bounceInDown" :class="$style.img01" src="../assets/images/img-2019-2-22/start-01.png">
       <img class="pulse" @click="next()" :class="$style.img02" src="../assets/images/img-2019-2-22/start-02.png">
       <img class="flipInX" :class="$style.img03" src="../assets/images/img-2019-2-22/start-03.png">
     </div>
@@ -47,19 +47,21 @@
       };
     },
     mounted() {
-      this.init();
     },
     methods: {
-      init() {
+      next() {
+        this.playMic();
+        this.show = true;
         setTimeout(() => {
           this.sui = true;
           setTimeout(() => {
-            this.show = true;
-          }, 3000);
-        }, 9300);
+            this.$router.replace({ name: 'Page02' });
+          }, 3300);
+        }, 7300);
       },
-      next() {
-        this.$router.replace({ name: 'Page02' });
+      playMic() {
+        const myVideo = document.getElementById('audios');
+        myVideo.play();
       },
     },
   };

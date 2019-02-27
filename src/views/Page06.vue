@@ -18,14 +18,20 @@
         </span>
         <span v-if="jiangxiangText === '二等奖'">
             <img class="zoomInDown" :class="$style.title" src="../assets/images/img-2019-2-22/zhongjiangla-03.png">
+            <br/>
             <img class="fadeInDown" :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-04.png"> 
         </span>
         <span v-if="jiangxiangText === '三等奖'">
             <img class="zoomInDown" :class="$style.title" src="../assets/images/img-2019-2-22/zhongjiangla-05.png">
-            <img class="fadeInDown" :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-06.png"> 
+            <div class="fadeInDown" :class="$style.hongbao">
+                <p>
+                    优惠代码<br/>{{ma}}
+                </p>
+            </div>
+            <p :class="$style.text">1.使用规则：用户需将此兑换码页面截图，发送给万家乐天猫旗舰店客服，用以兑换优惠券<br/>2.使用店铺：万家乐天猫旗舰店</p>
         </span>
         <div :class="$style.btn">
-            <img @click="show=true" src="../assets/images/img-2019-2-22/hongbao-03.png">
+            <img @click="show=true" v-if="jiangxiangText !== '三等奖'" src="../assets/images/img-2019-2-22/hongbao-03.png">
             <img @click="fanHuiFenXiang()"  src="../assets/images/img-2019-2-22/hongbao-04.png">
         </div>
       </div>
@@ -56,57 +62,92 @@
 <script>
 /* eslint-disable */
  import fenxiang from '@/components/fenxiang';
+ import axios from 'axios';
+ import { mapMutations, mapState } from 'vuex';
 
  export default {
    data() {
      return {
+        ma:'',
         lingqu:false,
-        jiangxiangText:'三等奖',
+        jiangxiangText:'感谢参与',
         jieshu:false,
         show: false,
-        yichoujiang: false,
-        jiangxiang: 1,
+        yichoujiang: true,
+        jiangxiang: 0,
         click_flag: true, // 是否可以旋转抽奖
         start_rotating_degree: 0, // 初始旋转角度
         rotate_angle: 0, // 将要旋转的角度
         rotate_transition: 'transform 6s ease-in-out', // 初始化选中的过度属性控制
      };
    },
+   computed: {
+      ...mapState(['xuanDeDaAn']),
+   },
    components: {
      fenxiang,
    },
    mounted() {
+     this.action();
    },
    methods: {
+     action(){
+        const dui = this.xuanDeDaAn.filter(item => {
+          return item === 1;
+        }).length;
+        if(dui<3){
+          this.$router.replace({ name: 'Page01' });
+        }
+     },
+     async chaMa(){
+       await axios.get('http://app.erji1pin.cn/index/index/wjldjdhqyhm/').then((response) => { 
+        if (response.data === '非法登录') {
+          this.$router.replace({ name: 'Page01' });
+        }else{
+          this.ma = response.data;
+        }
+         
+       });
+     },
      fanHuiFenXiang(){
        this.$router.replace({ name: 'Page04' });
      },
      rotate_handle() {
-       this.yichoujiang = true;
-       this.init_prize_list();
+       if(this.yichoujiang){
+         this.init_prize_list();
+       } else {
+         console.log('请明天再来抽奖哦！');
+       }  
      },
      init_prize_list() {
-       switch (this.jiangxiangText) {
+       axios.get('http://app.erji1pin.cn/index/index/get_cjjg/').then((response) => {
+        this.yichoujiang = false;
+        this.jiangxiangText = response.data;
+        switch (this.jiangxiangText) {
          case '一等奖':
-           this.jiangxiang = 0;
+           this.jiangxiang = 9;
            break;
          case '二等奖':
-           this.jiangxiang = 2;
+           this.jiangxiang = 1;
            break;
          case '三等奖':
            this.jiangxiang = 3;
            break;
+         case '感谢参与':
+           this.jiangxiang = 0;
+           break;
          default:
-           this.jiangxiang = 1;
+           this.jiangxiang = 0;
        }
-       this.init();
-     },
-     init() {
-       if (this.yichoujiang) {
+       if(this.jiangxiangText === '三等奖'){
+         this.chaMa();
          this.rotating(this.jiangxiang);
-       } else {
-         window.alert('请明天再来抽奖哦！');
+       }else {
+         this.rotating(this.jiangxiang);
        }
+      }).catch((response) => {
+        window.alert('出错了');
+      });
      },
      rotating(index) {
        if (!this.click_flag) return;
@@ -142,8 +183,13 @@
        }
      },
      game_over() {
-        this.jieshu = true;
-        console.log('游戏结束');
+        if(this.jiangxiang !== 0){
+          this.jieshu = true;
+        } else {
+          setTimeout(()=>{
+            this.$router.replace({ name: 'Page04' });
+          },2000);
+        }
     },
    },
  };
@@ -320,10 +366,35 @@
         text-align: center;
         z-index: 2000;
         text-align: center;
+        .text{
+          color: #cc2c23;
+          font-size: 0.56rem;
+          text-align: left;
+          padding: 0.3rem 1rem;
+          text-shadow:#ffffff 1px 0 1px,#ffffff 0 1px 1px,#ffffff -1px 0 1px,#ffffff 0 -1px 1px;
+        }
         .title{
             display: block;
             margin: 1rem auto 0;
             width: 20rem;
+        }
+        .hongbao{
+            width: 10rem;
+            height: 7rem;
+            margin: 0 auto;
+            margin-top: -1rem;
+            background-image: url('../assets/images/img-2019-2-22/zhongjiangla-06.png');
+            background-repeat: no-repeat;
+            background-size:100%; 
+            opacity: 0;
+            p{
+                padding-top: 1.4rem;
+                color: #cc2c23;
+                font-size: 0.64rem;
+                .big{
+                    font-size: 2rem;
+                }
+            }
         }
         .jiangping{
             display: block;
@@ -339,8 +410,9 @@
             margin-left: -5rem;
             width: 10rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             img{
+                margin: 0 0.5rem;
                 display: block;
                 width: 4rem;
                 height: 1.6rem;

@@ -6,7 +6,7 @@
         <img class="zoomInDown" :class="$style.title" src="../assets/images/img-2019-2-22/hongbao-01.png">
         <div class="fadeInDown" :class="$style.hongbao">
             <p>
-                <span :class="$style.big">5</span>
+                <span :class="$style.big">{{num}}</span>
                 <span>元</span>
             </p>
         </div>
@@ -19,11 +19,11 @@
       <div :class="$style.mianbanZheZhao" v-if="show">
         <div :class="$style.gongxi">
             <p>恭喜您！</p>
-            <p>获得了5元红包！</p>
+            <p>获得了{{num}}元红包！</p>
             <p>已存入您的微信钱包！</p> 
         </div>
         <div :class="$style.btn">
-            <img src="../assets/images/img-2019-2-22/hongbao-03.png">
+            <!-- <img src="../assets/images/img-2019-2-22/hongbao-03.png"> -->
             <img @click="fanHuiFenXiang()" src="../assets/images/img-2019-2-22/hongbao-04.png">
         </div>
       </div>
@@ -36,25 +36,58 @@
 </template>
 
 <script>
- import fenxiang from '@/components/fenxiang';
+import axios from 'axios';
+import { mapMutations, mapState } from 'vuex';
 
- export default {
-   data() {
-     return {
-       show: false,
-     };
-   },
-   components: {
-     fenxiang,
-   },
-   mounted() {
-   },
-   methods: {
-     fanHuiFenXiang() {
-       this.$router.replace({ name: 'Page04' });
-     },
-   },
- };
+export default {
+  data() {
+    return {
+      show: false,
+      num: 0,
+    };
+  },
+  computed: {
+    ...mapState(['xuanDeDaAn']),
+  },
+  components: {
+  },
+  created() {
+    this.init();
+  },
+  mounted() {
+
+  },
+  methods: {
+    init() {
+      const dui = this.xuanDeDaAn.filter(item => {
+        return item === 1;
+      }).length;
+      if (dui < 3) {
+        this.$router.replace({ name: 'Page01' });
+      } else {
+        this.jiangjin();
+      }
+    },
+    jiangjin() {
+      axios.get('http://app.erji1pin.cn/index/index/wjldjdhqhb').then((response) => {
+        const vData = response.data;
+        if (vData === '非法登录') {
+          this.$router.replace({ name: 'Page01' });
+        } else if (vData === 0) {
+          window.alert('已经领取！');
+          this.$router.replace({ name: 'Page04' });
+        } else {
+          this.num = (vData / 100);
+        }
+      }).catch(() => {
+        window.alert('出错了！');
+      });
+    },
+    fanHuiFenXiang() {
+      this.$router.replace({ name: 'Page04' });
+    },
+  },
+};
 </script>
 <style lang="less" module>
 .wrap{
@@ -135,8 +168,9 @@
       margin-left: -5rem;
       width: 10rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       img{
+        margin: 0 0.5rem;
         display: block;
         width: 4rem;
         height: 1.6rem;
@@ -167,8 +201,9 @@
             margin-left: -5rem;
             width: 10rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             img{
+                margin: 0 0.5rem;
                 display: block;
                 width: 4rem;
                 height: 1.6rem;
