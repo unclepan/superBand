@@ -5,10 +5,10 @@
         <p :class="$style.title" class="rubberBand" v-if="tiData.fenxiang">{{tiData.fenxiang||'即将回到首页'}}</p>
         <fenxiang/>
         <div :class="$style.btn">
-          <img @click="zailai()" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-02.png">
-          <img class="pulse" src="../assets/images/img-2019-2-22/fenxiang-03.png">
+          <img @click="zailai()" src="../assets/images/img-2019-2-22/fenxiang-02.png">
+          <img src="../assets/images/img-2019-2-22/fenxiang-03.png">
           <img @click="youjiang()" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-04.png">
-          <img @click="hongbao()" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-05.png">
+          <img @click="hongbao()" src="../assets/images/img-2019-2-22/fenxiang-05.png">
         </div>
       </div>
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">

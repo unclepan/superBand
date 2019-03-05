@@ -39,14 +39,14 @@
       <div :class="$style.mianbanZheZhao" v-if="jieshu&&show">
         <div :class="$style.shuru" v-if="!lingqu">
             <p>请输入联系方式</p>
-            <input type="text">
+            <input v-model="phone" @blur="onBlurM" type="number" pattern="[0-9]*">
         </div>
         <div :class="$style.chenggong" v-if="lingqu">
-            <p :class="$style.p1">领取成功！</p>
-            <p :class="$style.p2">活动结束后总部工作人员会与您联系 奖品将在4月份统一由总部寄出</p>
+            <p :class="$style.p1">{{tishi.title}}</p>
+            <p :class="$style.p2">{{tishi.text}}</p>
         </div>
         <div :class="$style.btn">
-            <img @click="lingqu=true" src="../assets/images/img-2019-2-22/hongbao-03.png">
+            <img @click="tiJiaoShouJi()" src="../assets/images/img-2019-2-22/hongbao-03.png">
             <img @click="fanHuiFenXiang()"  src="../assets/images/img-2019-2-22/hongbao-04.png">
         </div>
       </div>
@@ -68,6 +68,11 @@
  export default {
    data() {
      return {
+        tishi:{
+          title:'领取成功！',
+          text: '活动结束后总部工作人员会与您联系 奖品将在4月份统一由总部寄出'
+        },
+        phone:'',
         ma:'',
         lingqu:false,
         jiangxiangText:'感谢参与',
@@ -120,7 +125,7 @@
        }  
      },
      init_prize_list() {
-       axios.get('http://app.erji1pin.cn/index/index/get_cjjg/').then((response) => {
+       axios.get('http://app.erji1pin.cn/index/index/wjldjdhjjg/').then((response) => {
         this.yichoujiang = false;
         this.jiangxiangText = response.data;
         switch (this.jiangxiangText) {
@@ -191,14 +196,42 @@
           },2000);
         }
     },
+    onBlurM(val,$event) {
+      window.scroll(0,0);
+    },
+    tiJiaoShouJi(){
+      if(this.phone){
+        axios.post('http://app.erji1pin.cn/index/index/wjldjdhjxx/', {
+          phone: this.phone,
+        }).then((response) =>  {
+          const v = response.data;
+          if(v === '提交成功'){
+            this.tishi.title = '领取成功！';
+            this.tishi.text = '活动结束后总部工作人员会与您联系 奖品将在4月份统一由总部寄出';
+            this.lingqu=true;
+          } else if(v === '提交失败'){
+            this.tishi.title = '提交失败！';
+            this.tishi.text = '';
+            this.lingqu=true;
+          }
+        }).catch((error) => {
+          console.log('提交失败');
+        });
+      } else{
+        window.alert('请输入联系方式');
+      }
+      
+    }
    },
  };
 </script>
 <style lang="less" module>
 .wrap{
   position: absolute;
-  height: 100%;
-  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
   background-image: url('../assets/images/img-2019-2-22/wrap-bg.jpg');
   background-size:12px;
@@ -297,11 +330,11 @@
 
   .mianbanZheZhao{ 
         outline: none;
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        left: 0;
+        position: absolute;
         top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         text-align: center;
         z-index: 3001;
         text-align: center;
@@ -315,15 +348,13 @@
                font-size: 0.6rem;
            }
            input{
-               padding: 0.3rem;
+               padding: 0.5rem;
                color: #666666;
                margin: 0.2rem 0;
                border: none;
                background: #fef7a8;
                width: 8rem;
                border-radius:0.3rem; 
-               height: 1rem;
-               line-height: 1rem;
                font-size: 0.6rem;
 
            }

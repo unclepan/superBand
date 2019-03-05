@@ -29,26 +29,71 @@
       <img :class="{[$style['shan-05']]:true, [$style['shan-sui-05']]: sui}" src="../assets/images/img-2019-2-22/shan-05.png">
     </div>
 
-    <div class="bounceInJinru" :class="$style['page-02']" v-show="!show">
+    <div :class="$style['page-02']" v-show="!show">
+      <img class="bounceInDown" :class="$style.logo" src="../assets/images/img-2019-2-22/logo.png">
       <img class="bounceInDown" :class="$style.img01" src="../assets/images/img-2019-2-22/start-01.png">
-      <img class="pulse" @click="next()" :class="$style.img02" src="../assets/images/img-2019-2-22/start-02.png">
+      <div :class="$style.next">
+        <img :class="$style['loading-01']" src="/static/images/loading-01.png">
+        <img @click="next()" class="pulse" :class="$style['quan-01']" src="../assets/images/img-2019-2-22/quan-01.png">
+        <img :class="$style.img02" src="../assets/images/img-2019-2-22/start-02.png">
+      </div>
       <img class="flipInX" :class="$style.img03" src="../assets/images/img-2019-2-22/start-03.png">
+      <img @click="zhongjiang = !zhongjiang" v-if="stl !== '非法登录'" :class="$style.img04" src="../assets/images/img-2019-2-22/start-04.png">
+
+      <div :class="$style.yiZhongJiang" v-if="zhongjiang" class="bounceInDown">
+        <div :class="$style.zhongjiangBox" v-if="stl === '一等奖'">
+            <img :class="$style.xingxiang" src="/static/images/loading-01.png">
+            <img :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-02.png"> 
+        </div>
+        <div :class="$style.zhongjiangBox" v-if="stl === '二等奖'">
+            <img :class="$style.xingxiang" src="/static/images/loading-01.png">
+            <img :class="$style.jiangping" src="../assets/images/img-2019-2-22/zhongjiangla-04.png"> 
+        </div>
+        <div :class="$style.zhongjiangBox" v-if="stl !== '' && stl !== '未中奖' && stl !== '非法登录'">
+            <img :class="$style.xingxiang" src="/static/images/loading-01.png">
+            <div :class="$style.hongbao">
+                <p>
+                    优惠代码<br/>{{stl}}
+                </p>
+            </div>
+        </div>
+        <div :class="$style.zhongjiangBox" v-if="stl === '未中奖' || stl === '非法登录'">
+            <img :class="$style.xingxiang" src="/static/images/loading-01.png">
+            <p :class="$style.jiangping">很遗憾！<br/>您还未抽中奖品，加油！</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
+  import axios from 'axios';
 
   export default {
     data() {
       return {
+        zhongjiang: false,
+        stl: '',
         sui: false,
         show: false,
       };
     },
+    created() {
+      this.init();
+    },
     mounted() {
+
     },
     methods: {
+      init() {
+        // http://app.erji1pin.cn
+        axios.get('http://app.erji1pin.cn/index/index/wjldjdcxzjjg/').then((response) => {
+          this.stl = response.data;
+        }).catch((response) => {
+          window.alert('出错了');
+        });
+      },
       next() {
         this.playMic();
         this.show = true;
@@ -56,8 +101,8 @@
           this.sui = true;
           setTimeout(() => {
             this.$router.replace({ name: 'Page02' });
-          }, 3300);
-        }, 7300);
+          }, 1500);
+        }, 2300);
       },
       playMic() {
         const myVideo = document.getElementById('audios');
@@ -214,21 +259,104 @@
     }
   }
   .page-02{
-    img{
+    .yiZhongJiang{
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      background-image:url('../assets/images/img-2019-2-22/start-05.png'); 
+      background-position: center 1rem;
+      background-size:100%;
+      background-repeat: no-repeat;
+      text-align: center;
+      z-index: 1000;
+    }
+    .logo{
       display: block;
       margin: 0 auto;
+      width: 3rem;
+      margin-top: 0.6rem;
     }
     .img01{
-      margin-top: 3rem;
+      display: block;
+      margin: 0 auto;
+      margin-top: 0.6rem;
       width: 20rem;
     }
-    .img02{
-      width: 4rem;
-      margin-top: 1.8rem;
+    // .img02{
+    //   display: block;
+    //   margin: 0 auto;
+    //   width: 7rem;
+    //   margin-top: 1.4rem;
+    // }
+    .next{
+      margin: 0 auto;
+      width: 7rem;
+      margin-top: 1rem;
+      position: relative;
+      .loading-01{
+        width: 5rem;
+      }
+      .quan-01{
+        position: absolute;
+        right: 0;
+        top: 0.7rem;
+        width: 3.6rem;
+      }
+      .img02{
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+      }
     }
     .img03{
-      margin-top: 1.8rem;
+      display: block;
+      margin: 0 auto;
+      margin-top: 1rem;
       width: 4rem;
+    }
+    .img04{
+      position: fixed;
+      width: 1rem;
+      right: 0.8rem;
+      top: 0.8rem;
+      z-index: 1001;
+    }
+    .zhongjiangBox{
+      position: relative;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 4rem;
+      .xingxiang{
+        width: 5rem;
+        padding-right: 1rem;
+      }
+      .jiangping{
+        width: 10rem;
+        font-size: 0.9rem;
+        color: #b93123;
+      }
+      .hongbao{
+            width: 7rem;
+            height: 7rem;
+
+  
+            background-image: url('../assets/images/img-2019-2-22/start-06.png');
+            background-repeat: no-repeat;
+            background-size:100%; 
+            p{
+                padding-top: 1.4rem;
+                color: #cc2c23;
+                font-size: 0.64rem;
+                .big{
+                    font-size: 2rem;
+                }
+            }
+        }
     }
   }
 }

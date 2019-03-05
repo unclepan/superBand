@@ -64,7 +64,7 @@
           <img :class="$style['dati-04']" src="../assets/images/img-2019-2-22/dati-04.png">
         </div>
         <div class="bounceInDown"  :class="$style['da-an']" v-show="zhanshidaan">
-          <p :class="$style['da-an-title']">{{duicuo ? '对':'错'}}</p>
+          <p :class="{[$style['da-an-title']]:true,[$style['da-an-title-an']]:!duicuo}">{{duicuo ? '对':'错'}}</p>
           <p>{{tiData.tm[pointer].daan}}</p>
         </div>
       </div>
@@ -143,7 +143,7 @@
             const random = Math.floor(Math.random() * 6);
             this.jiazaiNum = this.jiazaiNum + random;
           }
-        }, 100);
+        }, 70);
       },
       dati() {
         this.pointer = 0;
@@ -153,6 +153,7 @@
         });
         this.tiData = data;
         this.setTiData(data);
+        window.wwxx(this.tiData.fenxiang);
         setTimeout(() => {
           this.datila = true;
         }, 2000);
@@ -480,18 +481,26 @@
         color: #fdf3b8;
         border: 0.14rem solid #fdf3b8;
         border-radius: 1.4rem;
-        padding: 0.4rem;
+        padding: 0.3rem;
         box-shadow: 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.2);
         .da-an-title{
-          text-shadow:0.03rem 0.06rem 0 #fdf3b8;
-          color: #e3a52a;
+          text-shadow:0.12rem 0.12rem 0 #4d7d2e;
+          color: #fe420f;
+          -webkit-text-fill-color: #fe420f;/*文字的填充色*/
+          -webkit-text-stroke: 0.023rem #fdf3b8;/*描边的像素，也就是粗细，这里指定是2像素的黑色边框*/
           margin: 0 auto 0.2rem;
-          font-size: 1.5rem;
+          font-size: 2rem;
           width: 9rem;
           background-image:url('../assets/images/img-2019-2-22/dati-03.png');
           background-size:100%;
           background-position: center center;
           background-repeat: no-repeat;
+        }
+        .da-an-title-an{
+          text-shadow:0.12rem 0.12rem 0 #4d7d2e;
+          color: #000000;
+          -webkit-text-fill-color: #000000;/*文字的填充色*/
+          -webkit-text-stroke: 0.023rem #fdf3b8;/*描边的像素，也就是粗细，这里指定是2像素的黑色边框*/
         }
       }
     }

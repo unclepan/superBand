@@ -2,7 +2,8 @@
   <div :class="$style.wrap">
       <div :class="$style.mianban">
         <img :class="$style['shibai-01']" src="../assets/images/img-2019-2-22/shibai-01.png">
-        <img :class="$style['shibai-02']" src="../assets/images/img-2019-2-22/shibai-02.png">
+        <img v-if="num === 0" :class="$style['shibai-02']" src="../assets/images/img-2019-2-22/shibai-02.png">
+        <img v-if="num === 1" :class="$style['shibai-02']" src="../assets/images/img-2019-2-22/shibai-04.png">
         <img @click="push()" class="pulse" :class="$style['shibai-03']" src="../assets/images/img-2019-2-22/shibai-03.png">
       </div>
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
@@ -15,15 +16,25 @@
 export default {
   data() {
     return {
-
+      num: 0,
     };
   },
   components: {
 
   },
   mounted() {
+    this.init();
   },
   methods: {
+    init() {
+      setInterval(() => {
+        if (this.num < 1) {
+          this.num = this.num + 1;
+        } else {
+          this.num = 0;
+        }
+      }, 150);
+    },
     push() {
       this.$router.replace({ name: 'Page02' });
     },
