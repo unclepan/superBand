@@ -14,7 +14,9 @@
             <div :class="$style.right">
                 <img class="pianyi1" :class="$style.jiantou" src="../assets/images/img-2019-2-22/xuanze-03.png">
                 <div :class="$style.center">
-                    <img class="pulse" :class="$style.title" src="../assets/images/img-2019-2-22/xuanze-02.png">
+                    <div class="pulse" :class="$style.title">
+                      <img src="../assets/images/img-2019-2-22/xuanze-02.png">
+                    </div>
                     <div :class="$style.box">
                         <span 
                           v-for="(item, index) in xianzejineng.list" :key="index"
@@ -60,8 +62,8 @@
           <img @click="xuanze(false)" :class="$style['dati-02']" src="../assets/images/img-2019-2-22/dati-02.png">
         </div>
         <div class="bounceInDown" :class="$style['xian']" v-show="zhanshidaan">
-          <img :class="$style['dati-04']" src="../assets/images/img-2019-2-22/dati-04.png">
-          <img :class="$style['dati-04']" src="../assets/images/img-2019-2-22/dati-04.png">
+          <img :class="$style['dati-04-1']" src="../assets/images/img-2019-2-22/dati-04.png">
+          <img :class="$style['dati-04-2']" src="../assets/images/img-2019-2-22/dati-04.png">
         </div>
         <div class="bounceInDown"  :class="$style['da-an']" v-show="zhanshidaan">
           <p :class="{[$style['da-an-title']]:true,[$style['da-an-title-an']]:!duicuo}">{{duicuo ? '对':'错'}}</p>
@@ -153,7 +155,7 @@
         });
         this.tiData = data;
         this.setTiData(data);
-        window.wwxx(this.tiData.fenxiang);
+        // window.wwxx(this.tiData.fenxiang);
         setTimeout(() => {
           this.datila = true;
         }, 2000);
@@ -186,7 +188,7 @@
                 this.jieshu = true;
                 setTimeout(() => {
                   this.$router.replace({ name: 'Page04' });
-                }, 6200);
+                }, 5000);
               } else if (dui >= 3) {
                 this.$router.replace({ name: 'Page04' });
               } else {
@@ -197,7 +199,7 @@
             this.zhanshidaan = false;
             this.nextTi();
           }
-        }, 6500);
+        }, 5000);
       },
       nextTi() {
         this.datila = false;
@@ -311,23 +313,32 @@
             align-items: center;
             margin-top: 2.8rem;
             .center{
-              width: 9.6rem;
-              padding: 0.2rem;
+              width: 10rem;
               text-align: center;
-              border: 0.08rem dotted #d04022;
               .title{
-                width: 5rem;
-                margin-top: -2rem;
+                width: 6rem;
+                margin: 0 auto;
+                margin-bottom: 0.4rem;
+                border: 0.08rem dotted #d04022;
+                border-radius: 0.2rem;
+                padding: 0.1rem 0.3rem;
+                img{
+                  width: 100%;
+                }
               }
               .box{
+                padding: 0.3rem;
+                border: 0.08rem dotted #d04022;
+                border-radius: 0.2rem;
                 span{
                   font-size: 0.7rem;
                   display: inline-block;
                   background: #54954d;
                   border: 0.12rem solid #f9e4b2;
-                  margin-bottom: 0.3rem;
+                  margin: 0 0.1rem;
+                  margin-bottom: 0.4rem;
                   border-radius: 0.6rem;
-                  padding: 0.3rem;
+                  padding: 0.2rem 0.3rem;
                   color: #f9e4b2;
                   box-shadow: 0 0.18rem 0 #e9cc6e;
                 }
@@ -337,6 +348,7 @@
               }
             }
             .jiantou{
+              margin-top: 2rem;
               width: 1rem;
               height: 2rem;
             }
@@ -440,7 +452,7 @@
       .wen-ti{
         margin: 0 auto;
         margin-top: 2rem;
-        width: 18rem;
+        width: 16rem;
         background: #54954d;
         color: #fdf3b8;
         border: 0.14rem solid #fdf3b8;
@@ -452,31 +464,36 @@
         }
         .dati-01{
           display: inline-block;
-          width: 1.4rem;
+          width: 1.6rem;
           margin: 0.2rem 2rem 0;
         }
         .dati-02{
           display: inline-block;
-          width: 1.4rem;
+          width: 1.6rem;
           margin: 0.2rem 2rem 0;
         }
       }
       .xian{
-        width: 18rem;
+        width: 16rem;
         margin: 0 auto;
         height: 1rem;
         position: relative;
         z-index: 2000;
-        .dati-04{
+        .dati-04-1{
           width: 0.4rem;
-          margin: 0 4rem;
+          margin-right: 4.3rem;
+          margin-top: -0.6rem;
+        }
+        .dati-04-2{
+          width: 0.4rem;
+          margin-left: 4.3rem;
           margin-top: -0.6rem;
         }
       }
       .da-an{
         font-size: 0.7rem;
         margin: 0 auto;
-        width: 18rem;
+        width: 16rem;
         background: #54954d;
         color: #fdf3b8;
         border: 0.14rem solid #fdf3b8;
@@ -489,7 +506,7 @@
           -webkit-text-fill-color: #fe420f;/*文字的填充色*/
           -webkit-text-stroke: 0.023rem #fdf3b8;/*描边的像素，也就是粗细，这里指定是2像素的黑色边框*/
           margin: 0 auto 0.2rem;
-          font-size: 2rem;
+          font-size: 2.3rem;
           width: 9rem;
           background-image:url('../assets/images/img-2019-2-22/dati-03.png');
           background-size:100%;
