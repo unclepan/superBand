@@ -1,3 +1,14 @@
+<script>
+                var _mtac = {};
+                (function() {
+                    var mta = document.createElement("script");
+                    mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+                    mta.setAttribute("name", "MTAH5");
+                    mta.setAttribute("sid", "500674690");
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(mta, s);
+                })();
+                </script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> 
  <script type="text/javascript">
 

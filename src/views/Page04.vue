@@ -1,12 +1,12 @@
 <template>
   <div :class="$style.wrap">
-      <img :class="$style.dianJiFenxiang" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-01.png">
+      <img v-if="fff" :class="$style.dianJiFenxiang" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-01.png">
       <div :class="$style.mianban">
         <p :class="$style.title" class="rubberBand" v-if="tiData.fenxiang">{{tiData.fenxiang||'即将回到首页'}}</p>
         <fenxiang/>
         <div :class="$style.btn">
           <img @click="zailai()" src="../assets/images/img-2019-2-22/fenxiang-02.png">
-          <img src="../assets/images/img-2019-2-22/fenxiang-03.png">
+          <img @click="fff=true" src="../assets/images/img-2019-2-22/fenxiang-03.png">
           <img @click="youjiang()" class="pulse" src="../assets/images/img-2019-2-22/fenxiang-04.png">
           <img @click="hongbao()" src="../assets/images/img-2019-2-22/fenxiang-05.png">
         </div>
@@ -25,7 +25,7 @@
  export default {
    data() {
      return {
-
+       fff: false,
      };
    },
    computed: {

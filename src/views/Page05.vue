@@ -1,6 +1,15 @@
 <template>
   <div :class="$style.wrap">
-      <img :class="$style.dianJiFenxiang" src="../assets/images/img-2019-2-22/fenxiang-01.png">
+      <div :class="$style['daTiMianBan']" v-if="tishiShow">
+        <div class="bounceInDown" :class="$style['da-an']">
+          <p :class="$style['da-an-title']">提示</p>
+          <p>{{tishiText}}</p>
+          <img :class="$style['fanhui']" @click="fanHuiFenXiang()" src="../assets/images/img-2019-2-22/hongbao-04.png">
+        </div>
+      </div>
+
+
+      <!-- <img :class="$style.dianJiFenxiang" src="../assets/images/img-2019-2-22/fenxiang-01.png"> -->
 
       <div :class="$style.mianban">
         <img class="zoomInDown" :class="$style.title" src="../assets/images/img-2019-2-22/hongbao-01.png">
@@ -42,6 +51,8 @@ import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {
+      tishiShow: false,
+      tishiText: '出错了！',
       show: false,
       num: 0,
     };
@@ -74,13 +85,20 @@ export default {
         if (vData === '非法登录') {
           this.$router.replace({ name: 'Page01' });
         } else if (vData === 0) {
-          window.alert('已经领取！');
-          this.$router.replace({ name: 'Page04' });
+          this.tishiText = '您已经领取了红包，请明天再来！';
+          this.tishiShow = true;
+        } else if (vData === 1) {
+          this.tishiText = '今日红包已全部发放，请明天再来！';
+          this.tishiShow = true;
+        } else if (vData === 2) {
+          this.tishiText = '未中奖！';
+          this.tishiShow = true;
         } else {
           this.num = (vData / 100);
         }
       }).catch(() => {
-        window.alert('出错了！');
+        this.tishiText = '出错了！';
+        this.tishiShow = true;
       });
     },
     fanHuiFenXiang() {
@@ -90,6 +108,47 @@ export default {
 };
 </script>
 <style lang="less" module>
+.daTiMianBan{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 4000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .da-an{
+    text-align: center;
+    font-size: 0.7rem;
+    margin: 0 auto;
+    width: 16rem;
+    background: #54954d;
+    color: #fdf3b8;
+    border: 0.14rem solid #fdf3b8;
+    border-radius: 1.4rem;
+    padding: 0.3rem;
+    box-shadow: 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.2);
+    .da-an-title{
+      text-shadow:0.12rem 0.12rem 0 #4d7d2e;
+      color: #fdf3b8;
+      -webkit-text-fill-color: #fdf3b8;/*文字的填充色*/
+      -webkit-text-stroke: 0.023rem #fdf3b8;/*描边的像素，也就是粗细，这里指定是2像素的黑色边框*/
+      margin: 0 auto 0.2rem;
+      font-size: 1rem;
+      width: 9rem;
+      background-image:url('../assets/images/img-2019-2-22/dati-03.png');
+      background-size:100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    .fanhui{
+      width: 4rem;
+      margin-top: 0.4rem;
+    }
+  }
+}
 .wrap{
   position: absolute;
   height: 100%;

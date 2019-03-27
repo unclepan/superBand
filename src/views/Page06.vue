@@ -1,6 +1,10 @@
 <template>
   <div :class="$style.wrap">
       <!-- <img :class="$style.dianJiFenxiang" src="../assets/images/img-2019-2-22/fenxiang-01.png"> -->
+      <div :class="$style.chongxinMianban" v-if="chongxinzailai">
+        <img :class="$style['chongxin-02']" src="../assets/images/img-2019-2-22/chongxin-02.png">
+        <img @click="gochongxin()" :class="$style['chongxin-01']" src="../assets/images/img-2019-2-22/chongxin-01.png"> 
+      </div>
 
       <div :class="$style.mianban" v-if="!jieshu">
         <div :class="$style.wheelMain">
@@ -68,6 +72,7 @@
  export default {
    data() {
      return {
+       chongxinzailai:false,
         tishi:{
           title:'领取成功！',
           text: '活动结束后总部工作人员会与您联系 奖品将在4月份统一由总部寄出'
@@ -192,9 +197,12 @@
           this.jieshu = true;
         } else {
           setTimeout(()=>{
-            this.$router.replace({ name: 'Page04' });
-          },2000);
+           this.chongxinzailai = true;
+          },1200);
         }
+    },
+    gochongxin(){
+      this.$router.replace({ name: 'Page04' });
     },
     onBlurM(val,$event) {
       window.scroll(0,0);
@@ -274,6 +282,26 @@
     left: 50%;
     margin-left: -10rem;
     z-index: 1 !important;
+  }
+  .chongxinMianban{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 3001 !important;
+    .chongxin-02{
+      width: 60%;
+      display: block;
+      margin: 2rem auto;
+    }
+    .chongxin-01{
+      width: 4rem;
+      height: 1.6rem;
+       margin: 2rem auto;
+    }
   }
   .mianban{
     position: fixed;

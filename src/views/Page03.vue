@@ -2,8 +2,14 @@
   <div :class="$style.wrap">
       <div :class="$style.mianban">
         <img :class="$style['shibai-01']" src="../assets/images/img-2019-2-22/shibai-01.png">
-        <img v-if="num === 0" :class="$style['shibai-02']" src="../assets/images/img-2019-2-22/shibai-02.png">
-        <img v-if="num === 1" :class="$style['shibai-02']" src="../assets/images/img-2019-2-22/shibai-04.png">
+        <!-- <img v-if="num === 0" :class="$style['shibai-02']" src="../assets/images/img-2019-2-22/shibai-02.png">
+        <img v-if="num === 1" :class="$style['shibai-02']" src="../assets/images/img-2019-2-22/shibai-04.png"> -->
+        <div :class="$style['shibaishibai']">
+          <img v-if="num === 0" :class="$style['shibaishibai-02']" src="../assets/images/img-2019-2-22/shibaishibai-ji-01.png">
+          <img v-if="num === 1" :class="$style['shibaishibai-02']" src="../assets/images/img-2019-2-22/shibaishibai-ji-02.png">
+          <img v-if="num === 0" :class="$style['shibaishibai-03']" src="../assets/images/img-2019-2-22/shibaishibai-01.png">
+          <img v-if="num === 1" :class="$style['shibaishibai-03']" src="../assets/images/img-2019-2-22/shibaishibai-02.png">
+        </div>
         <img @click="push()" class="pulse" :class="$style['shibai-03']" src="../assets/images/img-2019-2-22/shibai-03.png">
       </div>
       <img :class="$style['main-01']" src="../assets/images/img-2019-2-22/main-01.png">
@@ -33,7 +39,7 @@ export default {
         } else {
           this.num = 0;
         }
-      }, 150);
+      }, 70);
     },
     push() {
       this.$router.replace({ name: 'Page02' });
@@ -70,6 +76,24 @@ export default {
     background-color: rgba(0, 0, 0, 0.4);
     text-align: center;
     z-index: 1000;
+    .shibaishibai{
+      margin: 0 auto;
+      margin-top: 1.8rem;
+      margin-bottom: 1.6rem;
+      width: 12rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .shibaishibai-02{
+        width: 4.6rem;
+        height: 3.6rem;
+      }
+      .shibaishibai-03{
+        width: 6rem;
+        height: 5rem;
+        margin-left: -1rem;
+      }
+    }
     .shibai-01{
       margin: 0 auto;
       margin-top: 1.8rem;

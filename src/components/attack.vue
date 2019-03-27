@@ -8,26 +8,26 @@
       </div>
 
       <div :class="$style.dui" v-if="styl===1">
-        <img  :class="$style['dui-shan']" :style="{left:`${2.5+num}rem`}" src="../assets/images/img-2019-2-22/dui-shan.png">
+        <img  :class="$style['dui-shan']" :style="{left:`${2.9+num}rem`}" src="../assets/images/img-2019-2-22/dui-shan.png">
         <div :class="$style.innerDui">
-          <img v-show="num===1" :class="$style['dui-xi']" src="../assets/images/img-2019-2-22/dui-xi-01.png">
-          <img v-show="num===2" :class="$style['dui-xi']" src="../assets/images/img-2019-2-22/dui-xi-02.png">
-          <img v-show="num===3" :class="$style['dui-xi']" src="../assets/images/img-2019-2-22/dui-xi-03.png">
-          <img v-show="num===1" :class="$style['dui-you']" src="../assets/images/img-2019-2-22/dui-you-01.png">
-          <img v-show="num===2" :class="$style['dui-you']" src="../assets/images/img-2019-2-22/dui-you-02.png">
-          <img v-show="num===3" :class="$style['dui-you']" src="../assets/images/img-2019-2-22/dui-you-03.png">
+          <img v-show="num===1" :class="$style['dui-xi']" src="../assets/images/img-2019-2-22/duidui-xi-01.png">
+          <img v-show="num===2" :class="$style['dui-xi']" src="../assets/images/img-2019-2-22/duidui-xi-02.png">
+          <!-- <img v-show="num===3" :class="$style['dui-xi']" src="../assets/images/img-2019-2-22/dui-xi-03.png"> -->
+          <img v-show="num===1" :class="$style['dui-you']" src="../assets/images/img-2019-2-22/duidui-you-01.png">
+          <img v-show="num===2" :class="$style['dui-you']" src="../assets/images/img-2019-2-22/duidui-you-02.png">
+          <!-- <img v-show="num===3" :class="$style['dui-you']" src="../assets/images/img-2019-2-22/dui-you-03.png"> -->
         </div>
       </div>
 
       <div :class="$style.cuo" v-if="styl===2">
         <img  :class="$style['cuo-shan']" :style="{right:`${3+num}rem`}" src="../assets/images/img-2019-2-22/cuo-shan.png">
         <div :class="$style.innerCuo">
-          <img v-show="num===1" :class="$style['cuo-xi']" src="../assets/images/img-2019-2-22/cuo-xi-01.png">
-          <img v-show="num===2" :class="$style['cuo-xi']" src="../assets/images/img-2019-2-22/cuo-xi-02.png">
-          <img v-show="num===3" :class="$style['cuo-xi']" src="../assets/images/img-2019-2-22/cuo-xi-03.png">
-          <img v-show="num===1" :class="$style['cuo-you']" src="../assets/images/img-2019-2-22/cuo-you-01.png">
-          <img v-show="num===2" :class="$style['cuo-you']" src="../assets/images/img-2019-2-22/cuo-you-02.png">
-          <img v-show="num===3" :class="$style['cuo-you']" src="../assets/images/img-2019-2-22/cuo-you-03.png">
+          <img v-show="num===1" :class="$style['cuo-xi']" src="../assets/images/img-2019-2-22/cuocuo-xi-01.png">
+          <img v-show="num===2" :class="$style['cuo-xi']" src="../assets/images/img-2019-2-22/cuocuo-xi-02.png">
+          <!-- <img v-show="num===3" :class="$style['cuo-xi']" src="../assets/images/img-2019-2-22/cuo-xi-03.png"> -->
+          <img v-show="num===1" :class="$style['cuo-you']" src="../assets/images/img-2019-2-22/cuocuo-you-01.png">
+          <img v-show="num===2" :class="$style['cuo-you']" src="../assets/images/img-2019-2-22/cuocuo-you-02.png">
+          <!-- <img v-show="num===3" :class="$style['cuo-you']" src="../assets/images/img-2019-2-22/cuo-you-03.png"> -->
         </div>
       </div>
 
@@ -49,7 +49,7 @@
     methods: {
       action() {
         setInterval(() => {
-          if (this.num < 3) {
+          if (this.num < 2) {
             this.num = this.num + 1;
           } else {
             this.num = 1;
@@ -91,12 +91,12 @@
                 .dui-xi{
                     display: block;
                     width: 4rem;
-                    height: 3.8rem;
+                    height: 3.3rem;
                 }
                 .dui-you{
                     display: block;
-                    width: 4rem;
-                    height: 3.8rem;
+                    width: 3.4rem;
+                    height: 3rem;
                 }
             }
             .dui-shan{

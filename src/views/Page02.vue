@@ -55,11 +55,11 @@
       <img class="guang2" :class="$style['main-guang2']" src="../assets/images/img-2019-2-22/main-04.png">
       <img class="guang3" :class="$style['main-guang3']" src="../assets/images/img-2019-2-22/main-04.png">
 
-      <div :class="$style['daTiMianBan']" v-if="datila">
+      <div :class="$style['daTiMianBan']" v-if="datila" @click="aaaaaa()">
         <div class="bounceInDown" :class="$style['wen-ti']">
           <p>{{tiData.tm[pointer].w}}</p>
-          <img @click="xuanze(true)" :class="$style['dati-01']" src="../assets/images/img-2019-2-22/dati-01.png">
-          <img @click="xuanze(false)" :class="$style['dati-02']" src="../assets/images/img-2019-2-22/dati-02.png">
+          <img @click.stop="xuanze(true)" :class="$style['dati-01']" src="../assets/images/img-2019-2-22/dati-01.png">
+          <img @click.stop="xuanze(false)" :class="$style['dati-02']" src="../assets/images/img-2019-2-22/dati-02.png">
         </div>
         <div class="bounceInDown" :class="$style['xian']" v-show="zhanshidaan">
           <img :class="$style['dati-04-1']" src="../assets/images/img-2019-2-22/dati-04.png">
@@ -86,6 +86,7 @@
   export default {
     data() {
       return {
+        ttttttt: {},
         duicuo: true,
         xianzejineng: {
           list: ['四两拨千斤', '旋风无影腿', '劲力一刀斩', '净门冲击波', '分瓜切果手'],
@@ -155,10 +156,10 @@
         });
         this.tiData = data;
         this.setTiData(data);
-        // window.wwxx(this.tiData.fenxiang);
+        window.wwxx(this.tiData.fenxiang);
         setTimeout(() => {
           this.datila = true;
-        }, 2000);
+        }, 1800);
       },
       xuanze(val) {
         if (this.zhanshidaan) return;
@@ -174,7 +175,7 @@
           this.title = '脏脏拳';
           this.xuanzedaan.push(0);
         }
-        setTimeout(() => {
+        this.ttttttt = setTimeout(() => {
           if (this.pointer >= this.tiData.tm.length - 1) {
             console.log('没了');
             this.setXuanDeDaAn(this.xuanzedaan);
@@ -188,25 +189,24 @@
                 this.jieshu = true;
                 setTimeout(() => {
                   this.$router.replace({ name: 'Page04' });
-                }, 5000);
+                }, 2800);
               } else if (dui >= 3) {
                 this.$router.replace({ name: 'Page04' });
               } else {
                 this.$router.replace({ name: 'Page03' });
               }
-            }, 3600);
+            }, 2800);
           } else {
             this.zhanshidaan = false;
             this.nextTi();
           }
-        }, 5000);
+        }, 3800);
       },
       nextTi() {
         this.datila = false;
         setTimeout(() => {
           this.pointer = this.pointer + 1;
           this.$refs.attack.styl = 0;
-          // this.title = `第${this.pointer + 1}题`;
           switch (this.pointer + 1) {
             case 1:
               this.title = '第一题';
@@ -234,8 +234,12 @@
           }
           setTimeout(() => {
             this.datila = true;
-          }, 3600);
-        }, 3300);
+          }, 1800);
+        }, 1600);
+      },
+      aaaaaa() {
+        if (!this.zhanshidaan) return;
+        this.datila = false;
       },
       xuanzejineng(val) {
         this.xianzejineng.k = false;
