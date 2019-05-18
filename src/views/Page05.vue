@@ -93,6 +93,9 @@ export default {
         } else if (vData === 2) {
           this.tishiText = '未中奖！';
           this.tishiShow = true;
+        } else if (vData === 3) {
+          this.tishiText = '您的操作太过频繁，请明日再来！';
+          this.tishiShow = true;
         } else {
           this.num = (vData / 100);
         }
